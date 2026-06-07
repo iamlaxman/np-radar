@@ -1,0 +1,43 @@
+name: Keep NP Radar Alive
+
+# ─── Trigger: Runs every 13 minutes ─────────────────
+on:
+  schedule:
+    # Cron syntax: minute hour day month weekday
+    # */13 = every 13 minutes
+    - cron: '*/13 * * * *'
+  
+  # Also allow manual trigger from GitHub UI
+  workflow_dispatch:
+
+# ─── The actual job ─────────────────────────────────
+jobs:
+  ping:
+    # Use latest Ubuntu
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Ping NP Radar Health Endpoint
+        run: |
+          echo "🔄 Pinging NP Radar..."
+          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" https://npradar.laxman-poudel.com.np/health)
+          echo "📡 Response: HTTP $HTTP_CODE"
+          
+          if [ "$HTTP_CODE" = "200" ]; then
+            echo "✅ NP Radar is alive and responding!"
+          else
+            echo "⚠️ Unexpected response: $HTTP_CODE"
+          fi
+      
+      - name: Ping Dashboard Page (Backup)
+        run: |
+          echo "🔄 Pinging Dashboard..."
+          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" https://npradar.laxman-poudel.com.np/)
+          echo "📡 Dashboard Response: HTTP $HTTP_CODE"
+      
+      - name: Ping API Endpoint (Backup 2)
+        run: |
+          echo "🔄 Pinging API..."
+          curl -s "https://npradar.laxman-poudel.com.np/api/stats" | head -c 100
+          echo ""
+          echo "✅ API ping complete"
