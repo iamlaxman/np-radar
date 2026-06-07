@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- SEO Meta Tags -->
+  <title>Reverse IP Lookup — Find Domains on Same IP | NP Radar</title>
+  <meta name="title" content="Reverse IP Lookup — Find Domains on Same IP | NP Radar" />
+  <meta name="description" content="Free reverse IP lookup tool for .np domains. Find all domains hosted on the same IP address. Discover related websites, shared hosting, and potential neighbors. Built for Nepal." />
+  <meta name="keywords" content="reverse IP lookup, find domains on same IP, IP neighbor check, shared hosting detection, Nepal IP lookup, NP Radar" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#6366F1" />
+  
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://npradar.laxman-poudel.com.np/tools/reverse-ip.html" />
+  <meta property="og:title" content="Reverse IP Lookup — Find Domains on Same IP | NP Radar" />
+  <meta property="og:description" content="Free reverse IP lookup tool. Find all domains hosted on the same IP address. Discover related websites and shared hosting." />
+  <meta property="og:image" content="https://npradar.laxman-poudel.com.np/favicon/og.png" />
+  <meta property="twitter:card" content="summary_large_image" />
+  
+  <link rel="icon" type="image/x-icon" href="../favicon/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png" />
+  <link rel="apple-touch-icon" href="../favicon/apple-touch-icon.png" />
+  <link rel="manifest" href="../favicon/site.webmanifest" />
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{bg:'#0A0A0F',surface:'#111118',elevated:'#1A1A24',border:'rgba(255,255,255,0.08)',primary:'#6366F1',accent:'#EC4899',success:'#10B981',warning:'#F59E0B',danger:'#EF4444'},fontFamily:{display:['Syne','sans-serif'],body:['Space Grotesk','sans-serif'],mono:['JetBrains Mono','monospace']}}}}</script>
+  
+  <style>
+    body { background: #0A0A0F; font-family: 'Space Grotesk', sans-serif; color: #F1F5F9; }
+    .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); }
+    .search-input { background: rgba(255,255,255,0.04); border: 1.5px solid rgba(255,255,255,0.1); color: #F1F5F9; transition: border-color 0.3s, box-shadow 0.3s; }
+    .search-input:focus { outline: none; border-color: #06B6D4; box-shadow: 0 0 0 3px rgba(6,182,212,0.15), 0 0 30px rgba(6,182,212,0.2); }
+    .search-input::placeholder { color: #475569; }
+    .result-card { background: #111118; border: 1px solid rgba(255,255,255,0.06); border-radius: 1rem; padding: 1.25rem; }
+    .skeleton { background: linear-gradient(90deg, #1A1A24 25%, #252535 50%, #1A1A24 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 6px; }
+    @keyframes shimmer { 0%{background-position:200% 0}100%{background-position:-200% 0} }
+    .chip-btn {
+      padding: 0.375rem 0.75rem; border-radius: 0.5rem;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+      color: #CBD5E1; font-size: 0.8125rem; font-family: 'JetBrains Mono', monospace;
+      cursor: pointer; transition: all 0.2s ease;
+    }
+    .chip-btn:hover { background: rgba(255,255,255,0.1); border-color: rgba(6,182,212,0.3); color: #06B6D4; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="sticky top-0 z-50 flex items-center justify-between px-4 md:px-6 py-3 border-b border-white/5" style="background:rgba(10,10,15,0.95);backdrop-filter:blur(12px)">
+    <a href="../index.html" class="flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm">
+      <i class="fas fa-arrow-left text-xs"></i> Home
+    </a>
+    <div class="flex items-center gap-2">
+      <img src="../favicon/favicon-32x32.png" alt="NP Radar" class="w-6 h-6 rounded" />
+      <span class="font-display font-bold text-sm">NP <span class="text-primary">Radar</span></span>
+    </div>
+    <a href="tools.html" class="flex items-center gap-1 text-slate-400 hover:text-white transition-colors text-sm">
+      <i class="fas fa-th-large text-xs"></i> Tools
+    </a>
+  </nav>
+
+  <!-- MAIN -->
+  <div style="max-width:900px;margin:0 auto;padding:30px 20px">
+
+    <!-- HEADER -->
+    <div class="mb-8">
+      <div class="flex items-center gap-3 mb-2">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.2)">
+          <i class="fas fa-network-wired text-cyan-400 text-lg"></i>
+        </div>
+        <div>
+          <h1 class="font-display text-2xl md:text-3xl font-bold">Reverse IP Lookup</h1>
+          <p class="text-slate-400 text-sm">Find all domains hosted on the same IP address.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="glass rounded-2xl p-3 mb-6">
+      <div class="flex flex-col sm:flex-row gap-2">
+        <div class="flex-1 relative">
+          <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-sm"></i>
+          <input type="text" id="domainInput" placeholder="Enter domain — e.g. ncell.com.np" 
+            class="w-full pl-11 pr-4 py-3.5 rounded-xl text-base search-input" autocomplete="off" spellcheck="false" />
+        </div>
+        <button onclick="lookup()" class="px-6 py-3.5 rounded-xl font-semibold text-white transition-all hover:scale-105 active:scale-95 whitespace-nowrap flex items-center justify-center gap-2" style="background:#06B6D4">
+          <i class="fas fa-search"></i> Lookup
+        </button>
+      </div>
+    </div>
+
+    <!-- QUICK CHIPS -->
+    <div class="flex flex-wrap gap-2 mb-6">
+      <span class="text-slate-500 text-xs">Quick:</span>
+      <button onclick="quickLookup('ncell.com.np')" class="chip-btn">ncell.com.np</button>
+      <button onclick="quickLookup('ku.edu.np')" class="chip-btn">ku.edu.np</button>
+      <button onclick="quickLookup('worldlink.com.np')" class="chip-btn">worldlink.com.np</button>
+      <button onclick="quickLookup('laxman-poudel.com.np')" class="chip-btn">laxman-poudel.com.np</button>
+    </div>
+
+    <!-- EMPTY STATE -->
+    <div id="emptyState" class="text-center py-16">
+      <div class="text-5xl mb-5 text-slate-700"><i class="fas fa-network-wired"></i></div>
+      <h2 class="font-display text-xl font-bold mb-2">Enter a domain to find co-hosted sites</h2>
+      <p class="text-slate-400 max-w-md mx-auto text-sm">Discover all domains sharing the same IP address. Find related websites and potential neighbors.</p>
+    </div>
+
+    <!-- LOADING -->
+    <div id="loading" class="hidden"><div class="skeleton h-20 rounded-xl mb-4"></div><div class="skeleton h-20 rounded-xl mb-4"></div></div>
+
+    <!-- ERROR -->
+    <div id="error" class="hidden text-center py-12">
+      <div class="text-4xl mb-4 text-slate-600"><i class="fas fa-exclamation-circle"></i></div>
+      <p id="errorMsg" class="text-slate-400"></p>
+    </div>
+
+    <!-- RESULTS -->
+    <div id="results" class="hidden"></div>
+  </div>
+
+  <script>
+    const API = 'http://localhost:3000';
+    
+    function quickLookup(domain) {
+      document.getElementById('domainInput').value = domain;
+      lookup();
+    }
+    
+    async function lookup() {
+      const domain = document.getElementById('domainInput').value.trim().toLowerCase().replace(/^https?:\/\//,'').replace(/\/.*$/,'');
+      if(!domain) return;
+      
+      document.getElementById('emptyState').classList.add('hidden');
+      document.getElementById('loading').classList.remove('hidden');
+      document.getElementById('results').classList.add('hidden');
+      document.getElementById('error').classList.add('hidden');
+      
+      try {
+        const r = await fetch(`${API}/api/reverse-ip?domain=${encodeURIComponent(domain)}`);
+        const d = await r.json();
+        document.getElementById('loading').classList.add('hidden');
+        
+        if(d.error && !d.ip) throw new Error(d.error);
+        document.getElementById('results').classList.remove('hidden');
+        
+        document.getElementById('results').innerHTML = `
+          <div class="result-card mb-4">
+            <div class="text-xs text-slate-500 uppercase tracking-wider mb-2">IP Address</div>
+            <div class="font-mono text-3xl text-cyan-400 font-bold">${d.ip||'N/A'}</div>
+            <div class="text-slate-400 mt-2 text-sm">${d.totalDomains||0} domain(s) found on this IP</div>
+          </div>
+          ${(d.nepaliDomains||[]).length ? `
+            <div class="result-card mb-4">
+              <div class="text-xs text-slate-500 uppercase tracking-wider mb-3">.NP Domains (${d.nepaliDomains.length})</div>
+              <div class="flex flex-wrap gap-2">${d.nepaliDomains.map(dom=>`<span class="px-3 py-1.5 rounded-lg text-sm font-mono" style="background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.2);color:#22D3EE">${dom}</span>`).join('')}</div>
+            </div>
+          ` : '<div class="result-card mb-4"><p class="text-slate-500 text-sm">No .NP domains found on this IP.</p></div>'}
+          ${(d.otherDomains||[]).length ? `
+            <div class="result-card">
+              <div class="text-xs text-slate-500 uppercase tracking-wider mb-3">Other Domains</div>
+              <div class="flex flex-wrap gap-2">${d.otherDomains.map(dom=>`<span class="px-3 py-1.5 rounded-lg text-sm font-mono" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);color:#CBD5E1">${dom}</span>`).join('')}</div>
+            </div>
+          ` : ''}
+          <p class="text-xs text-slate-600 mt-4 text-center">Note: Only showing first 30 domains. Results may vary based on DNS configuration.</p>
+        `;
+      } catch(e) {
+        document.getElementById('loading').classList.add('hidden');
+        document.getElementById('error').classList.remove('hidden');
+        document.getElementById('errorMsg').textContent = e.message || 'Failed to lookup. Please try again.';
+      }
+    }
+    
+    document.getElementById('domainInput').addEventListener('keydown', e => { if(e.key==='Enter') lookup(); });
+  </script>
+</body>
+</html>

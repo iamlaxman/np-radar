@@ -1,0 +1,70 @@
+/* ═══════════════════════════════════════════════════════
+   NP RADAR — Dashboard Styles
+   ═══════════════════════════════════════════════════════ */
+
+/* Tab content animation */
+.tab-content {
+  animation: fadeIn 0.3s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Data row */
+.data-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  gap: 1rem;
+}
+.data-row:last-child { border-bottom: none; }
+.data-key { font-size: 0.75rem; color: #64748B; flex-shrink: 0; }
+.data-val { font-family: 'JetBrains Mono', monospace; font-size: 0.8125rem; color: #E2E8F0; text-align: right; word-break: break-all; }
+
+/* Status badge */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.status-active { background: rgba(16,185,129,0.1); color: #10B981; border: 1px solid rgba(16,185,129,0.2); }
+.status-expired { background: rgba(239,68,68,0.1); color: #EF4444; border: 1px solid rgba(239,68,68,0.2); }
+
+/* Security check item */
+.sec-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+}
+.sec-check.pass { background: rgba(16,185,129,0.05); border: 1px solid rgba(16,185,129,0.1); }
+.sec-check.fail { background: rgba(239,68,68,0.05); border: 1px solid rgba(239,68,68,0.1); }
+
+/* Bank scorecard table */
+.bank-row { transition: background 0.15s ease; }
+.bank-row:hover { background: rgba(99,102,241,0.04); }
+
+/* Tool page card */
+.tool-result-card {
+  background: #111118;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 1rem;
+  padding: 1.25rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .data-row { flex-direction: column; gap: 0.25rem; }
+  .data-val { text-align: left; }
+}
