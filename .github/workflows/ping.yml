@@ -1,40 +1,55 @@
 name: Keep NP Radar Alive
 
-# ─── Trigger: Runs every 13 minutes ─────────────────
 on:
   schedule:
-    # Cron syntax: minute hour day month weekday
-    # */13 = every 13 minutes
-    - cron: '*/13 * * * *'
-  
-  # Also allow manual trigger from GitHub UI
+    # Primary: every 7 minutes (two runs within 15-min window)
+    - cron: '*/7 * * * *'
+    # Backup: at specific minutes
+    - cron: '3,17,31,45,59 * * * *'
   workflow_dispatch:
 
-# ─── The actual job ─────────────────────────────────
 jobs:
   ping:
-    # Use latest Ubuntu
     runs-on: ubuntu-latest
     
+    strategy:
+      # If one ping fails, continue with others
+      fail-fast: false
+    
     steps:
-      - name: Ping NP Radar Health Endpoint
+      - name: Ping Health Endpoint
+        id: health
         run: |
-          echo "🔄 Pinging NP Radar..."
-          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" https://npradar.laxman-poudel.com.np/health)
-          echo "📡 Response: HTTP $HTTP_CODE"
+          RESPONSE=$(curl -s -w "\n%{http_code}" https://npradar.laxman-poudel.com.np/health)
+          HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+          BODY=$(echo "$RESPONSE" | head -n-1)
+          
+          echo "HTTP Status: $HTTP_CODE"
+          echo "Response: $(echo $BODY | head -c 200)"
           
           if [ "$HTTP_CODE" = "200" ]; then
-            echo "✅ NP Radar is alive and responding!"
+            echo "status=success" >> $GITHUB_OUTPUT
+            echo "✅ NP Radar is alive!"
           else
-            echo "⚠️ Unexpected response: $HTTP_CODE"
+            echo "status=failed" >> $GITHUB_OUTPUT
+            echo "⚠️ Unexpected status: $HTTP_CODE"
           fi
       
-      - name: Ping Dashboard Page (Backup)
+      - name: Ping Homepage
         run: |
-          echo "🔄 Pinging Dashboard..."
           HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" https://npradar.laxman-poudel.com.np/)
-          echo "📡 Dashboard Response: HTTP $HTTP_CODE"
+          echo "Homepage Status: $HTTP_CODE"
       
+      - name: Ping API
+        run: |
+          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "https://npradar.laxman-poudel.com.np/api/stats")
+          echo "API Status: $HTTP_CODE"
+      
+      - name: Notify on Failure (Optional)
+        if: failure()
+        run: |
+          echo "⚠️ One or more pings failed!"
+          echo "Check Render dashboard: https://dashboard.render.com"      
       - name: Ping API Endpoint (Backup 2)
         run: |
           echo "🔄 Pinging API..."
