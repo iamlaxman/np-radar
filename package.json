@@ -5,7 +5,11 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "build": "npm install"
+  },
+  "engines": {
+    "node": ">=20.0.0"
   },
   "dependencies": {
     "express": "^4.21.0",
@@ -14,11 +18,5 @@
     "compression": "^1.7.4",
     "express-rate-limit": "^7.3.0",
     "node-cache": "^5.1.2"
-  },
-  "engines": {
-    "node": ">=20.0.0"
-  },
-  "keywords": ["nepal", "whois", "dns", "domain", "np", "security"],
-  "author": "Laxman Poudel",
-  "license": "MIT"
+  }
 }
