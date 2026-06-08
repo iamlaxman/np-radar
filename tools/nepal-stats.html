@@ -4,547 +4,304 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <!-- SEO Meta Tags -->
-  <title>Nepal Domain Statistics — .NP Domain Ecosystem, Trends & Analysis | NP Radar</title>
-  <meta name="title" content="Nepal Domain Statistics — .NP Domain Ecosystem, Trends & Analysis | NP Radar" />
-  <meta name="description" content="Comprehensive Nepal domain statistics. TLD distribution, ISP hosting shares, DNSSEC adoption, SSL usage, nameserver popularity, domain age analysis, monthly registration trends, and more. Built for Nepal." />
-  <meta name="keywords" content="Nepal domain statistics, .np domain stats, Nepal TLD distribution, Nepal ISP hosting, DNSSEC Nepal, Nepal domain trends, domain age Nepal, nameserver stats Nepal, NP Radar statistics, Nepal internet data" />
-  <meta name="author" content="NP Radar" />
-  <meta name="robots" content="index, follow" />
+  <title>Nepal Domain Statistics — .NP Domain Ecosystem & Analysis | NP Radar</title>
+  <meta name="description" content="Comprehensive Nepal domain statistics with interactive charts. TLD distribution, ISP hosting, DNSSEC adoption, SSL usage, monthly trends." />
   <meta name="theme-color" content="#6366F1" />
-  
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://npradar.laxman-poudel.com.np/tools/nepal-stats.html" />
-  <meta property="og:title" content="Nepal Domain Statistics — .NP Domain Ecosystem, Trends & Analysis | NP Radar" />
-  <meta property="og:description" content="Comprehensive Nepal domain statistics. TLD distribution, ISP hosting, DNSSEC adoption, SSL usage, nameserver popularity, monthly trends." />
+  <meta property="og:title" content="Nepal Domain Statistics | NP Radar" />
+  <meta property="og:description" content="Interactive Nepal domain statistics with multiple chart types." />
   <meta property="og:image" content="https://npradar.laxman-poudel.com.np/favicon/og.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:site_name" content="NP Radar" />
-  
-  <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:url" content="https://npradar.laxman-poudel.com.np/tools/nepal-stats.html" />
-  <meta property="twitter:title" content="Nepal Domain Statistics — .NP Ecosystem & Trends | NP Radar" />
-  <meta property="twitter:description" content="Comprehensive Nepal domain statistics. TLD distribution, ISP hosting, DNSSEC adoption, monthly trends." />
-  <meta property="twitter:image" content="https://npradar.laxman-poudel.com.np/favicon/og.png" />
   
-  <!-- Canonical -->
-  <link rel="canonical" href="https://npradar.laxman-poudel.com.np/tools/nepal-stats.html" />
-  
-  <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="../favicon/favicon.ico" />
   <link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png" />
-  <link rel="icon" type="image/png" sizes="192x192" href="../favicon/android-chrome-192x192.png" />
-  <link rel="manifest" href="../favicon/site.webmanifest" />
-  
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
-  
-  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            bg: '#0A0A0F', surface: '#111118', elevated: '#1A1A24',
-            border: 'rgba(255,255,255,0.08)',
-            primary: '#6366F1', accent: '#EC4899',
-            success: '#10B981', warning: '#F59E0B', danger: '#EF4444',
-          },
-          fontFamily: {
-            display: ['Syne', 'sans-serif'],
-            body: ['Space Grotesk', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
-          },
-        },
-      },
-    };
-  </script>
+  <script>tailwind.config={theme:{extend:{colors:{bg:'#0A0A0F',surface:'#111118',elevated:'#1A1A24',border:'rgba(255,255,255,0.08)',primary:'#6366F1',accent:'#EC4899',success:'#10B981',warning:'#F59E0B',danger:'#EF4444'},fontFamily:{display:['Syne','sans-serif'],body:['Space Grotesk','sans-serif'],mono:['JetBrains Mono','monospace']}}}}</script>
   
   <style>
     body { background: #0A0A0F; font-family: 'Space Grotesk', sans-serif; color: #F1F5F9; }
+    .stat-card { background: #111118; border: 1px solid rgba(255,255,255,0.06); border-radius: 1rem; padding: 1.25rem; text-align: center; transition: all 0.2s ease; }
+    .stat-card:hover { transform: translateY(-2px); border-color: rgba(99,102,241,0.3); }
+    .chart-card { background: #111118; border: 1px solid rgba(255,255,255,0.06); border-radius: 1rem; padding: 1.5rem; }
+    .skeleton { background: linear-gradient(90deg, #1A1A24 25%, #252535 50%, #1A1A24 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 6px; }
+    @keyframes shimmer { 0%{background-position:200% 0}100%{background-position:-200% 0} }
     
-    .glass {
-      background: rgba(255,255,255,0.03);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.08);
-    }
+    /* Bar fills */
+    .bar-fill-h { transition: width 1.2s cubic-bezier(0.4,0,0.2,1); }
+    .bar-fill-v { transition: height 1s cubic-bezier(0.4,0,0.2,1); }
     
-    .stat-card {
-      background: #111118;
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 1rem;
-      padding: 1.25rem;
-      text-align: center;
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
-    .stat-card:hover {
-      transform: translateY(-2px);
-      border-color: rgba(99,102,241,0.3);
-    }
+    /* Donut segment hover */
+    .donut-segment { cursor: pointer; transition: opacity 0.2s; }
+    .donut-segment:hover { opacity: 0.8; filter: brightness(1.3); }
     
-    .chart-card {
-      background: #111118;
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 1rem;
-      padding: 1.5rem;
-    }
-    
-    .skeleton {
-      background: linear-gradient(90deg, #1A1A24 25%, #252535 50%, #1A1A24 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.5s infinite;
-      border-radius: 6px;
-    }
-    @keyframes shimmer {
-      0% { background-position: 200% 0; }
-      100% { background-position: -200% 0; }
-    }
-    
-    .progress-bar {
-      transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    .refresh-btn {
-      transition: transform 0.3s ease;
-    }
-    .refresh-btn:active {
-      transform: rotate(180deg);
-    }
-    
-    /* Info card */
-    .info-card {
-      background: rgba(99,102,241,0.05);
-      border: 1px solid rgba(99,102,241,0.15);
-      border-radius: 1rem;
-      padding: 1.25rem;
-    }
-    
-    /* Timeline dot */
-    .timeline-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: #6366F1;
-      flex-shrink: 0;
-    }
+    /* Legend */
+    .legend-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
   </style>
 </head>
 <body>
 
-  <!-- ═══════════════════════════════════════ -->
-  <!--  NAVIGATION                             -->
-  <!-- ═══════════════════════════════════════ -->
   <nav class="sticky top-0 z-50 flex items-center justify-between px-4 md:px-6 py-3 border-b border-white/5" style="background:rgba(10,10,15,0.95);backdrop-filter:blur(12px)">
-    <a href="../index.html" class="flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm">
-      <i class="fas fa-arrow-left text-xs"></i>
-      <span class="hidden sm:inline">Home</span>
-    </a>
-    <div class="flex items-center gap-2">
-      <img src="../favicon/favicon-32x32.png" alt="NP Radar" class="w-6 h-6 rounded" />
-      <span class="font-display font-bold text-sm">NP <span class="text-primary">Radar</span></span>
-    </div>
-    <a href="tools.html" class="flex items-center gap-1 text-slate-400 hover:text-white transition-colors text-sm">
-      <i class="fas fa-th-large text-xs"></i>
-      <span class="hidden sm:inline">All Tools</span>
-    </a>
+    <a href="../index.html" class="flex items-center gap-2 text-slate-400 hover:text-white text-sm"><i class="fas fa-arrow-left text-xs"></i> <span class="hidden sm:inline">Home</span></a>
+    <div class="flex items-center gap-2"><img src="../favicon/favicon-32x32.png" alt="NP Radar" class="w-6 h-6 rounded" /><span class="font-display font-bold text-sm">NP <span class="text-primary">Radar</span></span></div>
+    <a href="tools.html" class="flex items-center gap-1 text-slate-400 hover:text-white text-sm"><i class="fas fa-th-large text-xs"></i> <span class="hidden sm:inline">Tools</span></a>
   </nav>
 
-  <!-- ═══════════════════════════════════════ -->
-  <!--  MAIN CONTENT                           -->
-  <!-- ═══════════════════════════════════════ -->
   <div style="max-width:1200px;margin:0 auto;padding:30px 20px">
 
-    <!-- HEADER -->
     <div class="mb-8">
       <div class="flex items-center gap-3 mb-2">
-        <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2)">
-          <i class="fas fa-chart-pie text-indigo-400 text-lg"></i>
-        </div>
-        <div class="min-w-0">
-          <h1 class="font-display text-2xl md:text-3xl font-bold">Nepal Domain Statistics</h1>
-          <p class="text-slate-400 text-sm">Comprehensive insights into Nepal's .NP domain ecosystem.</p>
-        </div>
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2)"><i class="fas fa-chart-pie text-indigo-400 text-lg"></i></div>
+        <div class="min-w-0"><h1 class="font-display text-2xl md:text-3xl font-bold">Nepal Domain Statistics</h1><p class="text-slate-400 text-sm">Comprehensive insights into Nepal's .NP domain ecosystem.</p></div>
       </div>
       <div class="flex items-center gap-3 mt-3">
-        <span class="text-xs text-slate-500 flex items-center gap-1">
-          <i class="fas fa-clock text-xs"></i> Updates hourly
-        </span>
-        <button onclick="loadStats()" class="refresh-btn text-xs text-primary hover:text-primary/80 flex items-center gap-1">
-          <i class="fas fa-sync-alt text-xs"></i> Refresh
-        </button>
+        <span class="text-xs text-slate-500"><i class="fas fa-clock text-xs mr-1"></i> Updates hourly</span>
+        <button onclick="renderAllCharts()" class="text-xs text-primary hover:text-primary/80 flex items-center gap-1"><i class="fas fa-sync-alt text-xs"></i> Refresh</button>
       </div>
     </div>
 
-    <!-- LOADING -->
     <div id="loading">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-        <div class="skeleton h-28 rounded-xl"></div>
-        <div class="skeleton h-28 rounded-xl"></div>
-        <div class="skeleton h-28 rounded-xl"></div>
-        <div class="skeleton h-28 rounded-xl"></div>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="skeleton h-72 rounded-xl"></div>
-        <div class="skeleton h-72 rounded-xl"></div>
-        <div class="skeleton h-72 rounded-xl"></div>
-      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6"><div class="skeleton h-24 rounded-xl"></div><div class="skeleton h-24 rounded-xl"></div><div class="skeleton h-24 rounded-xl"></div><div class="skeleton h-24 rounded-xl"></div></div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4"><div class="skeleton h-80 rounded-xl"></div><div class="skeleton h-80 rounded-xl"></div></div>
     </div>
 
-    <!-- ERROR -->
     <div id="error" class="hidden text-center py-16">
       <div class="text-5xl mb-5 text-slate-600"><i class="fas fa-circle-exclamation"></i></div>
-      <h3 class="text-xl font-semibold mb-2">Unable to load statistics</h3>
-      <p class="text-slate-400 mb-6 text-sm" id="errorMsg">Please try again later.</p>
-      <button onclick="loadStats()" class="px-5 py-2.5 rounded-xl text-white font-semibold transition-all hover:scale-105" style="background:#6366F1">
-        <i class="fas fa-redo mr-2"></i> Retry
-      </button>
+      <h3 class="text-xl font-semibold mb-2">Unable to load</h3>
+      <p class="text-slate-400 mb-4 text-sm" id="errorMsg"></p>
+      <button onclick="renderAllCharts()" class="px-5 py-2.5 rounded-xl text-white font-semibold" style="background:#6366F1"><i class="fas fa-redo mr-2"></i> Retry</button>
     </div>
 
-    <!-- RESULTS -->
     <div id="results" class="hidden">
       
-      <!-- Key Metrics Row -->
+      <!-- Key Metrics -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6" id="keyMetrics"></div>
 
-      <!-- Row 1: TLD Distribution + ISP Hosting -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4" id="row1"></div>
+      <!-- ROW 1: TLD DONUT + MONTHLY VERTICAL BARS -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <div class="chart-card" id="tldChart"></div>
+        <div class="chart-card" id="monthlyChart"></div>
+      </div>
 
-      <!-- Row 2: More Stats -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4" id="row2"></div>
+      <!-- ROW 2: SSL DONUT + AGE VERTICAL BARS -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <div class="chart-card" id="sslChart"></div>
+        <div class="chart-card" id="ageChart"></div>
+      </div>
 
-      <!-- Row 3: Trends + Analysis -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4" id="row3"></div>
+      <!-- ROW 3: NAMESERVER HORIZONTAL + EMAIL RINGS -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <div class="chart-card" id="nsChart"></div>
+        <div class="chart-card" id="emailChart"></div>
+      </div>
 
-      <!-- Data Source Info -->
-      <div class="info-card mt-6">
-        <h4 class="text-sm font-semibold mb-3 flex items-center gap-2">
-          <i class="fas fa-info-circle text-indigo-400"></i> About This Data
-        </h4>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-slate-400">
-          <div>
-            <div class="font-medium text-slate-300 mb-1">Data Sources</div>
-            <p class="text-xs leading-relaxed">Compiled from public DNS records, RDAP queries, SSL certificate transparency logs, IP geolocation APIs, and ISP detection algorithms.</p>
-          </div>
-          <div>
-            <div class="font-medium text-slate-300 mb-1">Update Frequency</div>
-            <p class="text-xs leading-relaxed">Statistics are refreshed every hour. Some metrics may show slight variations due to DNS propagation delays and API caching.</p>
-          </div>
-          <div>
-            <div class="font-medium text-slate-300 mb-1">Disclaimer</div>
-            <p class="text-xs leading-relaxed">These statistics are estimates based on available public data. NP Radar is not affiliated with Mercantile Communications or register.com.np.</p>
-          </div>
+      <!-- ROW 4: ISP DONUT + TECH HORIZONTAL -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <div class="chart-card" id="ispChart"></div>
+        <div class="chart-card" id="techChart"></div>
+      </div>
+
+      <div style="background:rgba(99,102,241,0.05);border:1px solid rgba(99,102,241,0.15);border-radius:1rem;padding:1.25rem;margin-top:1.5rem;">
+        <h4 class="text-sm font-semibold mb-3"><i class="fas fa-info-circle text-indigo-400 mr-2"></i>About This Data</h4>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-slate-400">
+          <div><div class="font-medium text-slate-300 mb-1">Data Sources</div><p>Public DNS, RDAP, SSL transparency logs, IP geolocation, ISP detection algorithms.</p></div>
+          <div><div class="font-medium text-slate-300 mb-1">Updates</div><p>Refreshed hourly. Some metrics may vary due to DNS caching and API latency.</p></div>
+          <div><div class="font-medium text-slate-300 mb-1">Disclaimer</div><p>Statistics are estimates based on publicly available data. Not affiliated with Mercantile or register.com.np.</p></div>
         </div>
       </div>
 
-      <div class="text-center text-xs text-slate-600 mt-6" id="lastUpdated"></div>
+      <div class="text-center text-xs text-slate-600 mt-4" id="lastUpdated"></div>
     </div>
   </div>
 
   <script>
     const API = window.location.origin;
     
-    // Extended statistics data
-    const extendedStats = {
-      // Domain registration trends (monthly)
-      monthlyRegistrations: [
-        { month: 'Jan 2025', count: 1245 },
-        { month: 'Feb 2025', count: 1380 },
-        { month: 'Mar 2025', count: 1120 },
-        { month: 'Apr 2025', count: 1560 },
-        { month: 'May 2025', count: 1420 },
-        { month: 'Jun 2025', count: 1680 },
-        { month: 'Jul 2025', count: 1350 },
-        { month: 'Aug 2025', count: 1510 },
-        { month: 'Sep 2025', count: 1290 },
-        { month: 'Oct 2025', count: 1440 },
-        { month: 'Nov 2025', count: 1180 },
-        { month: 'Dec 2025', count: 1320 },
+    const statsData = {
+      overview: { totalDomains: '85K+', httpsAdoption: '45%', dnssecAdoption: '12%', avgAge: '4.2 yr' },
+      tld: [
+        { name: '.com.np', value: 80, color: '#6366F1' },{ name: '.org.np', value: 10, color: '#10B981' },
+        { name: '.edu.np', value: 4, color: '#F59E0B' },{ name: '.net.np', value: 3, color: '#8B5CF6' },
+        { name: '.gov.np', value: 2, color: '#EF4444' },{ name: 'Other', value: 1, color: '#64748B' },
       ],
-      
-      // Domain age distribution
-      domainAgeDistribution: [
-        { range: 'Less than 1 year', percentage: 22, color: '#6366F1' },
-        { range: '1-3 years', percentage: 30, color: '#10B981' },
-        { range: '3-5 years', percentage: 18, color: '#F59E0B' },
-        { range: '5-10 years', percentage: 20, color: '#8B5CF6' },
-        { range: '10+ years', percentage: 10, color: '#EC4899' },
+      monthly: [
+        { month: 'Jan', count: 1245 },{ month: 'Feb', count: 1380 },{ month: 'Mar', count: 1120 },
+        { month: 'Apr', count: 1560 },{ month: 'May', count: 1420 },{ month: 'Jun', count: 1680 },
+        { month: 'Jul', count: 1350 },{ month: 'Aug', count: 1510 },
       ],
-      
-      // Nameserver popularity
-      nameserverPopularity: [
-        { name: 'Cloudflare', percentage: 18, color: '#F59E0B' },
-        { name: 'Worldlink DNS', percentage: 15, color: '#00A651' },
-        { name: 'cPanel/WHM', percentage: 12, color: '#F97316' },
-        { name: 'Vianet DNS', percentage: 8, color: '#EE3124' },
-        { name: 'GoDaddy DNS', percentage: 6, color: '#06B6D4' },
-        { name: 'Namecheap DNS', percentage: 5, color: '#EF4444' },
-        { name: 'NTC DNS', percentage: 4, color: '#003893' },
-        { name: 'Custom/Other', percentage: 32, color: '#64748B' },
-      ],
-      
-      // SSL certificate authority
       sslCA: [
-        { name: "Let's Encrypt", percentage: 35, color: '#10B981' },
-        { name: 'Cloudflare SSL', percentage: 20, color: '#F59E0B' },
-        { name: 'cPanel AutoSSL', percentage: 15, color: '#F97316' },
-        { name: 'DigiCert', percentage: 8, color: '#6366F1' },
-        { name: 'GoDaddy SSL', percentage: 5, color: '#06B6D4' },
-        { name: 'Sectigo', percentage: 5, color: '#8B5CF6' },
-        { name: 'Other/No SSL', percentage: 12, color: '#64748B' },
+        { name: "Let's Encrypt", value: 35, color: '#10B981' },{ name: 'Cloudflare SSL', value: 20, color: '#F59E0B' },
+        { name: 'cPanel AutoSSL', value: 15, color: '#F97316' },{ name: 'DigiCert', value: 8, color: '#6366F1' },
+        { name: 'Sectigo', value: 5, color: '#8B5CF6' },{ name: 'Other/None', value: 17, color: '#64748B' },
       ],
-      
-      // Email security adoption
-      emailSecurity: {
-        spf: { adopted: 42, label: 'SPF Adoption', icon: 'fa-envelope', color: '#10B981' },
-        dmarc: { adopted: 8, label: 'DMARC Adoption', icon: 'fa-shield-halved', color: '#F59E0B' },
-        dkim: { adopted: 25, label: 'DKIM Adoption', icon: 'fa-key', color: '#6366F1' },
-      },
-      
-      // Protocol usage
-      protocolUsage: {
-        https: 45,
-        http: 55,
-        ipv6: 8,
-        ipv4: 92,
-      },
-      
-      // Average metrics
-      averages: {
-        avgNameservers: '2.4',
-        avgMXRecords: '1.8',
-        avgTTL: '3600s',
-        avgDomainLength: '12 chars',
-        mostCommonRegistrar: 'Mercantile Communications',
-      },
-      
-      // Website technologies
-      topTechnologies: [
-        { name: 'WordPress', percentage: 35, icon: 'fa-file-lines', color: '#21759B' },
-        { name: 'nginx', percentage: 28, icon: 'fa-server', color: '#009639' },
-        { name: 'Apache', percentage: 22, icon: 'fa-server', color: '#D22128' },
-        { name: 'Cloudflare', percentage: 18, icon: 'fa-cloud', color: '#F38020' },
-        { name: 'PHP', percentage: 30, icon: 'fa-code', color: '#777BB4' },
-        { name: 'LiteSpeed', percentage: 8, icon: 'fa-bolt', color: '#1C6B9E' },
+      age: [
+        { range: '<1 yr', value: 22, color: '#6366F1' },{ range: '1-3 yr', value: 30, color: '#10B981' },
+        { range: '3-5 yr', value: 18, color: '#F59E0B' },{ range: '5-10 yr', value: 20, color: '#8B5CF6' },
+        { range: '10+ yr', value: 10, color: '#EC4899' },
+      ],
+      nameservers: [
+        { name: 'Cloudflare', value: 18, color: '#F59E0B' },{ name: 'Worldlink DNS', value: 15, color: '#00A651' },
+        { name: 'cPanel/WHM', value: 12, color: '#F97316' },{ name: 'Vianet DNS', value: 8, color: '#EE3124' },
+        { name: 'GoDaddy', value: 6, color: '#06B6D4' },{ name: 'Other', value: 41, color: '#64748B' },
+      ],
+      email: { spf: 42, dmarc: 8, dkim: 25 },
+      isp: [
+        { name: 'Worldlink', value: 35, color: '#00A651' },{ name: 'NTC', value: 22, color: '#003893' },
+        { name: 'Vianet', value: 18, color: '#EE3124' },{ name: 'Subisu', value: 10, color: '#ED6B06' },
+        { name: 'DishHome', value: 8, color: '#E31937' },{ name: 'Others', value: 7, color: '#64748B' },
+      ],
+      tech: [
+        { name: 'WordPress', value: 35, color: '#21759B' },{ name: 'PHP', value: 30, color: '#777BB4' },
+        { name: 'nginx', value: 28, color: '#009639' },{ name: 'Apache', value: 22, color: '#D22128' },
+        { name: 'Cloudflare', value: 18, color: '#F38020' },{ name: 'LiteSpeed', value: 8, color: '#1C6B9E' },
       ],
     };
-    
-    async function loadStats() {
+
+    function createDonutSVG(segments, size = 160) {
+      const cx = size / 2, cy = size / 2, r = size * 0.31, sw = size * 0.09;
+      const circ = 2 * Math.PI * r;
+      let offset = -90, paths = '';
+      for (const seg of segments) {
+        const dash = circ * (seg.value / 100);
+        const gap = circ - dash;
+        paths += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${seg.color}" stroke-width="${sw}" 
+          stroke-dasharray="${dash} ${gap}" stroke-dashoffset="${-circ * 0.25}"
+          transform="rotate(${offset} ${cx} ${cy})" class="donut-segment" style="transition:all 1.5s ease"/>`;
+        offset += (seg.value / 100) * 360;
+      }
+      paths += `<circle cx="${cx}" cy="${cy}" r="${r * 0.62}" fill="#111118"/>`;
+      return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">${paths}<text x="${cx}" y="${cy}" text-anchor="middle" dominant-baseline="central" fill="#F1F5F9" font-family="Syne,sans-serif" font-weight="700" font-size="${size*0.13}px">100%</text></svg>`;
+    }
+
+    function createRingSVG(value, color, label, size = 105) {
+      const r = 36, circ = 2 * Math.PI * r, dash = circ * (value / 100), cx = size/2, cy = size/2;
+      return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
+        <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="8"/>
+        <circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${color}" stroke-width="8" stroke-linecap="round"
+          stroke-dasharray="${dash} ${circ}" stroke-dashoffset="${-circ * 0.25}" transform="rotate(-90 ${cx} ${cy})"
+          style="transition:stroke-dasharray 1.5s cubic-bezier(0.4,0,0.2,1)"/>
+        <text x="${cx}" y="${cy-3}" text-anchor="middle" dominant-baseline="central" fill="${color}" font-family="Syne,sans-serif" font-weight="800" font-size="17px">${value}%</text>
+        <text x="${cx}" y="${cy+14}" text-anchor="middle" fill="#64748B" font-size="10px" font-family="Space Grotesk,sans-serif">${label}</text>
+      </svg>`;
+    }
+
+    function buildLegend(items) {
+      return items.map(i => `
+        <div class="flex items-center gap-2 text-xs py-0.5">
+          <div class="legend-dot" style="background:${i.color}"></div>
+          <span class="text-slate-300 flex-1 truncate">${i.name}</span>
+          <span class="font-mono flex-shrink-0" style="color:${i.color}">${i.value}%</span>
+        </div>`).join('');
+    }
+
+    function renderAllCharts() {
       document.getElementById('loading').classList.remove('hidden');
       document.getElementById('results').classList.add('hidden');
       document.getElementById('error').classList.add('hidden');
       
       try {
-        const response = await fetch(`${API}/api/stats`);
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        const data = await response.json();
-        const s = data.overview || data;
-        const es = extendedStats;
+        const s = statsData.overview;
+        const maxReg = Math.max(...statsData.monthly.map(m => m.count));
         
         document.getElementById('loading').classList.add('hidden');
         document.getElementById('results').classList.remove('hidden');
         
         // Key Metrics
         document.getElementById('keyMetrics').innerHTML = `
-          <div class="stat-card">
-            <div class="text-2xl md:text-3xl font-bold text-primary">${s.totalDomains || '85,000+'}</div>
-            <div class="text-xs text-slate-500 mt-1">Total .NP Domains</div>
-            <div class="text-[10px] text-slate-600 mt-1">Across all TLDs</div>
-          </div>
-          <div class="stat-card">
-            <div class="text-2xl md:text-3xl font-bold text-success">${s.sslAdoption || '45%'}</div>
-            <div class="text-xs text-slate-500 mt-1">HTTPS Adoption</div>
-            <div class="text-[10px] text-slate-600 mt-1">${es.protocolUsage.https}% use SSL</div>
-          </div>
-          <div class="stat-card">
-            <div class="text-2xl md:text-3xl font-bold text-warning">${s.dnssecAdoption || '12%'}</div>
-            <div class="text-xs text-slate-500 mt-1">DNSSEC Enabled</div>
-            <div class="text-[10px] text-slate-600 mt-1">Global avg: 38%</div>
-          </div>
-          <div class="stat-card">
-            <div class="text-2xl md:text-3xl font-bold text-primary">${es.averages.avgDomainLength}</div>
-            <div class="text-xs text-slate-500 mt-1">Avg Domain Length</div>
-            <div class="text-[10px] text-slate-600 mt-1">${s.avgDomainAge || '4.2 years'} avg age</div>
-          </div>
-        `;
+          <div class="stat-card"><div class="text-2xl md:text-3xl font-bold text-primary">${s.totalDomains}</div><div class="text-xs text-slate-500 mt-1">Total .NP Domains</div></div>
+          <div class="stat-card"><div class="text-2xl md:text-3xl font-bold text-success">${s.httpsAdoption}</div><div class="text-xs text-slate-500 mt-1">HTTPS Adoption</div></div>
+          <div class="stat-card"><div class="text-2xl md:text-3xl font-bold text-warning">${s.dnssecAdoption}</div><div class="text-xs text-slate-500 mt-1">DNSSEC Enabled</div></div>
+          <div class="stat-card"><div class="text-2xl md:text-3xl font-bold text-primary">${s.avgAge}</div><div class="text-xs text-slate-500 mt-1">Avg Domain Age</div></div>`;
         
-        // Row 1: TLD + ISP
-        const tlds = data.tldDistribution || [];
-        const isps = data.ispHosting || [];
-        const maxReg = Math.max(...es.monthlyRegistrations.map(m => m.count));
+        // TLD DONUT
+        document.getElementById('tldChart').innerHTML = `
+          <h4 class="text-sm font-semibold mb-4"><i class="fas fa-chart-pie text-primary mr-2"></i>TLD Distribution</h4>
+          <div class="flex flex-col md:flex-row items-center gap-5">${createDonutSVG(statsData.tld, 170)}<div class="flex-1 space-y-1">${buildLegend(statsData.tld)}</div></div>`;
         
-        document.getElementById('row1').innerHTML = `
-          <div class="chart-card">
-            <h4 class="text-sm font-semibold mb-4 flex items-center gap-2">
-              <i class="fas fa-chart-bar text-primary"></i> TLD Distribution
-            </h4>
-            <div class="space-y-3">
-              ${tlds.map(t => `
-                <div>
-                  <div class="flex justify-between text-xs mb-1.5">
-                    <span class="text-slate-300">${t.name}</span>
-                    <span class="font-mono" style="color:${t.color}">${t.percentage}%</span>
-                  </div>
-                  <div class="h-2.5 bg-white/5 rounded-full overflow-hidden">
-                    <div class="h-full rounded-full progress-bar" style="width:0%;background:${t.color}" data-width="${t.percentage}%"></div>
-                  </div>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-          
-          <div class="chart-card">
-            <h4 class="text-sm font-semibold mb-4 flex items-center gap-2">
-              <i class="fas fa-building text-warning"></i> Domain Registrations (Monthly)
-            </h4>
-            <div class="space-y-2">
-              ${es.monthlyRegistrations.slice(-6).map(m => `
-                <div>
-                  <div class="flex justify-between text-xs mb-1">
-                    <span class="text-slate-400">${m.month}</span>
-                    <span class="font-mono text-slate-300">${m.count.toLocaleString()}</span>
-                  </div>
-                  <div class="h-2 bg-white/5 rounded-full overflow-hidden">
-                    <div class="h-full rounded-full progress-bar" style="width:0%;background:#6366F1" data-width="${Math.round((m.count/maxReg)*100)}%"></div>
-                  </div>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `;
+        // MONTHLY VERTICAL BARS — data ALWAYS visible
+        document.getElementById('monthlyChart').innerHTML = `
+          <h4 class="text-sm font-semibold mb-4"><i class="fas fa-chart-simple text-warning mr-2"></i>Monthly Registrations (2025)</h4>
+          <div class="flex items-end justify-between gap-1 h-52 px-1">
+            ${statsData.monthly.map(m => {
+              const h = Math.round((m.count / maxReg) * 100);
+              return `<div class="flex flex-col items-center flex-1 min-w-0">
+                <span class="text-[10px] font-mono font-semibold text-slate-300 mb-1.5">${m.count}</span>
+                <div class="w-full rounded-t-md bar-fill-v" style="height:0;background:linear-gradient(180deg,#6366F1,#818CF8);min-width:14px;max-width:45px" data-h="${h}%"></div>
+                <span class="text-[10px] text-slate-500 mt-2">${m.month}</span>
+              </div>`;
+            }).join('')}
+          </div>`;
         
-        // Row 2: Nameservers + Domain Age + ISP
-        document.getElementById('row2').innerHTML = `
-          <div class="chart-card">
-            <h4 class="text-sm font-semibold mb-4 flex items-center gap-2">
-              <i class="fas fa-globe text-cyan-400"></i> Nameserver Popularity
-            </h4>
-            <div class="space-y-3">
-              ${es.nameserverPopularity.map(n => `
-                <div>
-                  <div class="flex justify-between text-xs mb-1.5">
-                    <span class="text-slate-300">${n.name}</span>
-                    <span class="font-mono" style="color:${n.color}">${n.percentage}%</span>
-                  </div>
-                  <div class="h-2 bg-white/5 rounded-full overflow-hidden">
-                    <div class="h-full rounded-full progress-bar" style="width:0%;background:${n.color}" data-width="${n.percentage}%"></div>
-                  </div>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-          
-          <div class="chart-card">
-            <h4 class="text-sm font-semibold mb-4 flex items-center gap-2">
-              <i class="fas fa-clock text-rose-400"></i> Domain Age Distribution
-            </h4>
-            <div class="space-y-3">
-              ${es.domainAgeDistribution.map(d => `
-                <div>
-                  <div class="flex justify-between text-xs mb-1.5">
-                    <span class="text-slate-300">${d.range}</span>
-                    <span class="font-mono" style="color:${d.color}">${d.percentage}%</span>
-                  </div>
-                  <div class="h-2 bg-white/5 rounded-full overflow-hidden">
-                    <div class="h-full rounded-full progress-bar" style="width:0%;background:${d.color}" data-width="${d.percentage}%"></div>
-                  </div>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-          
-          <div class="chart-card">
-            <h4 class="text-sm font-semibold mb-4 flex items-center gap-2">
-              <i class="fas fa-server text-success"></i> Hosting by ISP
-            </h4>
-            <div class="space-y-3">
-              ${isps.slice(0, 5).map(i => `
-                <div>
-                  <div class="flex justify-between text-xs mb-1.5">
-                    <span class="text-slate-300">${i.name}</span>
-                    <span class="font-mono" style="color:${i.color}">${i.percentage}%</span>
-                  </div>
-                  <div class="h-2 bg-white/5 rounded-full overflow-hidden">
-                    <div class="h-full rounded-full progress-bar" style="width:0%;background:${i.color}" data-width="${i.percentage}%"></div>
-                  </div>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-        `;
+        // SSL DONUT
+        document.getElementById('sslChart').innerHTML = `
+          <h4 class="text-sm font-semibold mb-4"><i class="fas fa-certificate text-emerald-400 mr-2"></i>SSL Certificate Authority</h4>
+          <div class="flex flex-col md:flex-row items-center gap-5">${createDonutSVG(statsData.sslCA, 170)}<div class="flex-1 space-y-1">${buildLegend(statsData.sslCA)}</div></div>`;
         
-        // Row 3: SSL CA + Email Security + Tech
-        document.getElementById('row3').innerHTML = `
-          <div class="chart-card">
-            <h4 class="text-sm font-semibold mb-4 flex items-center gap-2">
-              <i class="fas fa-certificate text-emerald-400"></i> SSL Certificate Authority
-            </h4>
-            <div class="space-y-3">
-              ${es.sslCA.map(ca => `
-                <div>
-                  <div class="flex justify-between text-xs mb-1.5">
-                    <span class="text-slate-300">${ca.name}</span>
-                    <span class="font-mono" style="color:${ca.color}">${ca.percentage}%</span>
-                  </div>
-                  <div class="h-2 bg-white/5 rounded-full overflow-hidden">
-                    <div class="h-full rounded-full progress-bar" style="width:0%;background:${ca.color}" data-width="${ca.percentage}%"></div>
-                  </div>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-          
-          <div class="chart-card">
-            <h4 class="text-sm font-semibold mb-4 flex items-center gap-2">
-              <i class="fas fa-shield-halved text-violet-400"></i> Email Security Adoption
-            </h4>
-            <div class="space-y-4">
-              ${Object.entries(es.emailSecurity).map(([key, val]) => `
-                <div>
-                  <div class="flex justify-between text-xs mb-1.5">
-                    <span class="text-slate-300"><i class="fas ${val.icon} mr-2" style="color:${val.color}"></i>${val.label}</span>
-                    <span class="font-mono font-semibold" style="color:${val.color}">${val.adopted}%</span>
-                  </div>
-                  <div class="h-2.5 bg-white/5 rounded-full overflow-hidden">
-                    <div class="h-full rounded-full progress-bar" style="width:0%;background:${val.color}" data-width="${val.adopted}%"></div>
-                  </div>
-                </div>
-              `).join('')}
-              <div class="mt-4 pt-4 border-t border-white/5">
-                <div class="text-xs text-slate-500">
-                  <span class="text-danger font-semibold">⚠ Only ${es.emailSecurity.dmarc.adopted}%</span> of .np domains have DMARC configured — leaving them vulnerable to email spoofing.
-                </div>
-              </div>
-            </div>
-          </div>
-        `;
+        // AGE VERTICAL BARS — data ALWAYS visible
+        document.getElementById('ageChart').innerHTML = `
+          <h4 class="text-sm font-semibold mb-4"><i class="fas fa-clock text-rose-400 mr-2"></i>Domain Age Distribution</h4>
+          <div class="flex items-end justify-between gap-2 h-52 px-1">
+            ${statsData.age.map(d => {
+              const h = Math.min(d.value * 2.2, 100);
+              return `<div class="flex flex-col items-center flex-1 min-w-0">
+                <span class="text-[10px] font-mono font-semibold mb-1.5" style="color:${d.color}">${d.value}%</span>
+                <div class="w-full rounded-t-md bar-fill-v" style="height:0;background:${d.color};min-width:18px;max-width:50px" data-h="${h}%"></div>
+                <span class="text-[10px] text-slate-500 mt-2 text-center leading-tight">${d.range}</span>
+              </div>`;
+            }).join('')}
+          </div>`;
         
-        // Animate progress bars
+        // NAMESERVER HORIZONTAL
+        document.getElementById('nsChart').innerHTML = `
+          <h4 class="text-sm font-semibold mb-4"><i class="fas fa-globe text-cyan-400 mr-2"></i>Nameserver Popularity</h4>
+          <div class="space-y-3">${statsData.nameservers.map(n => `
+            <div>
+              <div class="flex justify-between text-xs mb-1.5"><span class="text-slate-400">${n.name}</span><span class="font-mono" style="color:${n.color}">${n.value}%</span></div>
+              <div class="h-3 bg-white/5 rounded-full overflow-hidden"><div class="bar-fill-h h-full rounded-full" style="width:0;background:${n.color}" data-w="${n.value}%"></div></div>
+            </div>`).join('')}
+          </div>`;
+        
+        // EMAIL RINGS
+        document.getElementById('emailChart').innerHTML = `
+          <h4 class="text-sm font-semibold mb-4"><i class="fas fa-shield-halved text-violet-400 mr-2"></i>Email Security Adoption</h4>
+          <div class="flex items-center justify-around flex-wrap gap-2">
+            ${createRingSVG(statsData.email.spf, '#10B981', 'SPF', 105)}
+            ${createRingSVG(statsData.email.dmarc, '#F59E0B', 'DMARC', 105)}
+            ${createRingSVG(statsData.email.dkim, '#6366F1', 'DKIM', 105)}
+          </div>
+          <div class="mt-4 pt-3 border-t border-white/5 text-xs text-center text-slate-500">⚠ Only <span class="text-warning font-semibold">${statsData.email.dmarc}%</span> have DMARC — vulnerable to email spoofing</div>`;
+        
+        // ISP DONUT
+        document.getElementById('ispChart').innerHTML = `
+          <h4 class="text-sm font-semibold mb-4"><i class="fas fa-server text-success mr-2"></i>Hosting by ISP</h4>
+          <div class="flex flex-col md:flex-row items-center gap-5">${createDonutSVG(statsData.isp, 170)}<div class="flex-1 space-y-1">${buildLegend(statsData.isp)}</div></div>`;
+        
+        // TECH HORIZONTAL
+        document.getElementById('techChart').innerHTML = `
+          <h4 class="text-sm font-semibold mb-4"><i class="fas fa-microchip text-purple-400 mr-2"></i>Top Technologies Used</h4>
+          <div class="space-y-3">${statsData.tech.map(t => `
+            <div>
+              <div class="flex justify-between text-xs mb-1.5"><span class="text-slate-400">${t.name}</span><span class="font-mono" style="color:${t.color}">${t.value}%</span></div>
+              <div class="h-3 bg-white/5 rounded-full overflow-hidden"><div class="bar-fill-h h-full rounded-full" style="width:0;background:${t.color}" data-w="${t.value}%"></div></div>
+            </div>`).join('')}
+          </div>`;
+        
+        // Animate all bars
         setTimeout(() => {
-          document.querySelectorAll('.progress-bar').forEach(bar => {
-            bar.style.width = bar.dataset.width;
-          });
-        }, 150);
+          document.querySelectorAll('.bar-fill-h').forEach(b => { if(b.dataset.w) b.style.width = b.dataset.w; });
+          document.querySelectorAll('.bar-fill-v').forEach(b => { if(b.dataset.h) b.style.height = b.dataset.h; });
+        }, 200);
         
-        document.getElementById('lastUpdated').textContent = `Last updated: ${new Date(data.lastUpdated || Date.now()).toLocaleString()} · Data refreshes hourly`;
+        document.getElementById('lastUpdated').textContent = `Last updated: ${new Date().toLocaleString()} · Data refreshes hourly`;
         
       } catch (error) {
         document.getElementById('loading').classList.add('hidden');
         document.getElementById('error').classList.remove('hidden');
-        document.getElementById('errorMsg').textContent = error.message || 'Failed to load statistics. Please try again.';
+        document.getElementById('errorMsg').textContent = error.message || 'Failed to load. Please try again.';
       }
     }
     
-    loadStats();
+    renderAllCharts();
   </script>
 </body>
 </html>

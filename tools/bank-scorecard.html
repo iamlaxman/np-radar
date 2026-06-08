@@ -27,9 +27,9 @@
     .bank-row { transition: background 0.15s ease; }
     .bank-row:hover { background: rgba(99,102,241,0.04); }
     .grade-badge { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 8px; font-weight: 700; font-size: 0.875rem; font-family: 'JetBrains Mono', monospace; }
-    .progress-fill { transition: width 0.3s ease; }
-    .refresh-btn { transition: transform 0.3s ease; }
+    .refresh-btn { transition: transform 0.3s ease; cursor: pointer; }
     .refresh-btn:active { transform: rotate(180deg); }
+    .cache-indicator { display: inline-flex; align-items: center; gap: 0.375rem; padding: 0.25rem 0.625rem; border-radius: 999px; font-size: 0.6875rem; font-weight: 500; }
     ::-webkit-scrollbar { width: 4px; height: 4px; }
     ::-webkit-scrollbar-track { background: #0A0A0F; }
     ::-webkit-scrollbar-thumb { background: #1A1A24; border-radius: 2px; }
@@ -38,16 +38,9 @@
 <body>
 
   <nav class="sticky top-0 z-50 flex items-center justify-between px-4 md:px-6 py-3 border-b border-white/5" style="background:rgba(10,10,15,0.95);backdrop-filter:blur(12px)">
-    <a href="../index.html" class="flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm">
-      <i class="fas fa-arrow-left text-xs"></i> <span class="hidden sm:inline">Home</span>
-    </a>
-    <div class="flex items-center gap-2">
-      <img src="../favicon/favicon-32x32.png" alt="NP Radar" class="w-6 h-6 rounded" width="28" height="28" />
-      <span class="font-display font-bold text-sm">NP <span class="text-primary">Radar</span></span>
-    </div>
-    <a href="tools.html" class="flex items-center gap-1 text-slate-400 hover:text-white transition-colors text-sm">
-      <i class="fas fa-th-large text-xs"></i> <span class="hidden sm:inline">Tools</span>
-    </a>
+    <a href="../index.html" class="flex items-center gap-2 text-slate-400 hover:text-white text-sm"><i class="fas fa-arrow-left text-xs"></i> <span class="hidden sm:inline">Home</span></a>
+    <div class="flex items-center gap-2"><img src="../favicon/favicon-32x32.png" alt="NP Radar" class="w-6 h-6 rounded" width="28" height="28" /><span class="font-display font-bold text-sm">NP <span class="text-primary">Radar</span></span></div>
+    <a href="tools.html" class="flex items-center gap-1 text-slate-400 hover:text-white text-sm"><i class="fas fa-th-large text-xs"></i> <span class="hidden sm:inline">Tools</span></a>
   </nav>
 
   <div style="max-width:1100px;margin:0 auto;padding:30px 20px">
@@ -55,46 +48,33 @@
     <!-- HEADER -->
     <div class="mb-6">
       <div class="flex items-center gap-3 mb-2">
-        <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2)">
-          <i class="fas fa-building-columns text-amber-400 text-lg"></i>
-        </div>
-        <div class="min-w-0">
-          <h1 class="font-display text-2xl md:text-3xl font-bold">Bank Security Scorecard</h1>
-          <p class="text-slate-400 text-sm">Compare security across 15+ Nepali bank domains.</p>
-        </div>
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2)"><i class="fas fa-building-columns text-amber-400 text-lg"></i></div>
+        <div class="min-w-0"><h1 class="font-display text-2xl md:text-3xl font-bold">Bank Security Scorecard</h1><p class="text-slate-400 text-sm">Compare security across 15+ Nepali bank domains.</p></div>
       </div>
-      <!-- Refresh Row -->
-      <div class="flex items-center gap-3 mt-3">
-        <span class="text-xs text-slate-500 flex items-center gap-1">
-          <i class="fas fa-clock text-xs"></i> Auto-refreshes every 2 hours
+      <div class="flex flex-wrap items-center gap-3 mt-3">
+        <span class="cache-indicator" style="background:rgba(16,185,129,0.1);color:#10B981;border:1px solid rgba(16,185,129,0.2)" id="cacheBadge">
+          <i class="fas fa-database text-[10px]"></i> <span id="cacheStatus">Loading...</span>
         </span>
-        <button onclick="loadData()" class="refresh-btn text-xs text-primary hover:text-primary/80 flex items-center gap-1 transition-colors">
-          <i class="fas fa-sync-alt text-xs"></i> Refresh Now
-        </button>
+        <span class="text-xs text-slate-500 flex items-center gap-1"><i class="fas fa-clock text-xs"></i> Auto-refreshes every 2 hours</span>
+        <button onclick="fetchFreshData()" class="refresh-btn text-xs text-primary hover:text-primary/80 flex items-center gap-1"><i class="fas fa-sync-alt text-xs"></i> Refresh Now</button>
       </div>
     </div>
 
-    <!-- LOADING -->
-    <div id="loading">
+    <!-- INITIAL LOADING (shown only first time, no cache) -->
+    <div id="firstTimeLoading" class="hidden">
       <div class="mb-4 p-4 rounded-xl" style="background:rgba(99,102,241,0.05);border:1px solid rgba(99,102,241,0.1)">
         <div class="flex items-center gap-3">
-          <div class="w-6 h-6 border-2 border-primary/30 border-t-primary rounded-full animate-spin"></div>
-          <div>
-            <div class="text-sm font-medium" id="loadingText">Checking banks...</div>
-            <div class="text-xs text-slate-500 mt-0.5" id="loadingDetail">This may take a few seconds</div>
-          </div>
-        </div>
-        <div class="h-1.5 bg-white/5 rounded-full mt-3 overflow-hidden">
-          <div class="h-full bg-primary rounded-full progress-fill" id="progressBar" style="width:0%"></div>
+          <div class="w-5 h-5 border-2 border-primary/30 border-t-primary rounded-full animate-spin"></div>
+          <div><div class="text-sm font-medium">Fetching bank data...</div><div class="text-xs text-slate-500 mt-0.5">This may take up to 60 seconds on first load</div></div>
         </div>
       </div>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
-        <div class="skeleton h-24 rounded-xl"></div>
-        <div class="skeleton h-24 rounded-xl"></div>
-        <div class="skeleton h-24 rounded-xl"></div>
-        <div class="skeleton h-24 rounded-xl"></div>
-      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4"><div class="skeleton h-24 rounded-xl"></div><div class="skeleton h-24 rounded-xl"></div><div class="skeleton h-24 rounded-xl"></div><div class="skeleton h-24 rounded-xl"></div></div>
       <div class="skeleton h-96 rounded-xl"></div>
+    </div>
+
+    <!-- BACKGROUND REFRESH INDICATOR (subtle, shown when refreshing in background) -->
+    <div id="bgRefresh" class="hidden mb-4 p-3 rounded-xl" style="background:rgba(99,102,241,0.05);border:1px solid rgba(99,102,241,0.1)">
+      <div class="flex items-center gap-2 text-xs text-slate-400"><div class="w-4 h-4 border-2 border-primary/30 border-t-primary rounded-full animate-spin"></div> Refreshing data in background...</div>
     </div>
 
     <!-- ERROR -->
@@ -102,187 +82,189 @@
       <div class="text-5xl mb-5 text-slate-600"><i class="fas fa-circle-exclamation"></i></div>
       <h3 class="text-xl font-semibold mb-2">Unable to load</h3>
       <p class="text-slate-400 mb-4 text-sm" id="errorMsg">Please try again.</p>
-      <button onclick="loadData()" class="px-5 py-2.5 rounded-xl text-white font-semibold transition-all hover:scale-105" style="background:#F59E0B">
-        <i class="fas fa-redo mr-2"></i> Retry
-      </button>
+      <button onclick="fetchFreshData()" class="px-5 py-2.5 rounded-xl text-white font-semibold transition-all hover:scale-105" style="background:#F59E0B"><i class="fas fa-redo mr-2"></i> Retry</button>
     </div>
 
     <!-- RESULTS -->
     <div id="results" class="hidden">
-
-      <!-- Info Banner -->
       <div class="result-card mb-4" style="background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.15)">
         <div class="flex items-start gap-3">
           <i class="fas fa-info-circle text-amber-400 mt-0.5"></i>
-          <div>
-            <div class="text-sm font-medium text-amber-400 mb-1">About this Scorecard</div>
-            <p class="text-slate-400 text-xs leading-relaxed">
-              This scorecard checks <strong style="color:#E2E8F0">SSL certificate validity</strong>, <strong style="color:#E2E8F0">DNSSEC configuration</strong>, 
-              <strong style="color:#E2E8F0">SPF records</strong> (email spoofing protection), and <strong style="color:#E2E8F0">DMARC policies</strong> for each bank domain. 
-              Scores are calculated automatically. Higher scores indicate better security posture.
-            </p>
-          </div>
+          <div><div class="text-sm font-medium text-amber-400 mb-1">About this Scorecard</div><p class="text-slate-400 text-xs leading-relaxed">This scorecard checks <strong style="color:#E2E8F0">SSL certificate validity</strong>, <strong style="color:#E2E8F0">DNSSEC configuration</strong>, <strong style="color:#E2E8F0">SPF records</strong> (email spoofing protection), and <strong style="color:#E2E8F0">DMARC policies</strong> for each bank domain. Scores are calculated automatically. Higher scores indicate better security posture.</p></div>
         </div>
       </div>
-
-      <!-- Stats Row -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4" id="statsRow"></div>
-
-      <!-- Table -->
       <div class="overflow-x-auto rounded-xl border border-white/5">
         <table class="w-full border-collapse">
-          <thead>
-            <tr class="bg-surface/50 border-b border-white/5">
-              <th class="text-left py-3 px-4 text-xs text-slate-500 uppercase">#</th>
-              <th class="text-left py-3 px-4 text-xs text-slate-500 uppercase">Bank</th>
-              <th class="text-center py-3 px-3 text-xs text-slate-500 uppercase">SSL</th>
-              <th class="text-center py-3 px-3 text-xs text-slate-500 uppercase">DNSSEC</th>
-              <th class="text-center py-3 px-3 text-xs text-slate-500 uppercase">SPF</th>
-              <th class="text-center py-3 px-3 text-xs text-slate-500 uppercase">DMARC</th>
-              <th class="text-right py-3 px-4 text-xs text-slate-500 uppercase">Score</th>
-              <th class="text-center py-3 px-4 text-xs text-slate-500 uppercase">Grade</th>
-            </tr>
-          </thead>
+          <thead><tr class="bg-surface/50 border-b border-white/5"><th class="text-left py-3 px-4 text-xs text-slate-500 uppercase">#</th><th class="text-left py-3 px-4 text-xs text-slate-500 uppercase">Bank</th><th class="text-center py-3 px-3 text-xs text-slate-500 uppercase">SSL</th><th class="text-center py-3 px-3 text-xs text-slate-500 uppercase">DNSSEC</th><th class="text-center py-3 px-3 text-xs text-slate-500 uppercase">SPF</th><th class="text-center py-3 px-3 text-xs text-slate-500 uppercase">DMARC</th><th class="text-right py-3 px-4 text-xs text-slate-500 uppercase">Score</th><th class="text-center py-3 px-4 text-xs text-slate-500 uppercase">Grade</th></tr></thead>
           <tbody id="bankTableBody" class="divide-y divide-white/3"></tbody>
         </table>
       </div>
-
-      <!-- Legend -->
       <div class="flex flex-wrap items-center gap-4 mt-4 text-xs text-slate-500">
         <span class="flex items-center gap-1"><span class="text-success">✅</span> = Good</span>
         <span class="flex items-center gap-1"><span class="text-danger">❌</span> = Missing</span>
         <span>·</span>
         <span>Score: SSL (30pts) + DNSSEC (25pts) + SPF (25pts) + DMARC (20pts)</span>
       </div>
-
       <div class="text-center text-xs text-slate-600 mt-4" id="lastUpdated"></div>
     </div>
   </div>
 
   <script>
     const API = window.location.origin;
+    const CACHE_KEY = 'npradar_bank_scorecard';
+    const CACHE_DURATION = 2 * 60 * 60 * 1000; // 2 hours
     
-    function simulateProgress() {
-      const bar = document.getElementById('progressBar');
-      const text = document.getElementById('loadingText');
-      const detail = document.getElementById('loadingDetail');
-      let progress = 0;
-      
-      const messages = [
-        { pct: 10, text: 'Connecting to banks...', detail: 'Initiating SSL checks' },
-        { pct: 25, text: 'Checking SSL certificates...', detail: 'Himalayan Bank, Nabil Bank...' },
-        { pct: 50, text: 'Checking DNSSEC...', detail: 'Verifying DNS security' },
-        { pct: 70, text: 'Checking email security...', detail: 'SPF and DMARC records' },
-        { pct: 85, text: 'Calculating scores...', detail: 'Almost done' },
-        { pct: 95, text: 'Finalizing...', detail: 'Preparing results' },
-      ];
-      
-      const interval = setInterval(() => {
-        progress += Math.random() * 5 + 2;
-        if (progress > 95) progress = 95;
-        bar.style.width = progress + '%';
-        for (const msg of messages) {
-          if (progress >= msg.pct && progress < msg.pct + 15) {
-            text.textContent = msg.text;
-            detail.textContent = msg.detail;
-            break;
-          }
-        }
-        if (progress >= 95) clearInterval(interval);
-      }, 400);
-      
-      return interval;
+    // Get cached data
+    function getCachedData() {
+      try {
+        const cached = localStorage.getItem(CACHE_KEY);
+        if (!cached) return null;
+        const data = JSON.parse(cached);
+        const age = Date.now() - data.timestamp;
+        if (age > CACHE_DURATION) return null; // Expired
+        return data;
+      } catch(e) { return null; }
     }
     
-    async function loadData() {
-      document.getElementById('loading').classList.remove('hidden');
-      document.getElementById('results').classList.add('hidden');
+    // Save to cache
+    function saveToCache(data) {
+      try {
+        const cacheData = { ...data, timestamp: Date.now() };
+        localStorage.setItem(CACHE_KEY, JSON.stringify(cacheData));
+      } catch(e) { /* Storage full — ignore */ }
+    }
+    
+    // Update cache badge
+    function updateCacheBadge(data) {
+      const badge = document.getElementById('cacheBadge');
+      const status = document.getElementById('cacheStatus');
+      if (!badge || !status) return;
+      
+      if (!data) {
+        badge.style.background = 'rgba(245,158,11,0.1)';
+        badge.style.color = '#F59E0B';
+        badge.style.borderColor = 'rgba(245,158,11,0.2)';
+        status.textContent = 'No cache';
+        return;
+      }
+      
+      const age = Math.floor((Date.now() - data.timestamp) / 60000);
+      if (age < 1) {
+        badge.style.background = 'rgba(16,185,129,0.1)';
+        badge.style.color = '#10B981';
+        badge.style.borderColor = 'rgba(16,185,129,0.2)';
+        status.textContent = 'Live data';
+      } else if (age < 60) {
+        badge.style.background = 'rgba(16,185,129,0.08)';
+        badge.style.color = '#10B981';
+        badge.style.borderColor = 'rgba(16,185,129,0.15)';
+        status.textContent = `Cached · ${age}m ago`;
+      } else {
+        badge.style.background = 'rgba(99,102,241,0.08)';
+        badge.style.color = '#818CF8';
+        badge.style.borderColor = 'rgba(99,102,241,0.15)';
+        status.textContent = `Cached · ${Math.floor(age/60)}h ago`;
+      }
+    }
+    
+    // Render data to UI
+    function renderData(data) {
+      document.getElementById('firstTimeLoading').classList.add('hidden');
+      document.getElementById('bgRefresh').classList.add('hidden');
+      document.getElementById('results').classList.remove('hidden');
+      
+      const secureBanks = data.banks.filter(b => b.score >= 60).length;
+      const needsWork = data.banks.filter(b => b.score < 40).length;
+      
+      document.getElementById('statsRow').innerHTML = `
+        <div class="stat-card"><div class="text-2xl font-bold text-primary">${data.totalBanks}</div><div class="text-xs text-slate-500 mt-1">Total Banks</div></div>
+        <div class="stat-card"><div class="text-2xl font-bold text-success">${data.avgScore}</div><div class="text-xs text-slate-500 mt-1">Avg Score /100</div></div>
+        <div class="stat-card"><div class="text-2xl font-bold text-success">${secureBanks}</div><div class="text-xs text-slate-500 mt-1">Secure (60+)</div></div>
+        <div class="stat-card"><div class="text-2xl font-bold text-warning">${needsWork}</div><div class="text-xs text-slate-500 mt-1">Needs Improvement</div></div>`;
+      
+      document.getElementById('bankTableBody').innerHTML = data.banks.map((bank, i) => {
+        const sc = bank.score >= 80 ? '#10B981' : bank.score >= 60 ? '#F59E0B' : bank.score >= 40 ? '#F97316' : '#EF4444';
+        const gc = {
+          A: { bg: 'rgba(16,185,129,0.1)', c: '#10B981', b: 'rgba(16,185,129,0.2)' },
+          B: { bg: 'rgba(99,102,241,0.1)', c: '#6366F1', b: 'rgba(99,102,241,0.2)' },
+          C: { bg: 'rgba(245,158,11,0.1)', c: '#F59E0B', b: 'rgba(245,158,11,0.2)' },
+          D: { bg: 'rgba(249,115,22,0.1)', c: '#F97316', b: 'rgba(249,115,22,0.2)' },
+          F: { bg: 'rgba(239,68,68,0.1)', c: '#EF4444', b: 'rgba(239,68,68,0.2)' },
+        }[bank.grade] || { bg: 'rgba(245,158,11,0.1)', c: '#F59E0B', b: 'rgba(245,158,11,0.2)' };
+        return `<tr class="bank-row border-b border-white/5"><td class="py-3 px-4 text-sm text-slate-500">${i+1}</td><td class="py-3 px-4"><div class="text-sm font-medium text-slate-200">${bank.name}</div><div class="text-xs text-slate-500 font-mono">${bank.domain}</div></td><td class="text-center py-3 px-3 text-sm">${bank.ssl}</td><td class="text-center py-3 px-3 text-sm">${bank.dnssec}</td><td class="text-center py-3 px-3 text-sm">${bank.spf}</td><td class="text-center py-3 px-3 text-sm">${bank.dmarc}</td><td class="text-right py-3 px-4"><span class="font-mono text-sm font-semibold" style="color:${sc}">${bank.score}</span></td><td class="text-center py-3 px-4"><span class="grade-badge" style="background:${gc.bg};color:${gc.c};border:1px solid ${gc.b}">${bank.grade}</span></td></tr>`;
+      }).join('');
+      
+      document.getElementById('lastUpdated').textContent = 'Last updated: ' + new Date(data.timestamp || data.lastChecked || Date.now()).toLocaleString();
+      updateCacheBadge(getCachedData());
+    }
+    
+    // Fetch fresh data from API
+    async function fetchFreshData() {
+      const cached = getCachedData();
+      
+      // If we have cached data, show it immediately and refresh in background
+      if (cached) {
+        renderData(cached);
+        document.getElementById('bgRefresh').classList.remove('hidden');
+      } else {
+        document.getElementById('firstTimeLoading').classList.remove('hidden');
+        document.getElementById('results').classList.add('hidden');
+      }
+      
       document.getElementById('error').classList.add('hidden');
       
-      const progressInterval = simulateProgress();
-      
       try {
-        const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 60000);
-        
-        const response = await fetch(API + '/api/bank-scorecard', { signal: controller.signal });
-        
-        clearTimeout(timeout);
-        clearInterval(progressInterval);
-        
+        const response = await fetch(`${API}/api/bank-scorecard`);
         if (!response.ok) throw new Error('HTTP ' + response.status);
         const data = await response.json();
         
-        document.getElementById('loading').classList.add('hidden');
-        document.getElementById('results').classList.remove('hidden');
-        document.getElementById('progressBar').style.width = '100%';
-        
-        // Stats
-        const secureBanks = data.banks.filter(b => b.score >= 60).length;
-        const needsWork = data.banks.filter(b => b.score < 40).length;
-        
-        document.getElementById('statsRow').innerHTML = `
-          <div class="stat-card">
-            <div class="text-2xl font-bold text-primary">${data.totalBanks}</div>
-            <div class="text-xs text-slate-500 mt-1">Total Banks</div>
-          </div>
-          <div class="stat-card">
-            <div class="text-2xl font-bold text-success">${data.avgScore}</div>
-            <div class="text-xs text-slate-500 mt-1">Avg Score /100</div>
-          </div>
-          <div class="stat-card">
-            <div class="text-2xl font-bold text-success">${secureBanks}</div>
-            <div class="text-xs text-slate-500 mt-1">Secure (60+)</div>
-          </div>
-          <div class="stat-card">
-            <div class="text-2xl font-bold text-warning">${needsWork}</div>
-            <div class="text-xs text-slate-500 mt-1">Needs Improvement</div>
-          </div>
-        `;
-        
-        // Table
-        document.getElementById('bankTableBody').innerHTML = data.banks.map((bank, i) => {
-          const sc = bank.score >= 80 ? '#10B981' : bank.score >= 60 ? '#F59E0B' : bank.score >= 40 ? '#F97316' : '#EF4444';
-          const gc = {
-            A: { bg: 'rgba(16,185,129,0.1)', c: '#10B981', b: 'rgba(16,185,129,0.2)' },
-            B: { bg: 'rgba(99,102,241,0.1)', c: '#6366F1', b: 'rgba(99,102,241,0.2)' },
-            C: { bg: 'rgba(245,158,11,0.1)', c: '#F59E0B', b: 'rgba(245,158,11,0.2)' },
-            D: { bg: 'rgba(249,115,22,0.1)', c: '#F97316', b: 'rgba(249,115,22,0.2)' },
-            F: { bg: 'rgba(239,68,68,0.1)', c: '#EF4444', b: 'rgba(239,68,68,0.2)' },
-          }[bank.grade] || { bg: 'rgba(245,158,11,0.1)', c: '#F59E0B', b: 'rgba(245,158,11,0.2)' };
-          
-          return `<tr class="bank-row border-b border-white/5">
-            <td class="py-3 px-4 text-sm text-slate-500">${i + 1}</td>
-            <td class="py-3 px-4">
-              <div class="text-sm font-medium text-slate-200">${bank.name}</div>
-              <div class="text-xs text-slate-500 font-mono">${bank.domain}</div>
-            </td>
-            <td class="text-center py-3 px-3 text-sm">${bank.ssl}</td>
-            <td class="text-center py-3 px-3 text-sm">${bank.dnssec}</td>
-            <td class="text-center py-3 px-3 text-sm">${bank.spf}</td>
-            <td class="text-center py-3 px-3 text-sm">${bank.dmarc}</td>
-            <td class="text-right py-3 px-4">
-              <span class="font-mono text-sm font-semibold" style="color:${sc}">${bank.score}</span>
-            </td>
-            <td class="text-center py-3 px-4">
-              <span class="grade-badge" style="background:${gc.bg};color:${gc.c};border:1px solid ${gc.b}">${bank.grade}</span>
-            </td>
-          </tr>`;
-        }).join('');
-        
-        document.getElementById('lastUpdated').textContent = 'Last updated: ' + new Date(data.lastChecked).toLocaleString();
+        saveToCache(data);
+        renderData({ ...data, timestamp: Date.now() });
         
       } catch (error) {
-        clearInterval(progressInterval);
-        document.getElementById('loading').classList.add('hidden');
-        document.getElementById('errorMsg').textContent = error.name === 'AbortError'
-          ? 'Request timed out. The server may be busy. Please try again.'
-          : (error.message || 'Failed to load. Please try again.');
+        document.getElementById('bgRefresh').classList.add('hidden');
+        
+        // If we have cached data, keep showing it
+        if (cached) {
+          updateCacheBadge(cached);
+          return;
+        }
+        
+        // No cache — show error
+        document.getElementById('firstTimeLoading').classList.add('hidden');
+        document.getElementById('errorMsg').textContent = error.message || 'Failed to load. Please try again.';
         document.getElementById('error').classList.remove('hidden');
       }
     }
     
-    loadData();
+    // Init
+    (function init() {
+      const cached = getCachedData();
+      
+      if (cached) {
+        // Show cached data INSTANTLY
+        renderData(cached);
+        
+        // Check if cache is older than 2 hours — refresh in background
+        const age = Date.now() - cached.timestamp;
+        if (age > CACHE_DURATION) {
+          fetchFreshData();
+        }
+      } else {
+        // No cache — show loading and fetch
+        document.getElementById('firstTimeLoading').classList.remove('hidden');
+        fetchFreshData();
+      }
+      
+      // Set up auto-refresh every 2 hours
+      setInterval(() => {
+        const currentCache = getCachedData();
+        if (!currentCache || (Date.now() - currentCache.timestamp) > CACHE_DURATION) {
+          fetchFreshData();
+        }
+      }, CACHE_DURATION);
+    })();
   </script>
 </body>
 </html>

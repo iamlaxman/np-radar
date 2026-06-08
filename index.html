@@ -4,55 +4,34 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <!-- Primary Meta Tags -->
-  <title>NP Radar — Domain Intelligence for Nepal | Free WHOIS, DNS, SSL, ISP Detection</title>
-  <meta name="title" content="NP Radar — Domain Intelligence for Nepal | Free WHOIS, DNS, SSL, ISP Detection" />
-  <meta name="description" content="NP Radar is Nepal's first domain intelligence platform. Free WHOIS lookups, DNS analysis, SSL checking, DNSSEC validation, and Nepali ISP detection for .np domains. Built for Nepal." />
-  <meta name="keywords" content="NP Radar, Nepal domain intelligence, .np WHOIS, Nepal WHOIS lookup, DNS checker Nepal, SSL checker, Nepali ISP detection, Worldlink, Vianet, Subisu, NTC, domain security, DNSSEC Nepal, reverse IP lookup, bank security scorecard, domain generator, Nepal domain statistics" />
-  <meta name="author" content="NP Radar" />
-  <meta name="robots" content="index, follow" />
-  <meta name="language" content="English" />
+  <title>NP Radar — Nepal's Domain Intelligence Platform | Free WHOIS, DNS, SSL, ISP Detection</title>
+  <meta name="description" content="NP Radar is Nepal's domain intelligence platform. Free WHOIS lookups, DNS analysis, SSL checking, DNSSEC validation, and Nepali ISP detection for .np domains." />
   <meta name="theme-color" content="#6366F1" />
   
-  <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://npradar.laxman-poudel.com.np/" />
-  <meta property="og:title" content="NP Radar — Domain Intelligence for Nepal" />
-  <meta property="og:description" content="Nepal's first domain intelligence platform. Free WHOIS, DNS, SSL, DNSSEC, ISP Detection for .np domains. Built for Nepal." />
+  <meta property="og:title" content="NP Radar — Nepal's Domain Intelligence Platform" />
+  <meta property="og:description" content="Free WHOIS, DNS, SSL, DNSSEC, ISP Detection for .np domains. Built for Nepal." />
   <meta property="og:image" content="https://npradar.laxman-poudel.com.np/favicon/og.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:site_name" content="NP Radar" />
-  <meta property="og:locale" content="en_US" />
-  
-  <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:url" content="https://npradar.laxman-poudel.com.np/" />
-  <meta property="twitter:title" content="NP Radar — Domain Intelligence for Nepal" />
-  <meta property="twitter:description" content="Nepal's first domain intelligence platform. Free WHOIS, DNS, SSL, DNSSEC, ISP Detection for .np domains." />
+  <meta property="twitter:title" content="NP Radar — Nepal's Domain Intelligence Platform" />
+  <meta property="twitter:description" content="Free WHOIS, DNS, SSL, DNSSEC, ISP Detection for .np domains." />
   <meta property="twitter:image" content="https://npradar.laxman-poudel.com.np/favicon/og.png" />
   
-  <!-- Canonical URL -->
   <link rel="canonical" href="https://npradar.laxman-poudel.com.np/" />
-  
-  <!-- Favicon / Icons -->
   <link rel="icon" type="image/x-icon" href="favicon/favicon.ico" />
   <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="favicon/android-chrome-192x192.png" />
-  <link rel="icon" type="image/png" sizes="512x512" href="favicon/android-chrome-512x512.png" />
   <link rel="manifest" href="favicon/site.webmanifest" />
   
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
   
-  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -74,173 +53,83 @@
     };
   </script>
   
-  <link rel="stylesheet" href="css/global.css" />
-  
   <style>
-    /* ═══════════════════════════════════════════════ */
-    /*  GLOBAL STYLES                                  */
-    /* ═══════════════════════════════════════════════ */
     html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+    body { background: #0A0A0F; font-family: 'Space Grotesk', sans-serif; color: #F1F5F9; overflow-x: hidden; }
     
-    body { 
-      background: #0A0A0F; 
-      font-family: 'Space Grotesk', sans-serif; 
-      color: #F1F5F9; 
-      overflow-x: hidden; 
-    }
-    
-    /* Grid background */
     .grid-bg {
-      background-image:
-        linear-gradient(rgba(99,102,241,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(99,102,241,0.04) 1px, transparent 1px);
-      background-size: 60px 60px;
+      background-image: linear-gradient(rgba(99,102,241,0.03) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(99,102,241,0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
     }
     
-    /* Glass */
-    .glass {
-      background: rgba(255,255,255,0.03); 
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px); 
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-    
-    /* Glow */
+    .glass { background: rgba(255,255,255,0.03); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); }
     .glow-primary { box-shadow: 0 0 40px rgba(99,102,241,0.25); }
     .text-glow { text-shadow: 0 0 40px rgba(99,102,241,0.5), 0 0 80px rgba(99,102,241,0.2); }
     
-    /* Search input */
     .search-input {
-      background: rgba(255,255,255,0.04); 
-      border: 1.5px solid rgba(255,255,255,0.1); 
-      color: #F1F5F9;
+      background: rgba(255,255,255,0.04); border: 1.5px solid rgba(255,255,255,0.1); color: #F1F5F9;
       transition: border-color 0.3s, box-shadow 0.3s;
     }
-    .search-input:focus { 
-      outline: none; 
-      border-color: #6366F1; 
-      box-shadow: 0 0 0 3px rgba(99,102,241,0.15), 0 0 30px rgba(99,102,241,0.2); 
-    }
+    .search-input:focus { outline: none; border-color: #6366F1; box-shadow: 0 0 0 3px rgba(99,102,241,0.15), 0 0 30px rgba(99,102,241,0.2); }
     .search-input::placeholder { color: #475569; }
     
-    /* Chip button */
     .chip-btn {
-      padding: 0.375rem 0.75rem; 
-      border-radius: 0.5rem;
-      background: rgba(255,255,255,0.05); 
-      border: 1px solid rgba(255,255,255,0.1);
-      color: #CBD5E1; 
-      font-size: 0.8125rem; 
-      font-family: 'JetBrains Mono', monospace;
-      cursor: pointer; 
-      transition: all 0.2s ease;
+      padding: 0.375rem 0.75rem; border-radius: 0.5rem;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+      color: #CBD5E1; font-size: 0.75rem; font-family: 'JetBrains Mono', monospace;
+      cursor: pointer; transition: all 0.2s ease;
     }
-    .chip-btn:hover { 
-      background: rgba(255,255,255,0.1); 
-      border-color: rgba(255,255,255,0.2); 
-      color: white; 
-      transform: scale(1.05);
-    }
+    .chip-btn:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); color: white; }
     
-    /* Pulse dot */
     .pulse-dot {
-      width: 8px; height: 8px; 
-      background: #10B981; 
-      border-radius: 50%;
+      width: 7px; height: 7px; background: #10B981; border-radius: 50%;
       animation: pulse-anim 2s ease-in-out infinite;
     }
     @keyframes pulse-anim {
-      0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(16,185,129,0.4); }
-      50% { opacity: 0.8; transform: scale(1.1); box-shadow: 0 0 0 6px rgba(16,185,129,0); }
+      0%,100%{opacity:1;transform:scale(1);box-shadow:0 0 0 0 rgba(16,185,129,0.4)}
+      50%{opacity:0.8;transform:scale(1.1);box-shadow:0 0 0 6px rgba(16,185,129,0)}
     }
     
-    @keyframes subtlePulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(99,102,241,0.4); }
-      50% { box-shadow: 0 0 0 12px rgba(99,102,241,0); }
-    }
     .pulse-cta { animation: subtlePulse 2.5s ease-in-out infinite; }
+    @keyframes subtlePulse { 0%,100%{box-shadow:0 0 0 0 rgba(99,102,241,0.4)} 50%{box-shadow:0 0 0 12px rgba(99,102,241,0)} }
     
-    /* Orb animations */
-    .orb {
-      position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none;
-    }
-    .orb-1 { width: 400px; height: 400px; background: rgba(99,102,241,0.12); top: -100px; right: -100px; animation: float1 8s ease-in-out infinite; }
-    .orb-2 { width: 300px; height: 300px; background: rgba(236,72,153,0.08); bottom: -50px; left: -50px; animation: float2 10s ease-in-out infinite; }
-    @keyframes float1 { 0%,100%{transform:translate(0,0)}50%{transform:translate(-30px,30px)} }
-    @keyframes float2 { 0%,100%{transform:translate(0,0)}50%{transform:translate(20px,-20px)} }
+    .orb { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; }
+    .orb-1 { width: 350px; height: 350px; background: rgba(99,102,241,0.08); top: -60px; right: -60px; animation: float1 8s ease-in-out infinite; }
+    .orb-2 { width: 250px; height: 250px; background: rgba(236,72,153,0.05); bottom: -30px; left: -30px; animation: float2 10s ease-in-out infinite; }
+    @keyframes float1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-25px,25px)} }
+    @keyframes float2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(15px,-15px)} }
     
-    /* Reveal animations */
-    .reveal {
-      opacity: 0; 
-      transform: translateY(30px);
-      transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1); }
     .reveal.visible { opacity: 1; transform: translateY(0); }
-    .delay-100 { transition-delay: 0.1s; } 
-    .delay-200 { transition-delay: 0.2s; }
-    .delay-300 { transition-delay: 0.3s; } 
-    .delay-400 { transition-delay: 0.4s; }
-    .delay-500 { transition-delay: 0.5s; }
+    .delay-100 { transition-delay: 0.1s; } .delay-200 { transition-delay: 0.2s; }
+    .delay-300 { transition-delay: 0.3s; } .delay-400 { transition-delay: 0.4s; }
     
-    /* Hover lift */
-    .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-    .hover-lift:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
-    
-    /* Feature card */
     .feature-card {
-      background: #111118; 
-      border: 1px solid rgba(255,255,255,0.06); 
-      border-radius: 1rem; 
-      padding: 1.5rem;
+      background: #111118; border: 1px solid rgba(255,255,255,0.06); border-radius: 1rem; padding: 1.5rem;
       transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
-    .feature-card:hover { 
-      transform: translateY(-6px); 
-      border-color: rgba(99,102,241,0.4); 
-      box-shadow: 0 20px 40px rgba(99,102,241,0.1); 
-    }
-    .feature-icon {
-      width: 2.5rem; height: 2.5rem; border-radius: 0.75rem; 
-      display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;
-    }
+    .feature-card:hover { transform: translateY(-6px); border-color: rgba(99,102,241,0.4); box-shadow: 0 20px 40px rgba(99,102,241,0.1); }
+    .feature-icon { width: 2.5rem; height: 2.5rem; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
     .feature-card h3 { font-weight: 600; color: white; margin-bottom: 0.5rem; font-size: 1rem; }
     .feature-card p { color: #94A3B8; font-size: 0.8125rem; line-height: 1.5; }
     
-    /* Tool card */
     .tool-card {
-      background: #111118; 
-      border: 1px solid rgba(255,255,255,0.06); 
-      border-radius: 1rem; 
-      padding: 1.5rem; 
-      display: block; 
-      text-decoration: none; 
-      color: inherit;
+      background: #111118; border: 1px solid rgba(255,255,255,0.06); border-radius: 1rem; padding: 1.5rem;
+      display: block; text-decoration: none; color: inherit;
       transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
-    .tool-card:hover { 
-      transform: translateY(-4px); 
-      border-color: rgba(99,102,241,0.4); 
-      box-shadow: 0 16px 32px rgba(99,102,241,0.08); 
-    }
-    .tool-icon {
-      width: 2.5rem; height: 2.5rem; border-radius: 0.75rem; 
-      display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;
-    }
+    .tool-card:hover { transform: translateY(-4px); border-color: rgba(99,102,241,0.4); box-shadow: 0 16px 32px rgba(99,102,241,0.08); }
+    .tool-icon { width: 2.5rem; height: 2.5rem; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem; }
     .tool-card h3 { font-weight: 600; color: white; margin-bottom: 0.5rem; font-size: 1rem; }
     .tool-card p { color: #94A3B8; font-size: 0.8125rem; line-height: 1.5; }
     .tool-link { display: inline-block; margin-top: 0.75rem; font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; }
     
-    /* Nav glass */
     .nav-glass { background: rgba(10,10,15,0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
-    
-    /* Nepal flag line */
     .nepal-line { background: linear-gradient(90deg, #003893, #DC143C); height: 2px; width: 100%; }
-    
-    /* Section spacing */
     .section-pad { padding: 4rem 1.5rem; }
     @media (min-width: 768px) { .section-pad { padding: 5rem 1.5rem; } }
     
-    /* Hero section - FIXED centering */
     .hero-section {
       min-height: 100vh;
       display: flex;
@@ -251,247 +140,232 @@
       position: relative;
       overflow: hidden;
     }
-    .hero-inner {
-      text-align: center;
-      max-width: 56rem;
-      margin: 0 auto;
+    @media (max-width: 767px) {
+      .hero-section { padding-top: 5rem; padding-bottom: 3rem; min-height: auto; }
+    }
+    
+    #mobileMenu { transition: transform 0.3s ease, opacity 0.3s ease; }
+    #mobileMenu.closed { transform: translateY(-100%); opacity: 0; pointer-events: none; }
+    #mobileMenu.open { transform: translateY(0); opacity: 1; pointer-events: all; }
+    #particleCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+    
+    /* MacBook Browser Card */
+    .macbook-card {
+      background: #1c1c1e;
+      border: 2px solid #2c2c2e;
+      border-radius: 1.25rem;
+      overflow: hidden;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.03);
       position: relative;
-      z-index: 10;
-      width: 100%;
     }
-    
-    /* Comparison cards mobile */
-    .comp-card { 
-      background: #111118; 
-      border: 1px solid rgba(255,255,255,0.06); 
-      border-radius: 1rem; 
-      padding: 1.25rem; 
-    }
-    .comp-card-featured { 
-      border-color: rgba(99,102,241,0.3); 
-      background: rgba(99,102,241,0.05); 
-    }
-    
-    /* Mobile menu */
-    #mobileMenu {
-      transition: transform 0.3s ease, opacity 0.3s ease;
-    }
-    #mobileMenu.closed {
-      transform: translateY(-100%);
-      opacity: 0;
-      pointer-events: none;
-    }
-    #mobileMenu.open {
-      transform: translateY(0);
-      opacity: 1;
-      pointer-events: all;
-    }
-    
-    /* Particle canvas */
-    #particleCanvas {
+    .macbook-card::before {
+      content: '';
       position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      pointer-events: none;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 4px;
+      background: #3c3c3e;
+      border-radius: 2px;
     }
+    .macbook-header {
+      background: #2c2c2e;
+      padding: 0.875rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .mac-dot { width: 11px; height: 11px; border-radius: 50%; }
+    .macbook-body { padding: 1.25rem; background: #131316; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; line-height: 1.9; min-height: 260px; }
     
-    /* Logo */
-    .nav-logo-img {
-      width: 28px; height: 28px; border-radius: 6px;
-    }
+    /* Mobile comparison */
+    .comp-row { display: flex; align-items: center; justify-content: space-between; padding: 0.5rem 0.75rem; border-radius: 0.5rem; }
+    .comp-row-green { background: rgba(16,185,129,0.08); }
+    .comp-row-red { background: rgba(239,68,68,0.06); }
+    .comp-row-neutral { background: rgba(255,255,255,0.03); }
   </style>
 </head>
 <body class="min-h-screen bg-bg text-slate-100 font-body overflow-x-hidden">
 
-  <!-- ═══════════════════════════════════════ -->
-  <!--  NAVIGATION                             -->
-  <!-- ═══════════════════════════════════════ -->
+  <!-- NAV -->
   <nav id="mainNav" class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 md:px-6 py-3 border-b border-white/5 nav-glass">
     <a href="index.html" class="flex items-center gap-3 flex-shrink-0">
-      <img src="favicon/favicon-32x32.png" alt="NP Radar Logo" class="nav-logo-img" />
+      <img src="favicon/favicon-32x32.png" alt="NP Radar" style="width:28px;height:28px;border-radius:6px" />
       <span class="font-display text-lg font-bold tracking-tight">NP <span class="text-primary">Radar</span></span>
     </a>
-    
     <div class="hidden md:flex items-center gap-8 text-sm text-slate-400">
-      <a href="#features" class="hover:text-white transition-colors duration-200">Features</a>
-      <a href="#tools" class="hover:text-white transition-colors duration-200">Tools</a>
-      <a href="#stats" class="hover:text-white transition-colors duration-200">Stats</a>
-      <a href="#compare" class="hover:text-white transition-colors duration-200">Compare</a>
+      <a href="#features" class="hover:text-white transition-colors">Features</a>
+      <a href="#tools" class="hover:text-white transition-colors">Tools</a>
+      <a href="#stats" class="hover:text-white transition-colors">Stats</a>
+      <a href="#compare" class="hover:text-white transition-colors">Compare</a>
     </div>
-    
-    <button id="mobileMenuBtn" class="md:hidden text-slate-400 hover:text-white p-2 transition-colors z-[60] relative" aria-label="Toggle menu">
+    <button id="mobileMenuBtn" class="md:hidden text-slate-400 hover:text-white p-2 z-[60] relative" aria-label="Menu">
       <i id="menuIcon" class="fas fa-bars text-lg"></i>
     </button>
-    
-    <a href="dashboard.html" class="hidden md:inline-flex text-sm px-5 py-2.5 rounded-lg bg-primary hover:bg-primary/90 text-white font-semibold transition-all duration-200 hover:scale-105 active:scale-95 pulse-cta">
+    <a href="dashboard.html" class="hidden md:inline-flex text-sm px-5 py-2.5 rounded-lg bg-primary hover:bg-primary/90 text-white font-semibold transition-all hover:scale-105 pulse-cta">
       <i class="fas fa-bolt mr-2"></i> Try Now
     </a>
   </nav>
 
-  <!-- ═══════════════════════════════════════ -->
-  <!--  MOBILE MENU                            -->
-  <!-- ═══════════════════════════════════════ -->
+  <!-- MOBILE MENU -->
   <div id="mobileMenu" class="fixed top-0 left-0 right-0 z-50 bg-surface/98 backdrop-blur-lg shadow-2xl closed md:hidden" style="padding-top:4.5rem;">
     <div class="px-4 py-3 flex flex-col gap-1">
-      <a href="#features" class="mobile-link flex items-center gap-3 text-slate-300 hover:text-white py-3 px-4 rounded-lg hover:bg-white/5 transition-all text-base font-medium">
-        <i class="fas fa-star text-primary text-sm w-5"></i> Features
-      </a>
-      <a href="#tools" class="mobile-link flex items-center gap-3 text-slate-300 hover:text-white py-3 px-4 rounded-lg hover:bg-white/5 transition-all text-base font-medium">
-        <i class="fas fa-toolbox text-primary text-sm w-5"></i> Tools
-      </a>
-      <a href="#stats" class="mobile-link flex items-center gap-3 text-slate-300 hover:text-white py-3 px-4 rounded-lg hover:bg-white/5 transition-all text-base font-medium">
-        <i class="fas fa-chart-pie text-primary text-sm w-5"></i> Stats
-      </a>
-      <a href="#compare" class="mobile-link flex items-center gap-3 text-slate-300 hover:text-white py-3 px-4 rounded-lg hover:bg-white/5 transition-all text-base font-medium">
-        <i class="fas fa-balance-scale text-primary text-sm w-5"></i> Compare
-      </a>
-      <a href="tools/tools.html" class="mobile-link flex items-center gap-3 text-slate-300 hover:text-white py-3 px-4 rounded-lg hover:bg-white/5 transition-all text-base font-medium">
-        <i class="fas fa-th-large text-primary text-sm w-5"></i> All Tools
-      </a>
-      <a href="dashboard.html" class="mt-3 text-center py-3 px-4 rounded-lg bg-primary hover:bg-primary/90 text-white font-semibold transition-all text-base">
-        <i class="fas fa-bolt mr-2"></i> Try Now
-      </a>
+      <a href="#features" class="flex items-center gap-3 text-slate-300 hover:text-white py-3 px-4 rounded-lg hover:bg-white/5 transition-all text-base"><i class="fas fa-star text-primary text-sm w-5"></i> Features</a>
+      <a href="#tools" class="flex items-center gap-3 text-slate-300 hover:text-white py-3 px-4 rounded-lg hover:bg-white/5 transition-all text-base"><i class="fas fa-toolbox text-primary text-sm w-5"></i> Tools</a>
+      <a href="#stats" class="flex items-center gap-3 text-slate-300 hover:text-white py-3 px-4 rounded-lg hover:bg-white/5 transition-all text-base"><i class="fas fa-chart-pie text-primary text-sm w-5"></i> Stats</a>
+      <a href="#compare" class="flex items-center gap-3 text-slate-300 hover:text-white py-3 px-4 rounded-lg hover:bg-white/5 transition-all text-base"><i class="fas fa-balance-scale text-primary text-sm w-5"></i> Compare</a>
+      <a href="tools/tools.html" class="flex items-center gap-3 text-slate-300 hover:text-white py-3 px-4 rounded-lg hover:bg-white/5 transition-all text-base"><i class="fas fa-th-large text-primary text-sm w-5"></i> All Tools</a>
+      <a href="dashboard.html" class="mt-3 text-center py-3 px-4 rounded-lg bg-primary hover:bg-primary/90 text-white font-semibold transition-all text-base"><i class="fas fa-bolt mr-2"></i> Try Now</a>
     </div>
   </div>
 
   <!-- ═══════════════════════════════════════ -->
-  <!--  HERO SECTION - SPLIT LAYOUT            -->
+  <!--  HERO — ALL FIXES APPLIED               -->
   <!-- ═══════════════════════════════════════ -->
-  <section class="hero-section px-3 md:px-6 grid-bg relative">
+  <section class="hero-section px-4 md:px-6 grid-bg relative">
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <canvas id="particleCanvas"></canvas>
 
-    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-6 md:gap-10 items-center">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-center w-full">
       
-      <!-- Left: Content -->
-      <div class="reveal delay-100 pl-2 md:pl-0">
-        <div class="inline-block px-4 py-2 rounded-lg bg-primary/10 border border-primary/30 text-primary text-sm font-bold font-display mb-5 tracking-tight">
-          #1 IN NEPAL
+      <!-- LEFT: Content -->
+      <div class="reveal delay-100 text-center md:text-left">
+        <!-- Badge — CENTERED on mobile via text-center on parent -->
+        <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full mb-5 text-[11px] sm:text-xs font-semibold tracking-wide whitespace-nowrap" style="background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.25);color:#A5B4FC">
+          <span class="pulse-dot" style="width:6px;height:6px;"></span>
+          NEPAL'S DOMAIN INTELLIGENCE
         </div>
         
-        <h1 class="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-5">
-          <span class="text-white">Domain</span>
-          <span class="text-primary text-glow"> Intelligence</span>
-          <span class="block text-white text-xl sm:text-2xl md:text-3xl mt-1 font-light">for .np domains</span>
+        <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] mb-3">
+          <span class="text-primary text-glow">Domain Intelligence</span>
         </h1>
         
-        <p class="text-slate-400 text-sm md:text-base mb-6 leading-relaxed">
-          Free WHOIS lookup, DNS analysis, SSL checking & ISP detection. 
-          Built by Nepali developers, for Nepal.
+        <p class="font-display text-lg sm:text-xl md:text-2xl text-slate-400 font-light mb-5 tracking-tight">
+          Built for <span class="text-white font-medium">Nepal</span>.
+        </p>
+        
+        <p class="text-slate-500 text-sm md:text-base mb-6 leading-relaxed max-w-md mx-auto md:mx-0">
+          Free WHOIS, DNS, SSL & ISP detection for .np domains.
         </p>
 
-        <!-- Search -->
-        <div class="mb-5">
+        <div class="mb-4">
           <div class="flex flex-col sm:flex-row gap-2.5">
             <div class="flex-1 relative">
-              <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
-              <input type="text" id="searchInput" placeholder="example.com.np"
+              <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-sm"></i>
+              <input type="text" id="searchInput" placeholder="e.g. ncell.com.np"
                 class="w-full pl-11 pr-4 py-3.5 rounded-xl font-mono text-sm search-input" autocomplete="off" spellcheck="false" />
             </div>
-            <button id="searchBtn" class="px-5 py-3.5 bg-primary hover:bg-primary/90 rounded-xl font-semibold text-white transition-all duration-200 hover:scale-105 flex items-center justify-center gap-2">
-              Search <i class="fas fa-arrow-right"></i>
+            <button id="searchBtn" class="px-6 py-3.5 bg-primary hover:bg-primary/90 rounded-xl font-semibold text-white transition-all hover:scale-105 flex items-center justify-center gap-2">
+              Lookup <i class="fas fa-arrow-right text-xs"></i>
             </button>
           </div>
         </div>
 
-        <!-- Examples -->
-        <div class="flex flex-wrap gap-2 mb-6">
-          <span class="text-slate-500 text-xs self-center">Try:</span>
-          <button onclick="quickSearch('ncell.com.np')" class="chip-btn text-[11px]">ncell.com.np</button>
-          <button onclick="quickSearch('ku.edu.np')" class="chip-btn text-[11px]">ku.edu.np</button>
-          <button onclick="quickSearch('worldlink.com.np')" class="chip-btn text-[11px]">worldlink.com.np</button>
+        <div class="flex flex-wrap items-center justify-center md:justify-start gap-2 mb-6">
+          <span class="text-slate-500 text-xs">Try:</span>
+          <button onclick="quickSearch('ncell.com.np')" class="chip-btn">ncell.com.np</button>
+          <button onclick="quickSearch('ku.edu.np')" class="chip-btn">ku.edu.np</button>
+          <button onclick="quickSearch('laxman-poudel.com.np')" class="chip-btn">laxman-poudel.com.np</button>
+          <button onclick="quickSearch('worldlink.com.np')" class="chip-btn">worldlink.com.np</button>
         </div>
 
-        <!-- Stats inline -->
-        <div class="flex flex-wrap justify-center md:justify-start gap-4 md:gap-6 text-xs md:text-sm">
-          <div class="text-center md:text-left">
-            <div class="font-display text-lg md:text-xl font-bold text-primary" id="statDomains">85K+</div>
-            <div class="text-slate-500 text-[11px] md:text-xs">Domains</div>
+        <!-- Stats Row — CENTERED on mobile, LEFT on desktop, ALL aligned -->
+        <div class="flex flex-wrap items-center justify-center md:justify-start gap-5 md:gap-8">
+          <div class="text-center">
+            <div class="font-display text-xl md:text-2xl font-bold text-primary" id="statDomains">85K+</div>
+            <div class="text-slate-500 text-[11px]">Domains Analyzed</div>
           </div>
-          <div class="text-center md:text-left">
-            <div class="font-display text-lg md:text-xl font-bold text-white">14</div>
-            <div class="text-slate-500 text-[11px] md:text-xs">Data Points</div>
+          <div class="text-center">
+            <div class="font-display text-xl md:text-2xl font-bold text-white">14+</div>
+            <div class="text-slate-500 text-[11px]">Data Points</div>
           </div>
-          <div class="text-center md:text-left">
-            <div class="font-display text-lg md:text-xl font-bold text-success">100% Free</div>
-            <div class="text-slate-500 text-[11px] md:text-xs">No signup</div>
+          <div class="text-center">
+            <div class="font-display text-xl md:text-2xl font-bold text-white">8</div>
+            <div class="text-slate-500 text-[11px]">ISPs Detected</div>
+          </div>
+          <div class="text-center">
+            <div class="font-display text-xl md:text-2xl font-bold text-success">Free</div>
+            <div class="text-slate-500 text-[11px]">No Signup</div>
           </div>
         </div>
       </div>
 
-      <!-- Right: Visual/Preview Card -->
-      <div class="reveal delay-200 hidden md:block">
+      <!-- RIGHT: MacBook Browser Card -->
+      <div class="reveal delay-300 hidden md:block">
         <div class="relative">
-          <!-- Background glow -->
-          <div class="absolute -inset-4 bg-gradient-to-r from-primary/20 to-accent/20 rounded-3xl blur-2xl"></div>
+          <div class="absolute -inset-4 bg-gradient-to-r from-primary/20 to-accent/10 rounded-3xl blur-2xl opacity-50"></div>
           
-          <!-- Main preview card -->
-          <div class="relative bg-surface border border-white/10 rounded-2xl p-6 shadow-2xl">
-            <!-- Card header -->
-            <div class="flex items-center gap-3 mb-6 pb-4 border-b border-white/5">
-              <div class="flex gap-2">
-                <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
-                <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-                <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
-              </div>
+          <div class="macbook-card relative">
+            <div class="macbook-header">
+              <div class="mac-dot" style="background:#FF5F57"></div>
+              <div class="mac-dot" style="background:#FFBD2E"></div>
+              <div class="mac-dot" style="background:#27CA40"></div>
               <div class="flex-1 text-center">
-                <div class="inline-block px-3 py-1 rounded-full bg-white/5 text-slate-500 text-xs font-mono">
-                  npradar.laxman-poudel.com.np
+                <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-white/5 text-slate-400 text-[10px] font-mono">
+                  <i class="fas fa-lock text-success text-[8px]"></i> npradar.laxman-poudel.com.np
                 </div>
+              </div>
+              <div class="flex gap-1.5">
+                <i class="fas fa-share text-slate-500 text-[10px]"></i>
+                <i class="fas fa-plus text-slate-500 text-[10px]"></i>
               </div>
             </div>
-
-            <!-- Preview content -->
-            <div class="space-y-4">
-              <!-- Status row -->
-              <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-lg bg-success/20 flex items-center justify-center">
-                  <i class="fas fa-check text-success"></i>
-                </div>
-                <div class="flex-1">
-                  <div class="text-sm text-white font-medium">Domain Active</div>
-                  <div class="text-xs text-slate-500">Registered since 2020</div>
-                </div>
-                <div class="px-2 py-1 rounded bg-success/20 text-success text-xs font-mono">A+</div>
+            
+            <div class="macbook-body">
+              <div class="flex items-center gap-2 mb-4 pb-3 border-b border-white/5">
+                <i class="fas fa-search text-slate-600 text-[10px]"></i>
+                <span class="text-slate-500 text-[11px]">ncell.com.np</span>
+                <span class="ml-auto px-2 py-0.5 rounded bg-primary/20 text-primary text-[9px] font-semibold">SCAN</span>
               </div>
-
-              <!-- Data rows -->
-              <div class="grid grid-cols-2 gap-3">
-                <div class="bg-white/5 rounded-lg p-3">
-                  <div class="text-xs text-slate-500 mb-1">Registrar</div>
-                  <div class="text-sm text-white font-mono">Mercantile</div>
-                </div>
-                <div class="bg-white/5 rounded-lg p-3">
-                  <div class="text-xs text-slate-500 mb-1">ISP</div>
-                  <div class="text-sm text-white font-mono">Worldlink</div>
-                </div>
-                <div class="bg-white/5 rounded-lg p-3">
-                  <div class="text-xs text-slate-500 mb-1">SSL</div>
-                  <div class="text-sm text-success font-mono">Valid</div>
-                </div>
-                <div class="bg-white/5 rounded-lg p-3">
-                  <div class="text-xs text-slate-500 mb-1">DNSSEC</div>
-                  <div class="text-sm text-warning font-mono">Enabled</div>
+              
+              <div class="mb-3">
+                <div class="text-white text-xs font-semibold">ncell.com.np</div>
+                <div class="flex items-center gap-2 mt-1">
+                  <span class="px-1.5 py-0.5 rounded text-[9px] font-semibold text-success" style="background:rgba(16,185,129,0.15)">ACTIVE</span>
+                  <span class="text-slate-500 text-[9px]">Score: <span class="text-success">82/100</span></span>
                 </div>
               </div>
-
-              <!-- Nameservers -->
-              <div class="bg-white/5 rounded-lg p-3">
-                <div class="text-xs text-slate-500 mb-2">Nameservers</div>
-                <div class="space-y-1">
-                  <div class="text-xs font-mono text-slate-300">ns1.mercantile.com.np</div>
-                  <div class="text-xs font-mono text-slate-300">ns2.mercantile.com.np</div>
+              
+              <div class="grid grid-cols-2 gap-x-4 gap-y-2 text-[10px]">
+                <div>
+                  <span class="text-slate-500">Registrar</span>
+                  <div class="text-slate-300">Mercantile Communications</div>
+                </div>
+                <div>
+                  <span class="text-slate-500">Registered</span>
+                  <div class="text-slate-300">2003-08-14</div>
+                </div>
+                <div>
+                  <span class="text-slate-500">ISP Hosting</span>
+                  <div class="text-warning">🇳🇵 Ncell Axiata</div>
+                </div>
+                <div>
+                  <span class="text-slate-500">SSL Grade</span>
+                  <div class="text-success">A+ (Valid)</div>
+                </div>
+                <div>
+                  <span class="text-slate-500">Nameservers</span>
+                  <div class="text-slate-300">ns1.ncell.com.np</div>
+                </div>
+                <div>
+                  <span class="text-slate-500">DNSSEC</span>
+                  <div class="text-danger">Not configured</div>
                 </div>
               </div>
-            </div>
-          </div>
-
-          <!-- Floating badge -->
-          <div class="absolute -bottom-4 -right-4 bg-primary rounded-xl px-4 py-3 shadow-lg">
-            <div class="flex items-center gap-2 text-white text-sm font-semibold">
-              <i class="fas fa-shield-halved"></i>
-              Security Scored
+              
+              <!-- FIX: SSL Expiry instead of Domain Expiry -->
+              <div class="mt-3 pt-3 border-t border-white/5">
+                <div class="flex justify-between text-[9px] text-slate-500 mb-1">
+                  <span>SSL Expiry</span>
+                  <span class="text-success">287 days left</span>
+                </div>
+                <div class="h-1 bg-white/5 rounded-full overflow-hidden">
+                  <div class="h-full rounded-full" style="width:78%;background:linear-gradient(90deg,#6366F1,#10B981)"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -499,9 +373,7 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════ -->
-  <!--  FEATURES SECTION                       -->
-  <!-- ═══════════════════════════════════════ -->
+  <!-- FEATURES -->
   <section id="features" class="section-pad">
     <div class="max-w-7xl mx-auto">
       <div class="text-center mb-12 reveal">
@@ -510,150 +382,48 @@
         <p class="text-slate-400 max-w-xl mx-auto">No more switching between tools. NP Radar aggregates everything into a single dashboard.</p>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="feature-card reveal delay-100">
-          <div class="feature-icon" style="background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2)"><i class="fas fa-search text-primary"></i></div>
-          <h3>WHOIS Intelligence</h3>
-          <p>Complete registration data from register.com.np — registrar, dates, status, nameservers.</p>
-        </div>
-        <div class="feature-card reveal delay-200">
-          <div class="feature-icon" style="background:rgba(96,165,250,0.1);border:1px solid rgba(96,165,250,0.2)"><i class="fas fa-globe text-blue-400"></i></div>
-          <h3>DNS Deep Scan</h3>
-          <p>A, AAAA, MX, NS, TXT, CNAME, SOA — all record types with TTL values and propagation status.</p>
-        </div>
-        <div class="feature-card reveal delay-300">
-          <div class="feature-icon" style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2)"><i class="fas fa-shield-halved text-success"></i></div>
-          <h3>SSL Analysis</h3>
-          <p>Certificate validity, issuer chain, expiry countdown, SAN entries, and grade badge (A+ to F).</p>
-        </div>
-        <div class="feature-card reveal delay-200">
-          <div class="feature-icon" style="background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.2)"><i class="fas fa-map-pin text-accent"></i></div>
-          <h3>Nepali ISP Detection</h3>
-          <p>Worldlink, DishHome, NTC, Subisu, Vianet, WebSurfer, Classic Tech, CG Net — 8 providers.</p>
-        </div>
-        <div class="feature-card reveal delay-300">
-          <div class="feature-icon" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2)"><i class="fas fa-triangle-exclamation text-warning"></i></div>
-          <h3>Security Scoring</h3>
-          <p>DNSSEC, SPF, DMARC, HTTPS, security headers — 0-100 score with detailed breakdown.</p>
-        </div>
-        <div class="feature-card reveal delay-400">
-          <div class="feature-icon" style="background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.2)"><i class="fas fa-microchip text-purple-400"></i></div>
-          <h3>Tech Stack Detection</h3>
-          <p>CMS, server, CDN, JavaScript frameworks, analytics — full technology fingerprint.</p>
-        </div>
+        <div class="feature-card reveal delay-100"><div class="feature-icon" style="background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2)"><i class="fas fa-search text-primary"></i></div><h3>WHOIS Intelligence</h3><p>Complete registration data from register.com.np — registrar, dates, status, nameservers.</p></div>
+        <div class="feature-card reveal delay-200"><div class="feature-icon" style="background:rgba(96,165,250,0.1);border:1px solid rgba(96,165,250,0.2)"><i class="fas fa-globe text-blue-400"></i></div><h3>DNS Deep Scan</h3><p>A, AAAA, MX, NS, TXT, CNAME, SOA — all record types with TTL values.</p></div>
+        <div class="feature-card reveal delay-300"><div class="feature-icon" style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2)"><i class="fas fa-shield-halved text-success"></i></div><h3>SSL Analysis</h3><p>Certificate validity, issuer chain, expiry countdown, and grade badge (A+ to F).</p></div>
+        <div class="feature-card reveal delay-200"><div class="feature-icon" style="background:rgba(236,72,153,0.1);border:1px solid rgba(236,72,153,0.2)"><i class="fas fa-map-pin text-accent"></i></div><h3>Nepali ISP Detection</h3><p>Worldlink, DishHome, NTC, Subisu, Vianet, WebSurfer, Classic Tech, CG Net — 8 providers.</p></div>
+        <div class="feature-card reveal delay-300"><div class="feature-icon" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2)"><i class="fas fa-triangle-exclamation text-warning"></i></div><h3>Security Scoring</h3><p>DNSSEC, SPF, DMARC, HTTPS, security headers — 0-100 score with breakdown.</p></div>
+        <div class="feature-card reveal delay-400"><div class="feature-icon" style="background:rgba(167,139,250,0.1);border:1px solid rgba(167,139,250,0.2)"><i class="fas fa-microchip text-purple-400"></i></div><h3>Tech Stack Detection</h3><p>CMS, server, CDN, frameworks, analytics — full technology fingerprint.</p></div>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════ -->
-  <!--  TOOLS SECTION                          -->
-  <!-- ═══════════════════════════════════════ -->
-  <section id="tools" class="section-pad" style="background: rgba(255,255,255,0.02);">
+  <!-- TOOLS -->
+  <section id="tools" class="section-pad" style="background:rgba(255,255,255,0.02)">
     <div class="max-w-7xl mx-auto">
-      <div class="text-center mb-12 reveal">
-        <div class="text-primary text-sm font-mono font-medium mb-3">// FREE TOOLS</div>
-        <h2 class="font-display text-3xl md:text-5xl font-bold mb-4">More than just WHOIS</h2>
-        <p class="text-slate-400 max-w-xl mx-auto">Powerful domain tools — all free, no login required.</p>
-      </div>
+      <div class="text-center mb-12 reveal"><div class="text-primary text-sm font-mono font-medium mb-3">// FREE TOOLS</div><h2 class="font-display text-3xl md:text-5xl font-bold mb-4">More than just WHOIS</h2><p class="text-slate-400 max-w-xl mx-auto">Powerful domain tools — all free, no login required.</p></div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-        <a href="tools/reverse-ip.html" class="tool-card reveal delay-100">
-          <div class="tool-icon" style="background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.2)"><i class="fas fa-network-wired text-cyan-400"></i></div>
-          <h3>Reverse IP Lookup</h3>
-          <p>Find all domains hosted on the same IP address.</p>
-          <span class="tool-link text-cyan-400">Try it <i class="fas fa-arrow-right"></i></span>
-        </a>
-        <a href="tools/dns-checker.html" class="tool-card reveal delay-200">
-          <div class="tool-icon" style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2)"><i class="fas fa-clipboard-check text-emerald-400"></i></div>
-          <h3>DNS Checker</h3>
-          <p>Grade your DNS setup — SPF, DMARC, DNSSEC, IPv6.</p>
-          <span class="tool-link text-emerald-400">Try it <i class="fas fa-arrow-right"></i></span>
-        </a>
-        <a href="tools/bank-scorecard.html" class="tool-card reveal delay-300">
-          <div class="tool-icon" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2)"><i class="fas fa-building-columns text-amber-400"></i></div>
-          <h3>Bank Scorecard</h3>
-          <p>Security comparison across 15+ Nepali banks.</p>
-          <span class="tool-link text-amber-400">View <i class="fas fa-arrow-right"></i></span>
-        </a>
-        <a href="tools/domain-generator.html" class="tool-card reveal delay-200">
-          <div class="tool-icon" style="background:rgba(244,63,94,0.1);border:1px solid rgba(244,63,94,0.2)"><i class="fas fa-lightbulb text-rose-400"></i></div>
-          <h3>Domain Generator</h3>
-          <p>Generate available .np domain suggestions.</p>
-          <span class="tool-link text-rose-400">Try it <i class="fas fa-arrow-right"></i></span>
-        </a>
-        <a href="tools/domain-compare.html" class="tool-card reveal delay-300">
-          <div class="tool-icon" style="background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.2)"><i class="fas fa-code-compare text-violet-400"></i></div>
-          <h3>Domain Comparison</h3>
-          <p>Compare two domains side by side.</p>
-          <span class="tool-link text-violet-400">Try it <i class="fas fa-arrow-right"></i></span>
-        </a>
-        <a href="tools/nepal-stats.html" class="tool-card reveal delay-400">
-          <div class="tool-icon" style="background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2)"><i class="fas fa-chart-pie text-indigo-400"></i></div>
-          <h3>Nepal Statistics</h3>
-          <p>TLD distribution, ISP shares, trends.</p>
-          <span class="tool-link text-indigo-400">View <i class="fas fa-arrow-right"></i></span>
-        </a>
+        <a href="tools/reverse-ip.html" class="tool-card reveal delay-100"><div class="tool-icon" style="background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.2)"><i class="fas fa-network-wired text-cyan-400"></i></div><h3>Reverse IP Lookup</h3><p>Find all domains hosted on the same IP address.</p><span class="tool-link text-cyan-400">Try it <i class="fas fa-arrow-right"></i></span></a>
+        <a href="tools/dns-checker.html" class="tool-card reveal delay-200"><div class="tool-icon" style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2)"><i class="fas fa-clipboard-check text-emerald-400"></i></div><h3>DNS Checker</h3><p>Grade your DNS setup — SPF, DMARC, DNSSEC, IPv6.</p><span class="tool-link text-emerald-400">Try it <i class="fas fa-arrow-right"></i></span></a>
+        <a href="tools/bank-scorecard.html" class="tool-card reveal delay-300"><div class="tool-icon" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2)"><i class="fas fa-building-columns text-amber-400"></i></div><h3>Bank Scorecard</h3><p>Security comparison across 15+ Nepali banks.</p><span class="tool-link text-amber-400">View <i class="fas fa-arrow-right"></i></span></a>
+        <a href="tools/domain-generator.html" class="tool-card reveal delay-200"><div class="tool-icon" style="background:rgba(244,63,94,0.1);border:1px solid rgba(244,63,94,0.2)"><i class="fas fa-lightbulb text-rose-400"></i></div><h3>Domain Generator</h3><p>Generate available .np domain suggestions.</p><span class="tool-link text-rose-400">Try it <i class="fas fa-arrow-right"></i></span></a>
+        <a href="tools/domain-compare.html" class="tool-card reveal delay-300"><div class="tool-icon" style="background:rgba(139,92,246,0.1);border:1px solid rgba(139,92,246,0.2)"><i class="fas fa-code-compare text-violet-400"></i></div><h3>Domain Comparison</h3><p>Compare two domains side by side.</p><span class="tool-link text-violet-400">Try it <i class="fas fa-arrow-right"></i></span></a>
+        <a href="tools/nepal-stats.html" class="tool-card reveal delay-400"><div class="tool-icon" style="background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2)"><i class="fas fa-chart-pie text-indigo-400"></i></div><h3>Nepal Statistics</h3><p>TLD distribution, ISP shares, trends.</p><span class="tool-link text-indigo-400">View <i class="fas fa-arrow-right"></i></span></a>
       </div>
-      <div class="text-center reveal">
-        <a href="tools/tools.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary/10 border border-primary/30 text-primary hover:bg-primary/20 font-semibold transition-all text-sm">
-          <i class="fas fa-th-large"></i> Explore All Tools <i class="fas fa-arrow-right"></i>
-        </a>
-      </div>
+      <div class="text-center reveal"><a href="tools/tools.html" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary/10 border border-primary/30 text-primary hover:bg-primary/20 font-semibold transition-all text-sm"><i class="fas fa-th-large"></i> Explore All Tools <i class="fas fa-arrow-right"></i></a></div>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════ -->
-  <!--  STATS SECTION                          -->
-  <!-- ═══════════════════════════════════════ -->
+  <!-- STATS -->
   <section id="stats" class="section-pad">
     <div class="max-w-7xl mx-auto">
-      <div class="text-center mb-12 reveal">
-        <div class="text-primary text-sm font-mono font-medium mb-3">// NEPAL STATISTICS</div>
-        <h2 class="font-display text-3xl md:text-5xl font-bold mb-4">.NP Domain Ecosystem</h2>
-        <p class="text-slate-400">Live insights into Nepal's domain landscape.</p>
-      </div>
+      <div class="text-center mb-12 reveal"><div class="text-primary text-sm font-mono font-medium mb-3">// NEPAL STATISTICS</div><h2 class="font-display text-3xl md:text-5xl font-bold mb-4">.NP Domain Ecosystem</h2><p class="text-slate-400">Live insights into Nepal's domain landscape.</p></div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 reveal">
-        <div class="glass rounded-2xl p-6">
-          <h4 class="text-sm font-semibold mb-4"><i class="fas fa-chart-bar text-primary mr-2"></i>TLD Distribution</h4>
-          <div class="space-y-3">
-            <div><div class="flex justify-between text-xs mb-1"><span>.com.np</span><span class="text-primary font-mono">80%</span></div><div class="h-2 bg-white/5 rounded-full"><div class="h-full bg-primary rounded-full" style="width:80%"></div></div></div>
-            <div><div class="flex justify-between text-xs mb-1"><span>.org.np</span><span class="text-success font-mono">10%</span></div><div class="h-2 bg-white/5 rounded-full"><div class="h-full bg-success rounded-full" style="width:10%"></div></div></div>
-            <div><div class="flex justify-between text-xs mb-1"><span>.edu.np</span><span class="text-warning font-mono">4%</span></div><div class="h-2 bg-white/5 rounded-full"><div class="h-full bg-warning rounded-full" style="width:4%"></div></div></div>
-            <div><div class="flex justify-between text-xs mb-1"><span>.gov.np</span><span class="text-danger font-mono">2%</span></div><div class="h-2 bg-white/5 rounded-full"><div class="h-full bg-danger rounded-full" style="width:2%"></div></div></div>
-          </div>
-        </div>
-        <div class="glass rounded-2xl p-6">
-          <h4 class="text-sm font-semibold mb-4"><i class="fas fa-server text-success mr-2"></i>Hosting by ISP</h4>
-          <div class="space-y-3">
-            <div><div class="flex justify-between text-xs mb-1"><span>Worldlink</span><span class="font-mono">35%</span></div><div class="h-2 bg-white/5 rounded-full"><div class="h-full rounded-full" style="width:35%;background:#00A651"></div></div></div>
-            <div><div class="flex justify-between text-xs mb-1"><span>NTC</span><span class="font-mono">22%</span></div><div class="h-2 bg-white/5 rounded-full"><div class="h-full rounded-full" style="width:22%;background:#003893"></div></div></div>
-            <div><div class="flex justify-between text-xs mb-1"><span>Vianet</span><span class="font-mono">18%</span></div><div class="h-2 bg-white/5 rounded-full"><div class="h-full rounded-full" style="width:18%;background:#EE3124"></div></div></div>
-            <div><div class="flex justify-between text-xs mb-1"><span>Subisu</span><span class="font-mono">10%</span></div><div class="h-2 bg-white/5 rounded-full"><div class="h-full rounded-full" style="width:10%;background:#ED6B06"></div></div></div>
-          </div>
-        </div>
-        <div class="glass rounded-2xl p-6">
-          <h4 class="text-sm font-semibold mb-4"><i class="fas fa-info-circle text-warning mr-2"></i>Quick Stats</h4>
-          <div class="space-y-4">
-            <div class="flex justify-between py-2 border-b border-white/5"><span class="text-slate-400 text-sm">DNSSEC Adoption</span><span class="font-mono text-warning font-semibold">12%</span></div>
-            <div class="flex justify-between py-2 border-b border-white/5"><span class="text-slate-400 text-sm">Cloudflare Usage</span><span class="font-mono text-primary font-semibold">18%</span></div>
-            <div class="flex justify-between py-2 border-b border-white/5"><span class="text-slate-400 text-sm">SSL Adoption</span><span class="font-mono text-success font-semibold">45%</span></div>
-            <div class="flex justify-between py-2"><span class="text-slate-400 text-sm">Avg Domain Age</span><span class="font-mono text-slate-200 font-semibold">4.2 years</span></div>
-          </div>
-        </div>
+        <div class="glass rounded-2xl p-6"><h4 class="text-sm font-semibold mb-4"><i class="fas fa-chart-bar text-primary mr-2"></i>TLD Distribution</h4><div class="space-y-3"><div><div class="flex justify-between text-xs mb-1"><span>.com.np</span><span class="text-primary font-mono">80%</span></div><div class="h-2 bg-white/5 rounded-full"><div class="h-full bg-primary rounded-full" style="width:80%"></div></div></div><div><div class="flex justify-between text-xs mb-1"><span>.org.np</span><span class="text-success font-mono">10%</span></div><div class="h-2 bg-white/5 rounded-full"><div class="h-full bg-success rounded-full" style="width:10%"></div></div></div><div><div class="flex justify-between text-xs mb-1"><span>.edu.np</span><span class="text-warning font-mono">4%</span></div><div class="h-2 bg-white/5 rounded-full"><div class="h-full bg-warning rounded-full" style="width:4%"></div></div></div><div><div class="flex justify-between text-xs mb-1"><span>.gov.np</span><span class="text-danger font-mono">2%</span></div><div class="h-2 bg-white/5 rounded-full"><div class="h-full bg-danger rounded-full" style="width:2%"></div></div></div></div></div>
+        <div class="glass rounded-2xl p-6"><h4 class="text-sm font-semibold mb-4"><i class="fas fa-server text-success mr-2"></i>Hosting by ISP</h4><div class="space-y-3"><div><div class="flex justify-between text-xs mb-1"><span>Worldlink</span><span class="font-mono">35%</span></div><div class="h-2 bg-white/5 rounded-full"><div class="h-full rounded-full" style="width:35%;background:#00A651"></div></div></div><div><div class="flex justify-between text-xs mb-1"><span>NTC</span><span class="font-mono">22%</span></div><div class="h-2 bg-white/5 rounded-full"><div class="h-full rounded-full" style="width:22%;background:#003893"></div></div></div><div><div class="flex justify-between text-xs mb-1"><span>Vianet</span><span class="font-mono">18%</span></div><div class="h-2 bg-white/5 rounded-full"><div class="h-full rounded-full" style="width:18%;background:#EE3124"></div></div></div><div><div class="flex justify-between text-xs mb-1"><span>Subisu</span><span class="font-mono">10%</span></div><div class="h-2 bg-white/5 rounded-full"><div class="h-full rounded-full" style="width:10%;background:#ED6B06"></div></div></div></div></div>
+        <div class="glass rounded-2xl p-6"><h4 class="text-sm font-semibold mb-4"><i class="fas fa-info-circle text-warning mr-2"></i>Quick Stats</h4><div class="space-y-4"><div class="flex justify-between py-2 border-b border-white/5"><span class="text-slate-400 text-sm">DNSSEC Adoption</span><span class="font-mono text-warning font-semibold">12%</span></div><div class="flex justify-between py-2 border-b border-white/5"><span class="text-slate-400 text-sm">Cloudflare Usage</span><span class="font-mono text-primary font-semibold">18%</span></div><div class="flex justify-between py-2 border-b border-white/5"><span class="text-slate-400 text-sm">SSL Adoption</span><span class="font-mono text-success font-semibold">45%</span></div><div class="flex justify-between py-2"><span class="text-slate-400 text-sm">Avg Domain Age</span><span class="font-mono text-slate-200 font-semibold">4.2 years</span></div></div></div>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════ -->
-  <!--  COMPARISON SECTION                     -->
-  <!-- ═══════════════════════════════════════ -->
-  <section id="compare" class="section-pad" style="background: rgba(255,255,255,0.02);">
+  <!-- COMPARISON -->
+  <section id="compare" class="section-pad" style="background:rgba(255,255,255,0.02)">
     <div class="max-w-5xl mx-auto">
-      <div class="text-center mb-12 reveal">
-        <div class="text-primary text-sm font-mono font-medium mb-3">// COMPARISON</div>
-        <h2 class="font-display text-3xl md:text-5xl font-bold mb-4">Why NP Radar?</h2>
-        <p class="text-slate-400">See how we stack up against existing options.</p>
-      </div>
-
-      <!-- Desktop Table -->
+      <div class="text-center mb-12 reveal"><div class="text-primary text-sm font-mono font-medium mb-3">// COMPARISON</div><h2 class="font-display text-3xl md:text-5xl font-bold mb-4">Why NP Radar?</h2><p class="text-slate-400">See how we stack up against existing options.</p></div>
       <div class="hidden md:block reveal">
         <div class="overflow-x-auto rounded-2xl border border-white/5">
           <table class="w-full border-collapse">
@@ -670,124 +440,19 @@
           </table>
         </div>
       </div>
-
-      <!-- Mobile Cards -->
-      <div class="md:hidden space-y-4 reveal">
-        <!-- NP Radar Card -->
+      <div class="md:hidden space-y-3 reveal">
         <div class="bg-surface border border-primary/30 rounded-xl p-4 relative overflow-hidden">
-          <div class="absolute top-0 right-0 w-20 h-20 bg-primary/10 rounded-full -translate-y-8 translate-x-8"></div>
-          <div class="flex items-center justify-between mb-4 relative">
-            <div class="flex items-center gap-3">
-              <div class="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center">
-                <i class="fas fa-crown text-primary text-sm"></i>
-              </div>
-              <div>
-                <div class="font-bold text-white text-base">NP Radar</div>
-                <div class="text-primary text-xs font-semibold">Recommended</div>
-              </div>
-            </div>
-            <div class="px-3 py-1 rounded-full bg-success/20 text-success text-xs font-bold">Best Value</div>
-          </div>
-          <div class="space-y-2.5 relative">
-            <div class="flex items-center justify-between py-2 px-3 rounded-lg bg-success/10">
-              <span class="text-slate-300 text-sm">WHOIS Lookup</span>
-              <i class="fas fa-check text-success text-sm"></i>
-            </div>
-            <div class="flex items-center justify-between py-2 px-3 rounded-lg bg-success/10">
-              <span class="text-slate-300 text-sm">DNS Records</span>
-              <i class="fas fa-check text-success text-sm"></i>
-            </div>
-            <div class="flex items-center justify-between py-2 px-3 rounded-lg bg-success/10">
-              <span class="text-slate-300 text-sm">SSL Analysis</span>
-              <i class="fas fa-check text-success text-sm"></i>
-            </div>
-            <div class="flex items-center justify-between py-2 px-3 rounded-lg bg-success/10">
-              <span class="text-slate-300 text-sm">Security Score</span>
-              <i class="fas fa-check text-success text-sm"></i>
-            </div>
-            <div class="flex items-center justify-between py-2 px-3 rounded-lg bg-success/10">
-              <span class="text-slate-300 text-sm">ISP Detection</span>
-              <i class="fas fa-check text-success text-sm"></i>
-            </div>
-            <div class="flex items-center justify-between py-2 px-3 rounded-lg bg-success/10">
-              <span class="text-slate-300 text-sm">Reverse IP</span>
-              <i class="fas fa-check text-success text-sm"></i>
-            </div>
-            <div class="flex items-center justify-between py-2.5 px-3 rounded-lg bg-primary/20 mt-3">
-              <span class="text-white text-sm font-semibold">Price</span>
-              <span class="text-success text-sm font-bold">Free Forever</span>
-            </div>
-          </div>
+          <div class="absolute top-0 right-0 w-16 h-16 bg-primary/10 rounded-full -translate-y-6 translate-x-6"></div>
+          <div class="flex items-center justify-between mb-3 relative"><div class="flex items-center gap-2.5"><div class="w-9 h-9 rounded-lg bg-primary/20 flex items-center justify-center"><i class="fas fa-crown text-primary text-sm"></i></div><div><div class="font-bold text-white text-sm">NP Radar</div><div class="text-primary text-[10px] font-semibold">Recommended</div></div></div><div class="px-2.5 py-1 rounded-full bg-success/20 text-success text-[10px] font-bold">Free</div></div>
+          <div class="space-y-1.5 relative"><div class="comp-row comp-row-green"><span class="text-slate-300 text-xs">WHOIS</span><i class="fas fa-check text-success text-xs"></i></div><div class="comp-row comp-row-green"><span class="text-slate-300 text-xs">DNS Records</span><i class="fas fa-check text-success text-xs"></i></div><div class="comp-row comp-row-green"><span class="text-slate-300 text-xs">SSL Analysis</span><i class="fas fa-check text-success text-xs"></i></div><div class="comp-row comp-row-green"><span class="text-slate-300 text-xs">Security Score</span><i class="fas fa-check text-success text-xs"></i></div><div class="comp-row comp-row-green"><span class="text-slate-300 text-xs">ISP Detection</span><i class="fas fa-check text-success text-xs"></i></div><div class="comp-row comp-row-green"><span class="text-slate-300 text-xs">Reverse IP</span><i class="fas fa-check text-success text-xs"></i></div><div class="comp-row comp-row-neutral mt-2"><span class="text-white text-xs font-semibold">Price</span><span class="text-success text-xs font-bold">Free Forever</span></div></div>
         </div>
-
-        <!-- Mercantile WHOIS Card -->
-        <div class="bg-surface border border-white/5 rounded-xl p-4">
-          <div class="flex items-center gap-3 mb-4">
-            <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center">
-              <i class="fas fa-database text-slate-400 text-sm"></i>
-            </div>
-            <div>
-              <div class="font-semibold text-white text-base">Mercantile WHOIS</div>
-              <div class="text-slate-500 text-xs">Basic lookup only</div>
-            </div>
-          </div>
-          <div class="space-y-2">
-            <div class="flex items-center justify-between py-2 px-3 rounded-lg bg-success/10">
-              <span class="text-slate-300 text-sm">WHOIS Lookup</span>
-              <i class="fas fa-check text-success text-sm"></i>
-            </div>
-            <div class="flex items-center justify-between py-2 px-3 rounded-lg bg-danger/10">
-              <span class="text-slate-300 text-sm">DNS Records</span>
-              <i class="fas fa-times text-danger text-sm"></i>
-            </div>
-            <div class="flex items-center justify-between py-2 px-3 rounded-lg bg-danger/10">
-              <span class="text-slate-300 text-sm">SSL Analysis</span>
-              <i class="fas fa-times text-danger text-sm"></i>
-            </div>
-            <div class="flex items-center justify-between py-2.5 px-3 rounded-lg bg-white/5 mt-3">
-              <span class="text-slate-400 text-sm">Price</span>
-              <span class="text-slate-400 text-sm">Free</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Global Tools Card -->
-        <div class="bg-surface border border-white/5 rounded-xl p-4">
-          <div class="flex items-center gap-3 mb-4">
-            <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center">
-              <i class="fas fa-globe text-slate-400 text-sm"></i>
-            </div>
-            <div>
-              <div class="font-semibold text-white text-base">Global Tools</div>
-              <div class="text-slate-500 text-xs">Expensive & complex</div>
-            </div>
-          </div>
-          <div class="space-y-2">
-            <div class="flex items-center justify-between py-2 px-3 rounded-lg bg-success/10">
-              <span class="text-slate-300 text-sm">WHOIS Lookup</span>
-              <i class="fas fa-check text-success text-sm"></i>
-            </div>
-            <div class="flex items-center justify-between py-2 px-3 rounded-lg bg-success/10">
-              <span class="text-slate-300 text-sm">DNS Records</span>
-              <i class="fas fa-check text-success text-sm"></i>
-            </div>
-            <div class="flex items-center justify-between py-2 px-3 rounded-lg bg-success/10">
-              <span class="text-slate-300 text-sm">SSL Analysis</span>
-              <i class="fas fa-check text-success text-sm"></i>
-            </div>
-            <div class="flex items-center justify-between py-2.5 px-3 rounded-lg bg-warning/10 mt-3">
-              <span class="text-slate-400 text-sm">Price</span>
-              <span class="text-warning text-sm font-semibold">$49–199/mo</span>
-            </div>
-          </div>
-        </div>
+        <div class="bg-surface border border-white/5 rounded-xl p-4"><div class="flex items-center gap-2.5 mb-3"><div class="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center"><i class="fas fa-database text-slate-400 text-sm"></i></div><div><div class="font-semibold text-white text-sm">Mercantile WHOIS</div><div class="text-slate-500 text-[10px]">Basic only</div></div></div><div class="space-y-1.5"><div class="comp-row comp-row-green"><span class="text-slate-300 text-xs">WHOIS</span><i class="fas fa-check text-success text-xs"></i></div><div class="comp-row comp-row-red"><span class="text-slate-300 text-xs">DNS Records</span><i class="fas fa-times text-danger text-xs"></i></div><div class="comp-row comp-row-red"><span class="text-slate-300 text-xs">SSL Analysis</span><i class="fas fa-times text-danger text-xs"></i></div><div class="comp-row comp-row-neutral mt-2"><span class="text-slate-400 text-xs">Price</span><span class="text-slate-400 text-xs">Free</span></div></div></div>
+        <div class="bg-surface border border-white/5 rounded-xl p-4"><div class="flex items-center gap-2.5 mb-3"><div class="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center"><i class="fas fa-globe text-slate-400 text-sm"></i></div><div><div class="font-semibold text-white text-sm">Global Tools</div><div class="text-slate-500 text-[10px]">Expensive</div></div></div><div class="space-y-1.5"><div class="comp-row comp-row-green"><span class="text-slate-300 text-xs">WHOIS</span><i class="fas fa-check text-success text-xs"></i></div><div class="comp-row comp-row-green"><span class="text-slate-300 text-xs">DNS Records</span><i class="fas fa-check text-success text-xs"></i></div><div class="comp-row comp-row-green"><span class="text-slate-300 text-xs">SSL Analysis</span><i class="fas fa-check text-success text-xs"></i></div><div class="comp-row comp-row-neutral mt-2"><span class="text-slate-400 text-xs">Price</span><span class="text-warning text-xs font-semibold">$49–199/mo</span></div></div></div>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════ -->
-  <!--  CTA SECTION                            -->
-  <!-- ═══════════════════════════════════════ -->
+  <!-- CTA -->
   <section class="section-pad">
     <div class="max-w-2xl mx-auto text-center reveal">
       <div class="glass rounded-3xl p-8 md:p-10 relative overflow-hidden">
@@ -804,156 +469,35 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════ -->
-  <!--  FOOTER                                 -->
-  <!-- ═══════════════════════════════════════ -->
+  <!-- FOOTER -->
   <footer class="border-t border-white/5 py-8 px-6">
     <div class="nepal-line mb-8"></div>
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-      <div class="flex items-center gap-3">
-        <img src="favicon/favicon-32x32.png" alt="NP Radar" class="w-7 h-7 rounded" />
-        <span class="font-display font-bold">NP <span class="text-primary">Radar</span></span>
-      </div>
-      <div class="flex gap-6 text-sm text-slate-500">
-        <a href="privacy.html" class="hover:text-slate-300 transition-colors">Privacy</a>
-        <a href="terms.html" class="hover:text-slate-300 transition-colors">Terms</a>
-        <a href="aboutus.html" class="hover:text-slate-300 transition-colors">About Us</a>
-      </div>
+      <div class="flex items-center gap-3"><img src="favicon/favicon-32x32.png" alt="NP Radar" class="w-7 h-7 rounded" /><span class="font-display font-bold">NP <span class="text-primary">Radar</span></span></div>
+      <div class="flex gap-6 text-sm text-slate-500"><a href="privacy.html" class="hover:text-slate-300 transition-colors">Privacy</a><a href="terms.html" class="hover:text-slate-300 transition-colors">Terms</a><a href="about.html" class="hover:text-slate-300 transition-colors">About</a></div>
       <div class="text-slate-500 text-sm">Built in Nepal · © 2026 NP Radar</div>
     </div>
   </footer>
 
-  <!-- ═══════════════════════════════════════ -->
-  <!--  SCRIPTS                                -->
-  <!-- ═══════════════════════════════════════ -->
   <script>
-    // Mobile Menu
-    const mobileBtn = document.getElementById('mobileMenuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const menuIcon = document.getElementById('menuIcon');
-    let menuOpen = false;
-    
-    function openMenu() {
-      mobileMenu.classList.remove('closed');
-      mobileMenu.classList.add('open');
-      menuIcon.className = 'fas fa-times text-lg';
-      menuOpen = true;
-      document.body.style.overflow = 'hidden';
-    }
-    
-    function closeMenu() {
-      mobileMenu.classList.remove('open');
-      mobileMenu.classList.add('closed');
-      menuIcon.className = 'fas fa-bars text-lg';
-      menuOpen = false;
-      document.body.style.overflow = '';
-    }
-    
-    mobileBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      menuOpen ? closeMenu() : openMenu();
-    });
-    
-    document.querySelectorAll('#mobileMenu .mobile-link, #mobileMenu a').forEach(link => {
-      link.addEventListener('click', () => {
-        closeMenu();
-        const href = link.getAttribute('href');
-        if (href && href.startsWith('#')) {
-          setTimeout(() => {
-            const target = document.querySelector(href);
-            if (target) {
-              const navHeight = document.getElementById('mainNav')?.offsetHeight || 64;
-              window.scrollTo({ top: target.getBoundingClientRect().top + window.pageYOffset - navHeight, behavior: 'smooth' });
-            }
-          }, 300);
-        }
-      });
-    });
-    
-    document.addEventListener('click', (e) => {
-      if (menuOpen && !mobileMenu.contains(e.target) && e.target !== mobileBtn && !mobileBtn.contains(e.target)) {
-        closeMenu();
-      }
-    });
-    
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && menuOpen) closeMenu();
-    });
-    
-    // Smooth scroll for all anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          const navHeight = document.getElementById('mainNav')?.offsetHeight || 64;
-          window.scrollTo({ top: target.getBoundingClientRect().top + window.pageYOffset - navHeight, behavior: 'smooth' });
-        }
-      });
-    });
-    
-    // Navbar shadow
-    window.addEventListener('scroll', () => {
-      const nav = document.getElementById('mainNav');
-      if (nav) nav.style.boxShadow = window.scrollY > 10 ? '0 1px 0 rgba(255,255,255,0.05), 0 4px 12px rgba(0,0,0,0.3)' : 'none';
-    }, { passive: true });
-    
-    // Reveal animations
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    
-    // Search
-    function quickSearch(domain) { window.location.href = `dashboard.html?domain=${encodeURIComponent(domain)}`; }
-    function ctaLookup() {
-      const val = document.getElementById('ctaInput')?.value?.trim()?.toLowerCase()?.replace(/^https?:\/\//, '')?.replace(/\/.*$/, '');
-      if (val) window.location.href = `dashboard.html?domain=${encodeURIComponent(val)}`;
-    }
-    document.getElementById('searchInput')?.addEventListener('keydown', function(e) { if (e.key === 'Enter') quickSearch(this.value); });
-    document.getElementById('searchBtn')?.addEventListener('click', function() { quickSearch(document.getElementById('searchInput')?.value); });
-    document.getElementById('ctaInput')?.addEventListener('keydown', function(e) { if (e.key === 'Enter') ctaLookup(); });
-    
-    // Particles
-    (function() {
-      const canvas = document.getElementById('particleCanvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      let particles = [];
-      function resize() { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
-      function create() {
-        particles = [];
-        for (let i = 0; i < Math.floor((canvas.width * canvas.height) / 20000); i++) {
-          particles.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, r: Math.random()*1.5+0.5, dx: (Math.random()-0.5)*0.3, dy: (Math.random()-0.5)*0.3, alpha: Math.random()*0.4+0.1 });
-        }
-      }
-      function draw() {
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        for (let i=0;i<particles.length;i++) {
-          for (let j=i+1;j<particles.length;j++) {
-            const dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y, dist=Math.sqrt(dx*dx+dy*dy);
-            if(dist<120){ctx.beginPath();ctx.strokeStyle=`rgba(99,102,241,${0.06*(1-dist/120)})`;ctx.lineWidth=0.5;ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.stroke();}
-          }
-        }
-        particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(99,102,241,${p.alpha})`;ctx.fill();p.x+=p.dx;p.y+=p.dy;if(p.x<0||p.x>canvas.width)p.dx*=-1;if(p.y<0||p.y>canvas.height)p.dy*=-1;});
-        requestAnimationFrame(draw);
-      }
-      window.addEventListener('resize',()=>{resize();create();});
-      resize();create();draw();
-    })();
-    
-    // Stat counter
-    const statObs = new IntersectionObserver((e) => { 
-      e.forEach(en => { 
-        if(en.isIntersecting){ 
-          const el=en.target; 
-          const t=85000,d=2000,s=performance.now();
-          function u(n){const p=Math.min((n-s)/d,1);el.textContent=Math.floor((1-Math.pow(1-p,3))*t).toLocaleString()+'+';if(p<1)requestAnimationFrame(u);}
-          requestAnimationFrame(u);statObs.unobserve(el);
-        }
-      });
-    },{threshold:0.5});
-    const sd = document.getElementById('statDomains'); if(sd) statObs.observe(sd);
+    const mobileBtn=document.getElementById('mobileMenuBtn'),mobileMenu=document.getElementById('mobileMenu'),menuIcon=document.getElementById('menuIcon');
+    let menuOpen=false;
+    function openMenu(){mobileMenu.classList.remove('closed');mobileMenu.classList.add('open');menuIcon.className='fas fa-times text-lg';menuOpen=true;document.body.style.overflow='hidden';}
+    function closeMenu(){mobileMenu.classList.remove('open');mobileMenu.classList.add('closed');menuIcon.className='fas fa-bars text-lg';menuOpen=false;document.body.style.overflow='';}
+    mobileBtn.addEventListener('click',e=>{e.stopPropagation();menuOpen?closeMenu():openMenu();});
+    document.querySelectorAll('#mobileMenu a').forEach(l=>l.addEventListener('click',()=>{closeMenu();const h=l.getAttribute('href');if(h&&h.startsWith('#')){setTimeout(()=>{const t=document.querySelector(h);if(t)window.scrollTo({top:t.getBoundingClientRect().top+window.pageYOffset-64,behavior:'smooth'});},300);}}));
+    document.addEventListener('click',e=>{if(menuOpen&&!mobileMenu.contains(e.target)&&e.target!==mobileBtn)closeMenu();});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'&&menuOpen)closeMenu();});
+    document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t)window.scrollTo({top:t.getBoundingClientRect().top+window.pageYOffset-64,behavior:'smooth'});}));
+    window.addEventListener('scroll',()=>{const n=document.getElementById('mainNav');if(n)n.style.boxShadow=window.scrollY>10?'0 1px 0 rgba(255,255,255,0.05),0 4px 12px rgba(0,0,0,0.3)':'none';},{passive:true});
+    document.querySelectorAll('.reveal').forEach(el=>new IntersectionObserver(e=>e.forEach(en=>{if(en.isIntersecting)en.target.classList.add('visible');}),{threshold:0.1,rootMargin:'0px 0px -30px 0px'}).observe(el));
+    function quickSearch(d){window.location.href=`dashboard.html?domain=${encodeURIComponent(d)}`;}
+    function ctaLookup(){const v=document.getElementById('ctaInput')?.value?.trim()?.toLowerCase()?.replace(/^https?:\/\//,'')?.replace(/\/.*$/,'');if(v)window.location.href=`dashboard.html?domain=${encodeURIComponent(v)}`;}
+    document.getElementById('searchInput')?.addEventListener('keydown',function(e){if(e.key==='Enter')quickSearch(this.value);});
+    document.getElementById('searchBtn')?.addEventListener('click',function(){quickSearch(document.getElementById('searchInput')?.value);});
+    document.getElementById('ctaInput')?.addEventListener('keydown',function(e){if(e.key==='Enter')ctaLookup();});
+    (function(){const c=document.getElementById('particleCanvas');if(!c)return;const x=c.getContext('2d');let p=[];function r(){c.width=c.offsetWidth;c.height=c.offsetHeight;}function cr(){p=[];for(let i=0;i<Math.floor((c.width*c.height)/20000);i++)p.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.5+0.5,dx:(Math.random()-0.5)*0.3,dy:(Math.random()-0.5)*0.3,alpha:Math.random()*0.4+0.1});}function d(){x.clearRect(0,0,c.width,c.height);for(let i=0;i<p.length;i++){for(let j=i+1;j<p.length;j++){const dx=p[i].x-p[j].x,dy=p[i].y-p[j].y,dist=Math.sqrt(dx*dx+dy*dy);if(dist<120){x.beginPath();x.strokeStyle=`rgba(99,102,241,${0.06*(1-dist/120)})`;x.lineWidth=0.5;x.moveTo(p[i].x,p[i].y);x.lineTo(p[j].x,p[j].y);x.stroke();}}}p.forEach(px=>{x.beginPath();x.arc(px.x,px.y,px.r,0,Math.PI*2);x.fillStyle=`rgba(99,102,241,${px.alpha})`;x.fill();px.x+=px.dx;px.y+=px.dy;if(px.x<0||px.x>c.width)px.dx*=-1;if(px.y<0||px.y>c.height)px.dy*=-1;});requestAnimationFrame(d);}window.addEventListener('resize',()=>{r();cr();});r();cr();d();})();
+    const sd=document.getElementById('statDomains');if(sd){new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting){const t=85,st=performance.now();function u(n){const pr=Math.min((n-st)/2000,1);sd.textContent=Math.floor((1-Math.pow(1-pr,3))*t)+'K+';if(pr<1)requestAnimationFrame(u);}requestAnimationFrame(u);}})},{threshold:0.5}).observe(sd);}
   </script>
 </body>
 </html>

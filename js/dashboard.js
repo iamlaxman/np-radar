@@ -247,6 +247,13 @@ function renderDomainHeader(data) {
   const header = document.getElementById('domainHeader');
   if (!header) return;
   
+  // Get dates — avoid duplicates
+  const regDate = data.whois?.created || w['Registration Date'] || w['First registered date'] || null;
+  const updDate = data.whois?.updated || w['Updated Date'] || w['Last updated date'] || null;
+  
+  // Only show updated if it's different from registered
+  const showUpdated = updDate && updDate !== regDate;
+  
   header.innerHTML = `
     <div class="flex flex-wrap items-center gap-3 md:gap-4 mb-2">
       <h1 class="font-display text-2xl md:text-4xl font-bold font-mono tracking-tight break-all">${currentDomain}</h1>
@@ -255,8 +262,8 @@ function renderDomainHeader(data) {
     </div>
     <div class="flex flex-wrap items-center gap-3 text-xs md:text-sm text-slate-500">
       ${w['Registrar'] ? `<span>${w['Registrar'].substring(0, 40)}</span><span class="text-slate-700">·</span>` : ''}
-      ${data.whois?.created ? `<span>Registered: ${data.whois.created.substring(0, 10)}</span><span class="text-slate-700">·</span>` : ''}
-      ${w['Registration Date'] ? `<span>Registered: ${w['Registration Date'].substring(0, 10)}</span><span class="text-slate-700">·</span>` : ''}
+      ${regDate ? `<span>Registered: ${regDate.substring(0, 10)}</span><span class="text-slate-700">·</span>` : ''}
+      ${showUpdated ? `<span>Updated: ${updDate.substring(0, 10)}</span><span class="text-slate-700">·</span>` : ''}
       ${g.primaryIp ? `<span class="font-mono">${g.primaryIp}</span>` : ''}
     </div>
     ${data.whois?.daysLeft !== null && data.whois?.daysLeft > 0 ? `
