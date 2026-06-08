@@ -1,0 +1,61 @@
+# NP Radar — Robots.txt
+# https://npradar.laxman-poudel.com.np/robots.txt
+
+User-agent: *
+Allow: /
+
+# Allow all pages
+Allow: /index.html
+Allow: /dashboard.html
+Allow: /about.html
+Allow: /privacy.html
+Allow: /terms.html
+Allow: /docs.html
+Allow: /tools/
+Allow: /api/
+
+# Crawl delay (seconds between requests)
+Crawl-delay: 5
+
+# Sitemap location
+Sitemap: https://npradar.laxman-poudel.com.np/sitemap.xml
+
+# Disallow API endpoints (not useful for search engines)
+Disallow: /api/dns
+Disallow: /api/whois
+Disallow: /api/ssl
+Disallow: /api/headers
+Disallow: /api/tech
+Disallow: /api/geo
+Disallow: /api/isp
+Disallow: /api/dnssec
+Disallow: /api/reverse-ip
+Disallow: /api/dns-check
+Disallow: /api/bank-scorecard
+Disallow: /api/domain-generate
+Disallow: /api/compare
+Disallow: /api/stats
+Disallow: /api/availability
+Disallow: /api/uptime
+
+# Disallow debug files
+Disallow: /debug-*.html
+Disallow: /test-*.js
+
+# Disallow internal files
+Disallow: /server.js
+Disallow: /package.json
+Disallow: /package-lock.json
+Disallow: /node_modules/
+Disallow: /.git/
+Disallow: /.github/
+Disallow: /Dockerfile
+Disallow: /.dockerignore
+
+# Allow CSS, JS, images
+Allow: /css/
+Allow: /js/
+Allow: /favicon/
+
+# Host directive
+Host: https://npradar.laxman-poudel.com.np

@@ -1,0 +1,5 @@
+# NP Radar Security Policy
+Contact: mailto:hello@laxman-poudel.com.np
+Expires: 2027-12-31T23:59:59.000Z
+Preferred-Languages: en, ne
+Canonical: https://npradar.laxman-poudel.com.np/security.txt
