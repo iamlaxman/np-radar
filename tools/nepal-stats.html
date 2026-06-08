@@ -167,10 +167,10 @@
     <!-- HEADER -->
     <div class="mb-8">
       <div class="flex items-center gap-3 mb-2">
-        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2)">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(99,102,241,0.1);border:1px solid rgba(99,102,241,0.2)">
           <i class="fas fa-chart-pie text-indigo-400 text-lg"></i>
         </div>
-        <div>
+        <div class="min-w-0">
           <h1 class="font-display text-2xl md:text-3xl font-bold">Nepal Domain Statistics</h1>
           <p class="text-slate-400 text-sm">Comprehensive insights into Nepal's .NP domain ecosystem.</p>
         </div>
@@ -251,7 +251,7 @@
   </div>
 
   <script>
-    const API = 'window.location.origin';
+    const API = window.location.origin;
     
     // Extended statistics data
     const extendedStats = {

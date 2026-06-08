@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
   <title>Domain Name Generator — Available .NP Domains | NP Radar</title>
-  <meta name="description" content="Free .np domain name generator. Generate available .np domain suggestions from your keywords with instant availability check. Built for Nepal." />
-  <meta name="keywords" content="domain name generator, .np domain generator, available .np domains, Nepal domain ideas, domain suggestions, NP Radar" />
+  <meta name="description" content="Free .np domain name generator. Generate available .np domain suggestions from your keywords with instant availability check." />
   <meta name="theme-color" content="#F43F5E" />
   <meta property="og:title" content="Domain Name Generator — Available .NP Domains | NP Radar" />
   <meta property="og:description" content="Generate available .np domain suggestions from your keywords with instant availability check." />
@@ -14,9 +13,6 @@
   
   <link rel="icon" type="image/x-icon" href="../favicon/favicon.ico" />
   <link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png" />
-  <link rel="apple-touch-icon" href="../favicon/apple-touch-icon.png" />
-  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
@@ -31,42 +27,47 @@
     .result-card { background: #111118; border: 1px solid rgba(255,255,255,0.06); border-radius: 1rem; padding: 1rem 1.25rem; }
     .skeleton { background: linear-gradient(90deg, #1A1A24 25%, #252535 50%, #1A1A24 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 6px; }
     @keyframes shimmer { 0%{background-position:200% 0}100%{background-position:-200% 0} }
+    .chip-btn { padding: 0.375rem 0.75rem; border-radius: 0.5rem; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #CBD5E1; font-size: 0.8125rem; font-family: 'JetBrains Mono', monospace; cursor: pointer; transition: all 0.2s ease; white-space: nowrap; display: inline-flex; align-items: center; }
+    .chip-btn:hover { background: rgba(255,255,255,0.1); border-color: rgba(244,63,94,0.3); color: #FB7185; }
   </style>
 </head>
 <body>
 
   <nav class="sticky top-0 z-50 flex items-center justify-between px-4 md:px-6 py-3 border-b border-white/5" style="background:rgba(10,10,15,0.95);backdrop-filter:blur(12px)">
     <a href="../index.html" class="flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm">
-      <i class="fas fa-arrow-left text-xs"></i> Home
+      <i class="fas fa-arrow-left text-xs"></i> <span class="hidden sm:inline">Home</span>
     </a>
     <div class="flex items-center gap-2">
-      <img src="../favicon/favicon-32x32.png" alt="NP Radar" class="w-6 h-6 rounded" />
+      <img src="../favicon/favicon-32x32.png" alt="NP Radar" class="w-6 h-6 rounded" width="28" height="28" />
       <span class="font-display font-bold text-sm">NP <span class="text-primary">Radar</span></span>
     </div>
     <a href="tools.html" class="flex items-center gap-1 text-slate-400 hover:text-white transition-colors text-sm">
-      <i class="fas fa-th-large text-xs"></i> Tools
+      <i class="fas fa-th-large text-xs"></i> <span class="hidden sm:inline">Tools</span>
     </a>
   </nav>
 
   <div style="max-width:800px;margin:0 auto;padding:30px 20px">
 
-    <div class="mb-8">
+    <!-- HEADER -->
+    <div class="mb-6">
       <div class="flex items-center gap-3 mb-2">
-        <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(244,63,94,0.1);border:1px solid rgba(244,63,94,0.2)">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(244,63,94,0.1);border:1px solid rgba(244,63,94,0.2)">
           <i class="fas fa-lightbulb text-rose-400 text-lg"></i>
         </div>
-        <div>
+        <div class="min-w-0">
           <h1 class="font-display text-2xl md:text-3xl font-bold">Domain Name Generator</h1>
-          <p class="text-slate-400 text-sm">Generate available .np domain suggestions from your keywords.</p>
+          <p class="text-slate-400 text-sm">Generate available .np domain suggestions.</p>
         </div>
       </div>
     </div>
 
-    <div class="glass rounded-2xl p-3 mb-6">
+    <!-- SEARCH -->
+    <div class="glass rounded-2xl p-3 mb-4">
       <div class="flex flex-col sm:flex-row gap-2">
         <div class="flex-1 relative">
           <i class="fas fa-lightbulb absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-sm"></i>
-          <input type="text" id="keywordInput" placeholder="Enter a keyword — e.g. tech, nepal, shop" class="w-full pl-11 pr-4 py-3.5 rounded-xl text-base search-input" autocomplete="off" spellcheck="false" />
+          <input type="text" id="keywordInput" placeholder="Enter a keyword — e.g. tech, nepal, shop" 
+            class="w-full pl-11 pr-4 py-3.5 rounded-xl text-base search-input" autocomplete="off" spellcheck="false" />
         </div>
         <button onclick="generate()" class="px-6 py-3.5 rounded-xl font-semibold text-white transition-all hover:scale-105 active:scale-95 whitespace-nowrap flex items-center justify-center gap-2" style="background:#F43F5E">
           <i class="fas fa-wand-magic-sparkles"></i> Generate
@@ -74,66 +75,132 @@
       </div>
     </div>
 
+    <!-- Quick Chips -->
+    <div class="flex flex-wrap items-center gap-2 mb-6">
+      <span class="text-slate-500 text-xs flex-shrink-0 font-medium">Quick:</span>
+      <button onclick="quickGen('tech')" class="chip-btn">tech</button>
+      <button onclick="quickGen('nepal')" class="chip-btn">nepal</button>
+      <button onclick="quickGen('shop')" class="chip-btn">shop</button>
+      <button onclick="quickGen('web')" class="chip-btn">web</button>
+    </div>
+
+    <!-- EMPTY STATE -->
     <div id="emptyState" class="text-center py-16">
       <div class="text-5xl mb-5 text-slate-700"><i class="fas fa-lightbulb"></i></div>
       <h2 class="font-display text-xl font-bold mb-2">Enter a keyword to generate domain ideas</h2>
-      <p class="text-slate-400 max-w-md mx-auto text-sm">Get creative .np domain suggestions with instant availability check. Find the perfect domain for your project.</p>
-      <div class="flex flex-wrap justify-center gap-2 mt-4">
-        <button onclick="quickGen('tech')" class="chip-btn">tech</button>
-        <button onclick="quickGen('nepal')" class="chip-btn">nepal</button>
-        <button onclick="quickGen('shop')" class="chip-btn">shop</button>
+      <p class="text-slate-400 max-w-md mx-auto text-sm">Get creative .np domain suggestions with instant availability check.</p>
+    </div>
+
+    <!-- LOADING -->
+    <div id="loading" class="hidden">
+      <div class="text-center py-8">
+        <div class="w-10 h-10 border-2 border-rose-400/30 border-t-rose-400 rounded-full animate-spin mx-auto mb-4"></div>
+        <p class="text-slate-400 text-sm" id="loadingText">Generating domain suggestions...</p>
+      </div>
+      <div class="space-y-2">
+        <div class="skeleton h-16 rounded-xl"></div>
+        <div class="skeleton h-16 rounded-xl"></div>
+        <div class="skeleton h-16 rounded-xl"></div>
+        <div class="skeleton h-16 rounded-xl"></div>
+        <div class="skeleton h-16 rounded-xl"></div>
       </div>
     </div>
 
-    <div id="loading" class="hidden"><div class="skeleton h-16 rounded-xl mb-3"></div><div class="skeleton h-16 rounded-xl mb-3"></div><div class="skeleton h-16 rounded-xl mb-3"></div></div>
-    <div id="error" class="hidden text-center py-12"><div class="text-4xl mb-4 text-slate-600"><i class="fas fa-exclamation-circle"></i></div><p id="errorMsg" class="text-slate-400"></p></div>
+    <!-- ERROR -->
+    <div id="error" class="hidden text-center py-12">
+      <div class="text-4xl mb-4 text-slate-600"><i class="fas fa-circle-exclamation"></i></div>
+      <p id="errorMsg" class="text-slate-400 text-sm mb-4"></p>
+      <button onclick="generate()" class="px-4 py-2 rounded-lg text-white text-sm font-medium" style="background:#F43F5E">Try Again</button>
+    </div>
+
+    <!-- RESULTS -->
     <div id="results" class="hidden"></div>
   </div>
 
   <script>
-    const API = 'window.location.origin';
+    const API = window.location.origin;
     
-    function quickGen(kw) { document.getElementById('keywordInput').value = kw; generate(); }
+    function quickGen(kw) {
+      document.getElementById('keywordInput').value = kw;
+      generate();
+    }
     
     async function generate() {
       const kw = document.getElementById('keywordInput').value.trim();
-      if(!kw) return;
+      if (!kw) return;
+      
       document.getElementById('emptyState').classList.add('hidden');
       document.getElementById('loading').classList.remove('hidden');
       document.getElementById('results').classList.add('hidden');
       document.getElementById('error').classList.add('hidden');
+      
+      // Update loading text
+      const texts = ['Generating domain suggestions...', 'Checking availability...', 'Almost done...'];
+      let i = 0;
+      const textTimer = setInterval(() => {
+        i = (i + 1) % texts.length;
+        document.getElementById('loadingText').textContent = texts[i];
+      }, 800);
+      
       try {
-        const r = await fetch(`${API}/api/domain-generate?keyword=${encodeURIComponent(kw)}`);
-        const d = await r.json();
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 30000); // 30 seconds
+        
+        const url = API + '/api/domain-generate?keyword=' + encodeURIComponent(kw);
+        console.log('Fetching:', url);
+        
+        const response = await fetch(url, { signal: controller.signal });
+        
+        clearTimeout(timeout);
+        clearInterval(textTimer);
+        
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        
+        const data = await response.json();
+        console.log('Data:', data);
+        
         document.getElementById('loading').classList.add('hidden');
         document.getElementById('results').classList.remove('hidden');
+        
+        const suggestions = data.suggestions || [];
+        
         document.getElementById('results').innerHTML = `
-          <div class="result-card mb-4">
+          <div class="result-card mb-3">
             <span class="text-slate-400 text-sm">Keyword:</span>
-            <span class="text-rose-400 font-semibold text-lg ml-2">${d.keyword}</span>
-            <span class="text-slate-500 text-xs ml-3">${d.suggestions?.length||0} suggestions generated</span>
+            <span class="text-rose-400 font-semibold text-lg ml-2">${data.keyword || kw}</span>
+            <span class="text-slate-500 text-xs ml-3">${suggestions.length} suggestions checked</span>
           </div>
           <div class="space-y-2">
-            ${(d.suggestions||[]).map(s=>`
+            ${suggestions.map(s => `
               <div class="result-card flex items-center justify-between">
                 <div class="flex-1 min-w-0">
                   <div class="font-mono text-sm text-slate-200 truncate">${s.domain}</div>
                 </div>
                 <span class="flex-shrink-0 ml-3 text-xs font-semibold px-3 py-1.5 rounded-full ${s.available ? 'bg-success/10 text-success border border-success/20' : 'bg-danger/10 text-danger border border-danger/20'}">
-                  ${s.status||(s.available?'Available ✅':'Taken ❌')}
+                  ${s.status || (s.available ? 'Available' : 'Taken')}
                 </span>
               </div>
             `).join('')}
+            ${suggestions.length === 0 ? '<p class="text-slate-500 text-sm text-center py-4">No suggestions generated. Try a different keyword.</p>' : ''}
           </div>
-          <p class="text-xs text-slate-600 mt-4 text-center">First 10 suggestions checked for availability. Results may vary.</p>
         `;
-      } catch(e) {
+        
+      } catch (error) {
+        clearInterval(textTimer);
         document.getElementById('loading').classList.add('hidden');
         document.getElementById('error').classList.remove('hidden');
-        document.getElementById('errorMsg').textContent = e.message || 'Failed to generate. Please try again.';
+        
+        if (error.name === 'AbortError') {
+          document.getElementById('errorMsg').textContent = 'Request timed out. The server may be busy. Please try a shorter keyword or try again.';
+        } else {
+          document.getElementById('errorMsg').textContent = 'Failed to generate: ' + (error.message || 'Unknown error');
+        }
       }
     }
-    document.getElementById('keywordInput').addEventListener('keydown', e => { if(e.key==='Enter') generate(); });
+    
+    document.getElementById('keywordInput').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') generate();
+    });
   </script>
 </body>
 </html>

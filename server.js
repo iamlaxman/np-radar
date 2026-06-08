@@ -616,8 +616,22 @@ app.get('/api/domain-generate', async (req, res) => {
   const suggestions = [];
   const combos = [keyword, 'the' + keyword, keyword + 'nepal', 'nepal' + keyword, keyword + 'online', keyword + 'hub', 'my' + keyword, keyword + 'web'];
   for (const c of combos) for (const ext of extensions) suggestions.push({ domain: c + ext, available: null });
-  for (const s of suggestions.slice(0, 10)) { try { await dns.resolve4(s.domain); s.available = false; s.status = 'Taken'; } catch(e) { s.available = true; s.status = 'Available ✅'; } }
-  res.json({ keyword, suggestions: suggestions.slice(0, 10).sort((a,b) => (a.available===true?-1:1) - (b.available===true?-1:1)) });
+  
+  // Check availability in parallel for first 10 suggestions
+  const toCheck = suggestions.slice(0, 10);
+  const checkPromises = toCheck.map(async (s) => {
+    try {
+      await dns.resolve4(s.domain);
+      s.available = false;
+      s.status = 'Taken';
+    } catch(e) {
+      s.available = true;
+      s.status = 'Available ✅';
+    }
+  });
+  await Promise.allSettled(checkPromises);
+  
+  res.json({ keyword, suggestions: toCheck.sort((a,b) => (a.available===true?-1:1) - (b.available===true?-1:1)) });
 });
 
 app.get('/api/compare', async (req, res) => {

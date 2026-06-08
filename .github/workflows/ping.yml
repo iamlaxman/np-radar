@@ -1,0 +1,58 @@
+name: Keep NP Radar Alive
+
+on:
+  schedule:
+    # Primary: every 7 minutes (two runs within 15-min window)
+    - cron: '*/7 * * * *'
+    # Backup: at specific minutes
+    - cron: '3,17,31,45,59 * * * *'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      # If one ping fails, continue with others
+      fail-fast: false
+    
+    steps:
+      - name: Ping Health Endpoint
+        id: health
+        run: |
+          RESPONSE=$(curl -s -w "\n%{http_code}" https://npradar.laxman-poudel.com.np/health)
+          HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+          BODY=$(echo "$RESPONSE" | head -n-1)
+          
+          echo "HTTP Status: $HTTP_CODE"
+          echo "Response: $(echo $BODY | head -c 200)"
+          
+          if [ "$HTTP_CODE" = "200" ]; then
+            echo "status=success" >> $GITHUB_OUTPUT
+            echo "✅ NP Radar is alive!"
+          else
+            echo "status=failed" >> $GITHUB_OUTPUT
+            echo "⚠️ Unexpected status: $HTTP_CODE"
+          fi
+      
+      - name: Ping Homepage
+        run: |
+          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" https://npradar.laxman-poudel.com.np/)
+          echo "Homepage Status: $HTTP_CODE"
+      
+      - name: Ping API
+        run: |
+          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" "https://npradar.laxman-poudel.com.np/api/stats")
+          echo "API Status: $HTTP_CODE"
+      
+      - name: Notify on Failure (Optional)
+        if: failure()
+        run: |
+          echo "⚠️ One or more pings failed!"
+          echo "Check Render dashboard: https://dashboard.render.com"      
+      - name: Ping API Endpoint (Backup 2)
+        run: |
+          echo "🔄 Pinging API..."
+          curl -s "https://npradar.laxman-poudel.com.np/api/stats" | head -c 100
+          echo ""
+          echo "✅ API ping complete"
