@@ -77,25 +77,22 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // 5. Rate Limiting — Proper with express-rate-limit
-const limiter = rateLimit({
-  windowMs: 60 * 1000, // 1 minute
-  max: isProduction ? 60 : 200, // 60/min in production, 200/min in dev
-  standardHeaders: true,
-  legacyHeaders: false,
-  message: {
-    error: 'Rate limit exceeded',
-    retryAfter: '60 seconds',
-    message: 'Too many requests. Please try again in a minute.',
-  },
-  keyGenerator: (req) => {
-    return req.ip || req.connection.remoteAddress || 'unknown';
-  },
-  skip: (req) => {
-    // Don't rate limit health checks
-    return req.path === '/health';
-  },
+const rateLimitMap = new Map();
+app.use((req, res, next) => {
+  // Skip rate limiting for health check and bank scorecard
+  if (req.path === '/health' || req.path === '/api/bank-scorecard') {
+    return next();
+  }
+  
+  const ip = req.ip || req.connection.remoteAddress;
+  const now = Date.now();
+  const entry = rateLimitMap.get(ip) || { count: 0, reset: now + 60000 };
+  if (now > entry.reset) { entry.count = 0; entry.reset = now + 60000; }
+  entry.count++;
+  rateLimitMap.set(ip, entry);
+  if (entry.count > 60) return res.status(429).json({ error: 'Rate limit exceeded. Max 60 requests/minute.' });
+  next();
 });
-app.use('/api/', limiter);
 
 // 6. Body parser with size limits
 app.use(express.json({ limit: '10kb' }));
@@ -585,28 +582,131 @@ app.get('/api/dns-check', async (req, res) => {
   res.json({ domain, checks, totalScore, maxScore, grade, gradeColor: gradeColors[grade], percentage: pct, recommendations: Object.values(checks).filter(c => !c.passed).map(c => `${c.name}: ${c.detail}`) });
 });
 
+// ─── BANK SCORECARD (Daily Auto-Refresh + 24h Cache) ──
 app.get('/api/bank-scorecard', async (req, res) => {
-  const ck = 'banks:scorecard'; if(cache.has(ck)) return res.json(cache.get(ck));
+  const ck = 'banks:scorecard:v4';
+  const cached = cache.get(ck);
+  
+  // Return cached data if available (cache for 24 hours)
+  if (cached) {
+    cached.servedFromCache = true;
+    cached.nextRefresh = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
+    return res.json(cached);
+  }
+  
   const banks = [
-    { name: 'Himalayan Bank', domain: 'himalayanbank.com.np' }, { name: 'Nabil Bank', domain: 'nabilbank.com.np' },
-    { name: 'NIC Asia Bank', domain: 'nicasiabank.com.np' }, { name: 'Global IME Bank', domain: 'globalimebank.com.np' },
-    { name: 'Prabhu Bank', domain: 'prabhubank.com.np' }, { name: 'Kumari Bank', domain: 'kumaribank.com.np' },
-    { name: 'NMB Bank', domain: 'nmbbank.com.np' }, { name: 'Sanima Bank', domain: 'sanimabank.com.np' },
-    { name: 'Siddhartha Bank', domain: 'siddharthabank.com.np' }, { name: 'Everest Bank', domain: 'everestbank.com.np' },
-    { name: 'Nepal Bank', domain: 'nepalbank.com.np' }, { name: 'Rastriya Banijya Bank', domain: 'rbb.com.np' },
-    { name: 'Agriculture Development Bank', domain: 'adbl.com.np' }, { name: 'Laxmi Bank', domain: 'laxmibank.com.np' },
+    { name: 'Himalayan Bank', domain: 'himalayanbank.com.np' },
+    { name: 'Nabil Bank', domain: 'nabilbank.com.np' },
+    { name: 'NIC Asia Bank', domain: 'nicasiabank.com.np' },
+    { name: 'Global IME Bank', domain: 'globalimebank.com.np' },
+    { name: 'Prabhu Bank', domain: 'prabhubank.com.np' },
+    { name: 'Kumari Bank', domain: 'kumaribank.com.np' },
+    { name: 'NMB Bank', domain: 'nmbbank.com.np' },
+    { name: 'Sanima Bank', domain: 'sanimabank.com.np' },
+    { name: 'Siddhartha Bank', domain: 'siddharthabank.com.np' },
+    { name: 'Everest Bank', domain: 'everestbank.com.np' },
+    { name: 'Nepal Bank', domain: 'nepalbank.com.np' },
+    { name: 'Rastriya Banijya Bank', domain: 'rbb.com.np' },
+    { name: 'Agriculture Development Bank', domain: 'adbl.com.np' },
+    { name: 'Laxmi Bank', domain: 'laxmibank.com.np' },
     { name: 'Citizens Bank', domain: 'ctznbank.com.np' },
   ];
-  const results = [];
-  for (const bank of banks) {
+  
+  // Check single bank with timeouts
+  async function checkBank(bank) {
     let sslValid = false, dnssecEnabled = false, hasSPF = false, hasDMARC = false;
-    try { const cert = await new Promise((resolve) => { const s = tls.connect({ host: bank.domain, port: 443, servername: bank.domain, rejectUnauthorized: false, timeout: 5000 }, () => { const c = s.getPeerCertificate(); resolve(c); s.destroy(); }); s.on('error', () => resolve(null)); s.on('timeout', () => { s.destroy(); resolve(null); }); }); if (cert?.valid_to) sslValid = new Date(cert.valid_to) > new Date(); } catch(e) {}
-    try { await dns.resolve(bank.domain, 'DS'); dnssecEnabled = true; } catch(e) {}
-    try { const txt = await dns.resolveTxt(bank.domain); hasSPF = txt.flat().some(r => r.includes('v=spf1')); } catch(e) {}
-    try { const dmarc = await dns.resolveTxt(`_dmarc.${bank.domain}`).catch(() => []); hasDMARC = dmarc.length > 0; } catch(e) {}
-    results.push({ name: bank.name, domain: bank.domain, ssl: sslValid ? '✅' : '❌', dnssec: dnssecEnabled ? '✅' : '❌', spf: hasSPF ? '✅' : '❌', dmarc: hasDMARC ? '✅' : '❌', score: (sslValid ? 30 : 0) + (dnssecEnabled ? 25 : 0) + (hasSPF ? 25 : 0) + (hasDMARC ? 20 : 0), grade: (sslValid ? 30 : 0) + (dnssecEnabled ? 25 : 0) + (hasSPF ? 25 : 0) + (hasDMARC ? 20 : 0) >= 80 ? 'A' : (sslValid ? 30 : 0) + (dnssecEnabled ? 25 : 0) + (hasSPF ? 25 : 0) + (hasDMARC ? 20 : 0) >= 60 ? 'B' : (sslValid ? 30 : 0) + (dnssecEnabled ? 25 : 0) + (hasSPF ? 25 : 0) + (hasDMARC ? 20 : 0) >= 40 ? 'C' : (sslValid ? 30 : 0) + (dnssecEnabled ? 25 : 0) + (hasSPF ? 25 : 0) + (hasDMARC ? 20 : 0) >= 20 ? 'D' : 'F' });
+    
+    // SSL check — 3 second timeout
+    try {
+      const cert = await Promise.race([
+        new Promise((resolve) => {
+          const s = tls.connect({ 
+            host: bank.domain, port: 443, servername: bank.domain, 
+            rejectUnauthorized: false, timeout: 3000 
+          }, () => { 
+            const c = s.getPeerCertificate(); resolve(c); s.destroy(); 
+          });
+          s.on('error', () => resolve(null));
+          s.on('timeout', () => { s.destroy(); resolve(null); });
+        }),
+        new Promise(resolve => setTimeout(() => resolve(null), 3000))
+      ]);
+      if (cert && cert.valid_to) sslValid = new Date(cert.valid_to) > new Date();
+    } catch(e) {}
+    
+    // DNSSEC — 2 second timeout
+    try {
+      await Promise.race([
+        dns.resolve(bank.domain, 'DS'),
+        new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 2000))
+      ]);
+      dnssecEnabled = true;
+    } catch(e) {}
+    
+    // SPF — 2 second timeout
+    try {
+      const txt = await Promise.race([
+        dns.resolveTxt(bank.domain),
+        new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 2000))
+      ]);
+      hasSPF = txt.flat().some(r => r.includes('v=spf1'));
+    } catch(e) {}
+    
+    // DMARC — 2 second timeout
+    try {
+      const dmarc = await Promise.race([
+        dns.resolveTxt(`_dmarc.${bank.domain}`).catch(() => []),
+        new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 2000))
+      ]);
+      hasDMARC = dmarc && dmarc.length > 0;
+    } catch(e) {}
+    
+    const score = (sslValid ? 30 : 0) + (dnssecEnabled ? 25 : 0) + (hasSPF ? 25 : 0) + (hasDMARC ? 20 : 0);
+    return {
+      name: bank.name, domain: bank.domain,
+      ssl: sslValid ? '✅' : '❌', dnssec: dnssecEnabled ? '✅' : '❌',
+      spf: hasSPF ? '✅' : '❌', dmarc: hasDMARC ? '✅' : '❌',
+      score, grade: score >= 80 ? 'A' : score >= 60 ? 'B' : score >= 40 ? 'C' : score >= 20 ? 'D' : 'F',
+    };
   }
-  res.json({ banks: results.sort((a, b) => b.score - a.score), totalBanks: results.length, avgScore: Math.round(results.reduce((s, b) => s + b.score, 0) / results.length), lastChecked: new Date().toISOString() });
+  
+  try {
+    console.log(`[BANK-SCORECARD] 🔄 Starting daily refresh — ${new Date().toLocaleString()}`);
+    const startTime = Date.now();
+    
+    const results = await Promise.allSettled(banks.map(b => checkBank(b)));
+    const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+    
+    const bankResults = results.map((r, i) => 
+      r.status === 'fulfilled' ? r.value : {
+        name: banks[i].name, domain: banks[i].domain,
+        ssl: '❌', dnssec: '❌', spf: '❌', dmarc: '❌', score: 0, grade: 'F', error: true,
+      }
+    );
+    
+    const sorted = bankResults.sort((a, b) => b.score - a.score);
+    const avgScore = Math.round(sorted.reduce((s, b) => s + b.score, 0) / sorted.length);
+    
+    const response = {
+      banks: sorted,
+      totalBanks: sorted.length,
+      avgScore,
+      lastChecked: new Date().toISOString(),
+      nextRefresh: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
+      refreshInterval: 'Every 24 hours (daily)',
+      completedIn: `${elapsed}s`,
+    };
+    
+    // Cache for 24 hours (86400 seconds)
+    cache.set(ck, response, 86400);
+    
+    console.log(`[BANK-SCORECARD] ✅ Completed in ${elapsed}s — Cached for 24 hours`);
+    res.json(response);
+    
+  } catch(e) {
+    console.error('[BANK-SCORECARD] ❌ Error:', e.message);
+    res.status(500).json({ error: 'Failed to check banks', message: e.message });
+  }
 });
 
 app.get('/api/domain-generate', async (req, res) => {
