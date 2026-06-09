@@ -4,44 +4,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-    <!-- Primary Meta Tags -->
   <title>Nepal Domain Statistics — .NP Domain Ecosystem & Analysis | NP Radar</title>
-  <meta name="title" content="Nepal Domain Statistics — .NP Domain Ecosystem & Analysis | NP Radar" />
   <meta name="description" content="Comprehensive Nepal domain statistics with interactive charts. TLD distribution, ISP hosting, DNSSEC adoption, SSL usage, monthly trends for 2026." />
-  <meta name="keywords" content="Nepal domain statistics, .np stats, TLD distribution Nepal, ISP hosting Nepal, DNSSEC Nepal, Nepal internet data, NP Radar" />
-  <meta name="author" content="NP Radar" />
-  <meta name="robots" content="index, follow" />
   <meta name="theme-color" content="#6366F1" />
-  
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://npradar.laxman-poudel.com.np/tools/nepal-stats.html" />
-  <meta property="og:title" content="Nepal Domain Statistics — .NP Ecosystem | NP Radar" />
-  <meta property="og:description" content="Interactive Nepal domain statistics with animated charts. TLD, ISP, DNSSEC, SSL data. Auto-updating monthly." />
+  <meta property="og:title" content="Nepal Domain Statistics | NP Radar" />
+  <meta property="og:description" content="Interactive Nepal domain statistics with animated charts." />
   <meta property="og:image" content="https://npradar.laxman-poudel.com.np/favicon/og.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:site_name" content="NP Radar" />
-  <meta property="og:locale" content="en_US" />
-  
-  <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:url" content="https://npradar.laxman-poudel.com.np/tools/nepal-stats.html" />
-  <meta property="twitter:title" content="Nepal Domain Statistics — .NP Ecosystem | NP Radar" />
-  <meta property="twitter:description" content="Interactive Nepal domain statistics with animated charts. Auto-updating monthly." />
-  <meta property="twitter:image" content="https://npradar.laxman-poudel.com.np/favicon/og.png" />
   
-  <!-- Canonical -->
   <link rel="canonical" href="https://npradar.laxman-poudel.com.np/tools/nepal-stats.html" />
-  
-  <!-- PWA -->
   <link rel="manifest" href="../favicon/site.webmanifest" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="NP Radar" />
   
-  <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="../favicon/favicon.ico" />
   <link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png" />
@@ -49,12 +26,7 @@
   <link rel="icon" type="image/png" sizes="192x192" href="../favicon/android-chrome-192x192.png" />
   <link rel="icon" type="image/png" sizes="512x512" href="../favicon/android-chrome-512x512.png" />
   
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'" />
-  
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>tailwind.config={theme:{extend:{colors:{bg:'#0A0A0F',surface:'#111118',elevated:'#1A1A24',border:'rgba(255,255,255,0.08)',primary:'#6366F1',accent:'#EC4899',success:'#10B981',warning:'#F59E0B',danger:'#EF4444'},fontFamily:{display:['Syne','sans-serif'],body:['Space Grotesk','sans-serif'],mono:['JetBrains Mono','monospace']}}}}</script>
@@ -63,7 +35,7 @@
     body { background: #0A0A0F; font-family: 'Space Grotesk', sans-serif; color: #F1F5F9; }
     .stat-card { background: #111118; border: 1px solid rgba(255,255,255,0.06); border-radius: 1rem; padding: 1.25rem; text-align: center; transition: all 0.2s ease; }
     .stat-card:hover { transform: translateY(-2px); border-color: rgba(99,102,241,0.3); }
-    .chart-card { background: #111118; border: 1px solid rgba(255,255,255,0.06); border-radius: 1rem; padding: 1.5rem; position: relative; }
+    .chart-card { background: #111118; border: 1px solid rgba(255,255,255,0.06); border-radius: 1rem; padding: 1.5rem; position: relative; overflow: hidden; }
     .skeleton { background: linear-gradient(90deg, #1A1A24 25%, #252535 50%, #1A1A24 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 6px; }
     @keyframes shimmer { 0%{background-position:200% 0}100%{background-position:-200% 0} }
     
@@ -74,9 +46,10 @@
     .bar { width: 55%; border-radius: 6px 6px 0 0; height: 0%; transition: height 1s cubic-bezier(0.4,0,0.2,1), filter 0.2s ease; cursor: pointer; }
     .bar:hover { filter: brightness(1.3); }
     .bar-label { margin-top: 0.5rem; font-size: 0.6875rem; color: #64748B; text-align: center; }
-    .bar-value { font-size: 0.625rem; color: #94A3B8; margin-bottom: 0.25rem; font-family: 'JetBrains Mono', monospace; text-align: center; min-height: 14px; }
+    .bar-value { font-size: 0.625rem; color: #94A3B8; margin-bottom: 0.25rem; font-family: 'JetBrains Mono', monospace; text-align: center; }
     
-    .chart-tooltip { position: absolute; background: #1e293b; color: #F1F5F9; padding: 0.5rem 0.75rem; border-radius: 8px; font-size: 0.75rem; pointer-events: none; opacity: 0; transform: translate(-50%, -110%); transition: opacity 0.2s ease; top: 0; left: 0; box-shadow: 0 10px 25px rgba(0,0,0,0.5); white-space: nowrap; z-index: 10; border: 1px solid rgba(255,255,255,0.1); font-family: 'JetBrains Mono', monospace; }
+    /* Tooltip — now relative to chart card, NOT absolute to page */
+    .chart-tooltip { position: absolute; background: #1e293b; color: #F1F5F9; padding: 0.5rem 0.75rem; border-radius: 8px; font-size: 0.75rem; pointer-events: none; opacity: 0; transition: opacity 0.2s ease; white-space: nowrap; z-index: 10; border: 1px solid rgba(255,255,255,0.1); font-family: 'JetBrains Mono', monospace; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
     
     .pie-wrapper { position: relative; width: 180px; height: 180px; margin: 0 auto; }
     .pie-svg { width: 100%; height: 100%; transform: rotate(-90deg); }
@@ -151,149 +124,95 @@
     </div>
   </div>
 
+  <!-- GLOBAL tooltip — one for all charts, positioned via JS -->
+  <div id="globalTooltip" class="chart-tooltip" style="position:fixed;pointer-events:none;opacity:0;z-index:999;"></div>
+
   <script>
     const API = window.location.origin;
+    const globalTip = document.getElementById('globalTooltip');
+
+    function showTip(text, e) {
+      globalTip.textContent = text;
+      globalTip.style.opacity = '1';
+      globalTip.style.left = (e.clientX + 15) + 'px';
+      globalTip.style.top = (e.clientY - 40) + 'px';
+    }
+    function hideTip() { globalTip.style.opacity = '0'; }
 
     function getMonthlyData() {
-      const now = new Date();
-      const currentMonth = now.getMonth();
-      const monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-      const baseValues = [1520, 1680, 1450, 1890, 1750, 0, 0, 0, 0, 0, 0, 0];
-      const data = [];
-      for (let i = 0; i < currentMonth; i++) {
-        data.push({ label: monthNames[i], value: baseValues[i] || Math.floor(1200 + Math.random() * 600) });
-      }
-      return data;
+      const now = new Date(), cm = now.getMonth();
+      const mn = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      const bv = [1520,1680,1450,1890,1750,0,0,0,0,0,0,0];
+      const d = [];
+      for(let i=0;i<cm;i++) d.push({label:mn[i],value:bv[i]||Math.floor(1200+Math.random()*600)});
+      return d;
     }
-
     function getMonthlyTitle() {
-      const now = new Date();
-      const currentMonth = now.getMonth();
-      if (currentMonth === 0) return 'Monthly Registrations (Coming Soon)';
-      const lastMonth = new Date(now.getFullYear(), currentMonth - 1, 1);
-      return `Monthly Registrations (Jan-${lastMonth.toLocaleString('default',{month:'short'})} ${now.getFullYear()})`;
+      const now = new Date(), cm = now.getMonth();
+      if(cm===0) return 'Monthly Registrations (Coming Soon)';
+      const lm = new Date(now.getFullYear(),cm-1,1);
+      return `Monthly Registrations (Jan-${lm.toLocaleString('default',{month:'short'})} ${now.getFullYear()})`;
     }
 
-    const monthlyData = getMonthlyData();
-    const monthlyTitle = getMonthlyTitle();
+    const md = getMonthlyData(), mt = getMonthlyTitle();
 
     const stats = {
-      overview: { totalDomains: '92K+', httpsAdoption: '48%', dnssecAdoption: '14%', avgAge: '4.5 yr' },
-      monthly: monthlyData,
-      monthlyTitle: monthlyTitle,
-      tld: [
-        { label: '.com.np', value: 78, color: '#6366F1' },{ label: '.org.np', value: 11, color: '#10B981' },
-        { label: '.edu.np', value: 4, color: '#F59E0B' },{ label: '.net.np', value: 3, color: '#8B5CF6' },
-        { label: '.gov.np', value: 2, color: '#EF4444' },{ label: 'Other', value: 2, color: '#64748B' },
-      ],
-      nameservers: [
-        { label: 'Cloudflare', value: 20, color: '#F59E0B' },{ label: 'Worldlink', value: 16, color: '#00A651' },
-        { label: 'cPanel', value: 11, color: '#F97316' },{ label: 'Vianet', value: 9, color: '#EE3124' },
-        { label: 'GoDaddy', value: 5, color: '#06B6D4' },{ label: 'Other', value: 39, color: '#64748B' },
-      ],
-      isp: [
-        { label: 'Worldlink', value: 33, color: '#00A651' },{ label: 'NTC', value: 24, color: '#003893' },
-        { label: 'Vianet', value: 17, color: '#EE3124' },{ label: 'Subisu', value: 11, color: '#ED6B06' },
-        { label: 'DishHome', value: 9, color: '#E31937' },{ label: 'Others', value: 6, color: '#64748B' },
-      ],
-      age: [
-        { label: '<1 yr', value: 20, color: '#6366F1' },{ label: '1-3 yr', value: 32, color: '#10B981' },
-        { label: '3-5 yr', value: 19, color: '#F59E0B' },{ label: '5-10 yr', value: 18, color: '#8B5CF6' },
-        { label: '10+ yr', value: 11, color: '#EC4899' },
-      ],
-      email: { spf: 44, dmarc: 10, dkim: 27 },
-      sslCA: [
-        { label: "Let's Encrypt", value: 37, color: '#10B981' },{ label: 'Cloudflare', value: 21, color: '#F59E0B' },
-        { label: 'cPanel', value: 14, color: '#F97316' },{ label: 'DigiCert', value: 9, color: '#6366F1' },
-        { label: 'Sectigo', value: 6, color: '#8B5CF6' },{ label: 'Other', value: 13, color: '#64748B' },
-      ],
-      tech: [
-        { label: 'WordPress', value: 33, color: '#21759B' },{ label: 'PHP', value: 28, color: '#777BB4' },
-        { label: 'nginx', value: 30, color: '#009639' },{ label: 'Apache', value: 20, color: '#D22128' },
-        { label: 'Cloudflare', value: 20, color: '#F38020' },{ label: 'LiteSpeed', value: 10, color: '#1C6B9E' },
-      ],
+      overview:{totalDomains:'92K+',httpsAdoption:'48%',dnssecAdoption:'14%',avgAge:'4.5 yr'},
+      monthly:md,monthlyTitle:mt,
+      tld:[{label:'.com.np',value:78,color:'#6366F1'},{label:'.org.np',value:11,color:'#10B981'},{label:'.edu.np',value:4,color:'#F59E0B'},{label:'.net.np',value:3,color:'#8B5CF6'},{label:'.gov.np',value:2,color:'#EF4444'},{label:'Other',value:2,color:'#64748B'}],
+      nameservers:[{label:'Cloudflare',value:20,color:'#F59E0B'},{label:'Worldlink',value:16,color:'#00A651'},{label:'cPanel',value:11,color:'#F97316'},{label:'Vianet',value:9,color:'#EE3124'},{label:'GoDaddy',value:5,color:'#06B6D4'},{label:'Other',value:39,color:'#64748B'}],
+      isp:[{label:'Worldlink',value:33,color:'#00A651'},{label:'NTC',value:24,color:'#003893'},{label:'Vianet',value:17,color:'#EE3124'},{label:'Subisu',value:11,color:'#ED6B06'},{label:'DishHome',value:9,color:'#E31937'},{label:'Others',value:6,color:'#64748B'}],
+      age:[{label:'<1 yr',value:20,color:'#6366F1'},{label:'1-3 yr',value:32,color:'#10B981'},{label:'3-5 yr',value:19,color:'#F59E0B'},{label:'5-10 yr',value:18,color:'#8B5CF6'},{label:'10+ yr',value:11,color:'#EC4899'}],
+      email:{spf:44,dmarc:10,dkim:27},
+      sslCA:[{label:"Let's Encrypt",value:37,color:'#10B981'},{label:'Cloudflare',value:21,color:'#F59E0B'},{label:'cPanel',value:14,color:'#F97316'},{label:'DigiCert',value:9,color:'#6366F1'},{label:'Sectigo',value:6,color:'#8B5CF6'},{label:'Other',value:13,color:'#64748B'}],
+      tech:[{label:'WordPress',value:33,color:'#21759B'},{label:'PHP',value:28,color:'#777BB4'},{label:'nginx',value:30,color:'#009639'},{label:'Apache',value:20,color:'#D22128'},{label:'Cloudflare',value:20,color:'#F38020'},{label:'LiteSpeed',value:10,color:'#1C6B9E'}],
     };
 
-    function createBarChart(containerId, data, title, icon) {
-      const container = document.getElementById(containerId);
-      if (!container || !data.length) return;
-      const maxVal = Math.max(...data.map(d => d.value));
-      container.innerHTML = `<h4 class="text-sm font-semibold mb-4"><i class="${icon} mr-2"></i>${title}</h4>
-        <div class="graph-area" id="${containerId}-graph"><div class="gridlines"><div class="gridline"></div><div class="gridline"></div><div class="gridline"></div><div class="gridline"></div></div></div>
-        <div class="chart-tooltip" id="${containerId}-tip"></div>`;
-      const graph = document.getElementById(`${containerId}-graph`);
-      const tip = document.getElementById(`${containerId}-tip`);
+    function createBarChart(cid, data, title, icon) {
+      const c = document.getElementById(cid); if(!c||!data.length) return;
+      const mx = Math.max(...data.map(d=>d.value));
+      c.innerHTML = `<h4 class="text-sm font-semibold mb-4"><i class="${icon} mr-2"></i>${title}</h4><div class="graph-area" id="${cid}-g"><div class="gridlines"><div class="gridline"></div><div class="gridline"></div><div class="gridline"></div><div class="gridline"></div></div></div>`;
+      const g = document.getElementById(`${cid}-g`);
       data.forEach(item => {
-        const w = document.createElement('div'); w.classList.add('bar-wrapper');
-        const v = document.createElement('div'); v.classList.add('bar-value'); v.textContent = item.value.toLocaleString();
-        const b = document.createElement('div'); b.classList.add('bar'); b.style.background = item.color || '#6366F1';
-        const l = document.createElement('div'); l.classList.add('bar-label'); l.textContent = item.label;
-        w.appendChild(v); w.appendChild(b); w.appendChild(l); graph.appendChild(w);
-        requestAnimationFrame(() => { b.style.height = `${(item.value / maxVal) * 100}%`; });
-        b.addEventListener('mouseenter', () => { tip.textContent = `${item.label}: ${item.value.toLocaleString()}`; tip.style.opacity = '1'; });
-        b.addEventListener('mousemove', e => { const r = container.getBoundingClientRect(); tip.style.left = `${e.clientX - r.left}px`; tip.style.top = `${e.clientY - r.top - 40}px`; });
-        b.addEventListener('mouseleave', () => { tip.style.opacity = '0'; });
+        const w = document.createElement('div');w.classList.add('bar-wrapper');
+        const v = document.createElement('div');v.classList.add('bar-value');v.textContent=item.value.toLocaleString();
+        const b = document.createElement('div');b.classList.add('bar');b.style.background=item.color||'#6366F1';
+        const l = document.createElement('div');l.classList.add('bar-label');l.textContent=item.label;
+        w.appendChild(v);w.appendChild(b);w.appendChild(l);g.appendChild(w);
+        requestAnimationFrame(()=>{b.style.height=`${(item.value/mx)*100}%`;});
+        b.addEventListener('mouseenter',e=>{showTip(`${item.label}: ${item.value.toLocaleString()}`,e);});
+        b.addEventListener('mousemove',e=>{showTip(`${item.label}: ${item.value.toLocaleString()}`,e);});
+        b.addEventListener('mouseleave',hideTip);
       });
     }
 
-    function createPieChart(containerId, data, title, icon) {
-      const container = document.getElementById(containerId);
-      if (!container) return;
-      const size = 180, cx = size/2, cy = size/2, r = 68, sw = 15, circ = 2 * Math.PI * r;
-      let offset = 0, segs = '';
-      data.forEach(item => {
-        const dash = circ * (item.value / 100), gap = circ - dash;
-        const rot = (offset / 100) * 360 - 90;
-        segs += `<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${item.color}" stroke-width="${sw}" 
-          stroke-dasharray="${dash} ${gap}" stroke-dashoffset="${-circ * 0.25}"
-          transform="rotate(${rot} ${cx} ${cy})" class="pie-segment"
-          data-label="${item.label}" data-value="${item.value}%"/>`;
-        offset += item.value;
+    function createPieChart(cid, data, title, icon) {
+      const c = document.getElementById(cid); if(!c) return;
+      const sz=180,cx=sz/2,cy=sz/2,r=68,sw=15,circ=2*Math.PI*r;
+      let offset=0,segs='';
+      data.forEach(item=>{
+        const dash=circ*(item.value/100),gap=circ-dash,rot=(offset/100)*360-90;
+        segs+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${item.color}" stroke-width="${sw}" stroke-dasharray="${dash} ${gap}" stroke-dashoffset="${-circ*0.25}" transform="rotate(${rot} ${cx} ${cy})" class="pie-segment" data-label="${item.label}" data-value="${item.value}%"/>`;
+        offset+=item.value;
       });
-      container.innerHTML = `<h4 class="text-sm font-semibold mb-4"><i class="${icon} mr-2"></i>${title}</h4>
-        <div class="flex flex-col md:flex-row items-center gap-5">
-          <div class="pie-wrapper flex-shrink-0"><svg class="pie-svg" viewBox="0 0 ${size} ${size}">${segs}</svg></div>
-          <div class="flex-1 space-y-1.5 w-full">${data.map(d => `<div class="legend-item flex items-center gap-2 text-xs"><div class="legend-dot" style="background:${d.color}"></div><span class="text-slate-300 flex-1 truncate">${d.label}</span><span class="font-mono flex-shrink-0" style="color:${d.color}">${d.value}%</span></div>`).join('')}</div>
-        </div>
-        <div class="chart-tooltip" id="${containerId}-tip"></div>`;
-      const tip = document.getElementById(`${containerId}-tip`);
-      container.querySelectorAll('.pie-segment').forEach(seg => {
-        seg.addEventListener('mouseenter', () => { tip.textContent = `${seg.dataset.label}: ${seg.dataset.value}`; tip.style.opacity = '1'; });
-        seg.addEventListener('mousemove', e => { const r = container.getBoundingClientRect(); tip.style.left = `${e.clientX - r.left}px`; tip.style.top = `${e.clientY - r.top - 40}px`; });
-        seg.addEventListener('mouseleave', () => { tip.style.opacity = '0'; });
+      c.innerHTML = `<h4 class="text-sm font-semibold mb-4"><i class="${icon} mr-2"></i>${title}</h4><div class="flex flex-col md:flex-row items-center gap-5"><div class="pie-wrapper flex-shrink-0"><svg class="pie-svg" viewBox="0 0 ${sz} ${sz}">${segs}</svg></div><div class="flex-1 space-y-1.5 w-full">${data.map(d=>`<div class="legend-item flex items-center gap-2 text-xs"><div class="legend-dot" style="background:${d.color}"></div><span class="text-slate-300 flex-1 truncate">${d.label}</span><span class="font-mono flex-shrink-0" style="color:${d.color}">${d.value}%</span></div>`).join('')}</div></div>`;
+      c.querySelectorAll('.pie-segment').forEach(seg=>{
+        seg.addEventListener('mouseenter',e=>{showTip(`${seg.dataset.label}: ${seg.dataset.value}`,e);});
+        seg.addEventListener('mousemove',e=>{showTip(`${seg.dataset.label}: ${seg.dataset.value}`,e);});
+        seg.addEventListener('mouseleave',hideTip);
       });
     }
 
-    function createHBarChart(containerId, data, title, icon) {
-      const container = document.getElementById(containerId);
-      if (!container) return;
-      container.innerHTML = `<h4 class="text-sm font-semibold mb-4"><i class="${icon} mr-2"></i>${title}</h4>
-        <div class="space-y-3">${data.map(d => `<div class="hbar-group"><div class="flex justify-between text-xs mb-1.5"><span class="text-slate-400">${d.label}</span><span class="font-mono" style="color:${d.color}">${d.value}%</span></div><div class="hbar-track"><div class="hbar-fill" style="width:0;background:${d.color}" data-w="${d.value}%"></div></div></div>`).join('')}</div>`;
-      setTimeout(() => { container.querySelectorAll('.hbar-fill').forEach(b => { b.style.width = b.dataset.w; }); }, 200);
+    function createHBarChart(cid, data, title, icon) {
+      const c = document.getElementById(cid); if(!c) return;
+      c.innerHTML = `<h4 class="text-sm font-semibold mb-4"><i class="${icon} mr-2"></i>${title}</h4><div class="space-y-3">${data.map(d=>`<div class="hbar-group"><div class="flex justify-between text-xs mb-1.5"><span class="text-slate-400">${d.label}</span><span class="font-mono" style="color:${d.color}">${d.value}%</span></div><div class="hbar-track"><div class="hbar-fill" style="width:0;background:${d.color}" data-w="${d.value}%"></div></div></div>`).join('')}</div>`;
+      setTimeout(()=>{c.querySelectorAll('.hbar-fill').forEach(b=>{b.style.width=b.dataset.w;});},200);
     }
 
-    function createEmailRings(containerId) {
-      const container = document.getElementById(containerId);
-      if (!container) return;
-      const rings = [
-        { value: stats.email.spf, color: '#10B981', label: 'SPF' },
-        { value: stats.email.dmarc, color: '#F59E0B', label: 'DMARC' },
-        { value: stats.email.dkim, color: '#6366F1', label: 'DKIM' },
-      ];
-      container.innerHTML = `<h4 class="text-sm font-semibold mb-4"><i class="fas fa-shield-halved text-violet-400 mr-2"></i>Email Security Adoption</h4>
-        <div class="flex items-center justify-around flex-wrap gap-3">
-          ${rings.map(r => {
-            const circ = 2 * Math.PI * 38, dash = circ * (r.value / 100);
-            return `<div class="text-center"><svg width="100" height="100" viewBox="0 0 100 100">
-              <circle cx="50" cy="50" r="38" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="7"/>
-              <circle cx="50" cy="50" r="38" fill="none" stroke="${r.color}" stroke-width="7" stroke-linecap="round"
-                stroke-dasharray="${dash} ${circ}" stroke-dashoffset="-59.7" transform="rotate(-90 50 50)" style="transition:stroke-dasharray 1.5s ease"/>
-              <text x="50" y="47" text-anchor="middle" fill="${r.color}" font-family="Syne,sans-serif" font-weight="800" font-size="16">${r.value}%</text>
-              <text x="50" y="62" text-anchor="middle" fill="#64748B" font-size="10" font-family="Space Grotesk,sans-serif">${r.label}</text>
-            </svg></div>`;
-          }).join('')}
-        </div>
-        <div class="mt-4 pt-3 border-t border-white/5 text-xs text-center text-slate-500">⚠ Only <span class="text-warning font-semibold">${stats.email.dmarc}%</span> have DMARC — vulnerable to email spoofing</div>`;
+    function createEmailRings(cid) {
+      const c = document.getElementById(cid); if(!c) return;
+      const rings=[{value:stats.email.spf,color:'#10B981',label:'SPF'},{value:stats.email.dmarc,color:'#F59E0B',label:'DMARC'},{value:stats.email.dkim,color:'#6366F1',label:'DKIM'}];
+      c.innerHTML = `<h4 class="text-sm font-semibold mb-4"><i class="fas fa-shield-halved text-violet-400 mr-2"></i>Email Security Adoption</h4><div class="flex items-center justify-around flex-wrap gap-3">${rings.map(r=>{const circ=2*Math.PI*38,dash=circ*(r.value/100);return`<div class="text-center"><svg width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="38" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="7"/><circle cx="50" cy="50" r="38" fill="none" stroke="${r.color}" stroke-width="7" stroke-linecap="round" stroke-dasharray="${dash} ${circ}" stroke-dashoffset="-59.7" transform="rotate(-90 50 50)" style="transition:stroke-dasharray 1.5s ease"/><text x="50" y="47" text-anchor="middle" fill="${r.color}" font-family="Syne,sans-serif" font-weight="800" font-size="16">${r.value}%</text><text x="50" y="62" text-anchor="middle" fill="#64748B" font-size="10" font-family="Space Grotesk,sans-serif">${r.label}</text></svg></div>`;}).join('')}</div><div class="mt-4 pt-3 border-t border-white/5 text-xs text-center text-slate-500">⚠ Only <span class="text-warning font-semibold">${stats.email.dmarc}%</span> have DMARC — vulnerable to email spoofing</div>`;
     }
 
     function renderAllCharts() {
@@ -302,19 +221,15 @@
       try {
         document.getElementById('loading').classList.add('hidden');
         document.getElementById('results').classList.remove('hidden');
-        document.getElementById('keyMetrics').innerHTML = `
-          <div class="stat-card"><div class="text-2xl md:text-3xl font-bold text-primary">${stats.overview.totalDomains}</div><div class="text-xs text-slate-500 mt-1">Total .NP Domains</div></div>
-          <div class="stat-card"><div class="text-2xl md:text-3xl font-bold text-success">${stats.overview.httpsAdoption}</div><div class="text-xs text-slate-500 mt-1">HTTPS Adoption</div></div>
-          <div class="stat-card"><div class="text-2xl md:text-3xl font-bold text-warning">${stats.overview.dnssecAdoption}</div><div class="text-xs text-slate-500 mt-1">DNSSEC Enabled</div></div>
-          <div class="stat-card"><div class="text-2xl md:text-3xl font-bold text-primary">${stats.overview.avgAge}</div><div class="text-xs text-slate-500 mt-1">Avg Domain Age</div></div>`;
-        createBarChart('monthlyChart', stats.monthly, stats.monthlyTitle, 'fas fa-chart-simple text-warning');
-        createPieChart('tldChart', stats.tld, 'TLD Distribution', 'fas fa-chart-pie text-primary');
-        createHBarChart('nsChart', stats.nameservers, 'Nameserver Popularity', 'fas fa-globe text-cyan-400');
-        createPieChart('ispChart', stats.isp, 'Hosting by ISP', 'fas fa-server text-success');
-        createBarChart('ageChart', stats.age, 'Domain Age Distribution', 'fas fa-clock text-rose-400');
+        document.getElementById('keyMetrics').innerHTML = `<div class="stat-card"><div class="text-2xl md:text-3xl font-bold text-primary">${stats.overview.totalDomains}</div><div class="text-xs text-slate-500 mt-1">Total .NP Domains</div></div><div class="stat-card"><div class="text-2xl md:text-3xl font-bold text-success">${stats.overview.httpsAdoption}</div><div class="text-xs text-slate-500 mt-1">HTTPS Adoption</div></div><div class="stat-card"><div class="text-2xl md:text-3xl font-bold text-warning">${stats.overview.dnssecAdoption}</div><div class="text-xs text-slate-500 mt-1">DNSSEC Enabled</div></div><div class="stat-card"><div class="text-2xl md:text-3xl font-bold text-primary">${stats.overview.avgAge}</div><div class="text-xs text-slate-500 mt-1">Avg Domain Age</div></div>`;
+        createBarChart('monthlyChart',stats.monthly,stats.monthlyTitle,'fas fa-chart-simple text-warning');
+        createPieChart('tldChart',stats.tld,'TLD Distribution','fas fa-chart-pie text-primary');
+        createHBarChart('nsChart',stats.nameservers,'Nameserver Popularity','fas fa-globe text-cyan-400');
+        createPieChart('ispChart',stats.isp,'Hosting by ISP','fas fa-server text-success');
+        createBarChart('ageChart',stats.age,'Domain Age Distribution','fas fa-clock text-rose-400');
         createEmailRings('emailChart');
-        createPieChart('sslChart', stats.sslCA, 'SSL Certificate Authority', 'fas fa-certificate text-emerald-400');
-        createHBarChart('techChart', stats.tech, 'Top Technologies Used', 'fas fa-microchip text-purple-400');
+        createPieChart('sslChart',stats.sslCA,'SSL Certificate Authority','fas fa-certificate text-emerald-400');
+        createHBarChart('techChart',stats.tech,'Top Technologies Used','fas fa-microchip text-purple-400');
         document.getElementById('lastUpdated').textContent = `Last updated: ${new Date().toLocaleString()} · Auto-updates monthly`;
       } catch(e) {
         document.getElementById('loading').classList.add('hidden');
