@@ -44,14 +44,6 @@
     <priority>0.5</priority>
   </url>
 
-  <!-- Documentation -->
-  <url>
-    <loc>https://npradar.laxman-poudel.com.np/docs.html</loc>
-    <lastmod>2026-06-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
   <!-- Tools Overview -->
   <url>
     <loc>https://npradar.laxman-poudel.com.np/tools/tools.html</loc>
