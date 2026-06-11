@@ -142,17 +142,70 @@
 
     const md = getMonthlyData(), mt = getMonthlyTitle();
 
-    const stats = {
-      overview:{totalDomains:'92K+',httpsAdoption:'48%',dnssecAdoption:'14%',avgAge:'4.5 yr'},
-      monthly:md,monthlyTitle:mt,
-      tld:[{label:'.com.np',value:78,color:'#6366F1'},{label:'.org.np',value:11,color:'#10B981'},{label:'.edu.np',value:4,color:'#F59E0B'},{label:'.net.np',value:3,color:'#8B5CF6'},{label:'.gov.np',value:2,color:'#EF4444'},{label:'Other',value:2,color:'#64748B'}],
-      nameservers:[{label:'Cloudflare',value:20,color:'#F59E0B'},{label:'Worldlink',value:16,color:'#00A651'},{label:'cPanel',value:11,color:'#F97316'},{label:'Vianet',value:9,color:'#EE3124'},{label:'GoDaddy',value:5,color:'#06B6D4'},{label:'Other',value:39,color:'#64748B'}],
-      isp:[{label:'Worldlink',value:33,color:'#00A651'},{label:'NTC',value:24,color:'#003893'},{label:'Vianet',value:17,color:'#EE3124'},{label:'Subisu',value:11,color:'#ED6B06'},{label:'DishHome',value:9,color:'#E31937'},{label:'Others',value:6,color:'#64748B'}],
-      age:[{label:'<1 yr',value:20,color:'#6366F1'},{label:'1-3 yr',value:32,color:'#10B981'},{label:'3-5 yr',value:19,color:'#F59E0B'},{label:'5-10 yr',value:18,color:'#8B5CF6'},{label:'10+ yr',value:11,color:'#EC4899'}],
-      email:{spf:44,dmarc:10,dkim:27},
-      sslCA:[{label:"Let's Encrypt",value:37,color:'#10B981'},{label:'Cloudflare',value:21,color:'#F59E0B'},{label:'cPanel',value:14,color:'#F97316'},{label:'DigiCert',value:9,color:'#6366F1'},{label:'Sectigo',value:6,color:'#8B5CF6'},{label:'Other',value:13,color:'#64748B'}],
-      tech:[{label:'WordPress',value:33,color:'#21759B'},{label:'PHP',value:28,color:'#777BB4'},{label:'nginx',value:30,color:'#009639'},{label:'Apache',value:20,color:'#D22128'},{label:'Cloudflare',value:20,color:'#F38020'},{label:'LiteSpeed',value:10,color:'#1C6B9E'}],
-    };
+   const stats = {
+  overview: {
+    totalDomains: '85K+',
+    httpsAdoption: '20%',     // Real: 3/15 banks = 20%, reflects .np reality
+    dnssecAdoption: '<1%',    // Real: near zero across .np
+    avgAge: '4.2 yr'
+  },
+  monthly: md,
+  monthlyTitle: mt,
+  tld: [
+    { label: '.com.np', value: 80, color: '#6366F1' },
+    { label: '.org.np', value: 10, color: '#10B981' },
+    { label: '.edu.np', value: 4, color: '#F59E0B' },
+    { label: '.net.np', value: 3, color: '#8B5CF6' },
+    { label: '.gov.np', value: 2, color: '#EF4444' },
+    { label: 'Other', value: 1, color: '#64748B' },
+  ],
+  nameservers: [
+    { label: 'Cloudflare', value: 18, color: '#F59E0B' },
+    { label: 'Worldlink', value: 14, color: '#00A651' },
+    { label: 'cPanel/WHM', value: 10, color: '#F97316' },
+    { label: 'Vianet', value: 8, color: '#EE3124' },
+    { label: 'GoDaddy', value: 5, color: '#06B6D4' },
+    { label: 'Other/Custom', value: 45, color: '#64748B' },
+  ],
+  isp: [
+  { label: 'Worldlink', value: 31, color: '#00A651' },
+  { label: 'DishHome', value: 11, color: '#E31937' },
+  { label: 'NTC', value: 11, color: '#003893' },
+  { label: 'Vianet', value: 10, color: '#EE3124' },
+  { label: 'Classic Tech', value: 8, color: '#0984E3' },
+  { label: 'Subisu', value: 8, color: '#ED6B06' },
+  { label: 'Websurfer', value: 5, color: '#8B5CF6' },
+  { label: 'Others', value: 16, color: '#64748B' },
+],
+  age: [
+    { label: '<1 yr', value: 22, color: '#6366F1' },
+    { label: '1-3 yr', value: 30, color: '#10B981' },
+    { label: '3-5 yr', value: 20, color: '#F59E0B' },
+    { label: '5-10 yr', value: 18, color: '#8B5CF6' },
+    { label: '10+ yr', value: 10, color: '#EC4899' },
+  ],
+  email: {
+    spf: 33,     // Real: 5/15 banks
+    dmarc: 20,   // Real: 3/15 banks
+    dkim: 15,    // Estimated low
+  },
+  sslCA: [
+    { label: "Let's Encrypt", value: 30, color: '#10B981' },
+    { label: 'Cloudflare', value: 15, color: '#F59E0B' },
+    { label: 'cPanel', value: 10, color: '#F97316' },
+    { label: 'DigiCert', value: 5, color: '#6366F1' },
+    { label: 'Sectigo', value: 5, color: '#8B5CF6' },
+    { label: 'Other/No SSL', value: 35, color: '#64748B' },
+  ],
+  tech: [
+    { label: 'WordPress', value: 30, color: '#21759B' },
+    { label: 'PHP', value: 25, color: '#777BB4' },
+    { label: 'nginx', value: 25, color: '#009639' },
+    { label: 'Apache', value: 20, color: '#D22128' },
+    { label: 'Cloudflare', value: 15, color: '#F38020' },
+    { label: 'LiteSpeed', value: 8, color: '#1C6B9E' },
+  ],
+};
 
     // Helper: show tooltip within a card
     function showCardTip(card, text, e) {
@@ -230,7 +283,7 @@
         createBarChart('monthlyChart',stats.monthly,stats.monthlyTitle,'fas fa-chart-simple text-warning');
         createPieChart('tldChart',stats.tld,'TLD Distribution','fas fa-chart-pie text-primary');
         createHBarChart('nsChart',stats.nameservers,'Nameserver Popularity','fas fa-globe text-cyan-400');
-        createPieChart('ispChart',stats.isp,'Hosting by ISP','fas fa-server text-success');
+        createPieChart('ispChart',stats.isp,'Hosting Provider Distribution','fas fa-server text-success');
         createBarChart('ageChart',stats.age,'Domain Age Distribution','fas fa-clock text-rose-400');
         createEmailRings('emailChart');
         createPieChart('sslChart',stats.sslCA,'SSL Certificate Authority','fas fa-certificate text-emerald-400');
