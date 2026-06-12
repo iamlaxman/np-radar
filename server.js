@@ -1270,7 +1270,7 @@ const FALLBACK_BANKS = {
     },
     {
       name: "Laxmi Bank",
-      domain: "laxmibank.com.np",
+      domain: "laxmisunrise.com",
       ssl: "❌",
       dnssec: "❌",
       spf: "✅",
@@ -1280,7 +1280,7 @@ const FALLBACK_BANKS = {
     },
     {
       name: "Citizens Bank",
-      domain: "ctznbank.com.np",
+      domain: "ctznbank.com",
       ssl: "✅",
       dnssec: "❌",
       spf: "❌",
@@ -1290,7 +1290,7 @@ const FALLBACK_BANKS = {
     },
     {
       name: "Nabil Bank",
-      domain: "nabilbank.com.np",
+      domain: "nabilbank.com",
       ssl: "❌",
       dnssec: "❌",
       spf: "✅",
@@ -1300,7 +1300,7 @@ const FALLBACK_BANKS = {
     },
     {
       name: "Global IME Bank",
-      domain: "globalimebank.com.np",
+      domain: "globalimebank.com",
       ssl: "❌",
       dnssec: "❌",
       spf: "✅",
@@ -1310,7 +1310,7 @@ const FALLBACK_BANKS = {
     },
     {
       name: "NMB Bank",
-      domain: "nmbbank.com.np",
+      domain: "nmb.com.np",
       ssl: "❌",
       dnssec: "❌",
       spf: "✅",
@@ -1320,7 +1320,7 @@ const FALLBACK_BANKS = {
     },
     {
       name: "Sanima Bank",
-      domain: "sanimabank.com.np",
+      domain: "sanimabank.com",
       ssl: "❌",
       dnssec: "❌",
       spf: "✅",
@@ -1330,7 +1330,7 @@ const FALLBACK_BANKS = {
     },
     {
       name: "Himalayan Bank",
-      domain: "himalayanbank.com.np",
+      domain: "himalayanbank.com",
       ssl: "❌",
       dnssec: "❌",
       spf: "❌",
@@ -1340,7 +1340,7 @@ const FALLBACK_BANKS = {
     },
     {
       name: "NIC Asia Bank",
-      domain: "nicasiabank.com.np",
+      domain: "nicasiabank.com",
       ssl: "❌",
       dnssec: "❌",
       spf: "❌",
@@ -1350,7 +1350,7 @@ const FALLBACK_BANKS = {
     },
     {
       name: "Prabhu Bank",
-      domain: "prabhubank.com.np",
+      domain: "prabhubank.com",
       ssl: "❌",
       dnssec: "❌",
       spf: "❌",
@@ -1360,7 +1360,7 @@ const FALLBACK_BANKS = {
     },
     {
       name: "Kumari Bank",
-      domain: "kumaribank.com.np",
+      domain: "kumaribank.com",
       ssl: "❌",
       dnssec: "❌",
       spf: "❌",
@@ -1370,7 +1370,7 @@ const FALLBACK_BANKS = {
     },
     {
       name: "Siddhartha Bank",
-      domain: "siddharthabank.com.np",
+      domain: "siddharthabank.com",
       ssl: "❌",
       dnssec: "❌",
       spf: "❌",
@@ -1380,7 +1380,7 @@ const FALLBACK_BANKS = {
     },
     {
       name: "Everest Bank",
-      domain: "everestbank.com.np",
+      domain: "everestbankltd.com",
       ssl: "❌",
       dnssec: "❌",
       spf: "❌",
@@ -1390,7 +1390,7 @@ const FALLBACK_BANKS = {
     },
     {
       name: "Agriculture Development Bank",
-      domain: "adbl.com.np",
+      domain: "adbl.gov.np",
       ssl: "❌",
       dnssec: "❌",
       spf: "❌",
@@ -1451,21 +1451,21 @@ async function refreshBanksInBackground() {
   bankCheckRunning = true;
 
   const banks = [
-    { name: "Himalayan Bank", domain: "himalayanbank.com.np" },
-    { name: "Nabil Bank", domain: "nabilbank.com.np" },
-    { name: "NIC Asia Bank", domain: "nicasiabank.com.np" },
-    { name: "Global IME Bank", domain: "globalimebank.com.np" },
-    { name: "Prabhu Bank", domain: "prabhubank.com.np" },
-    { name: "Kumari Bank", domain: "kumaribank.com.np" },
-    { name: "NMB Bank", domain: "nmbbank.com.np" },
-    { name: "Sanima Bank", domain: "sanimabank.com.np" },
-    { name: "Siddhartha Bank", domain: "siddharthabank.com.np" },
-    { name: "Everest Bank", domain: "everestbank.com.np" },
-    { name: "Nepal Bank", domain: "nepalbank.com.np" },
+    { name: "Himalayan Bank", domain: "himalayanbank.com" },
+    { name: "Nabil Bank", domain: "nabilbank.com" },
+    { name: "NIC Asia Bank", domain: "nicasiabank.com" },
+    { name: "Global IME Bank", domain: "globalimebank.com" },
+    { name: "Prabhu Bank", domain: "prabhubank.com" },
+    { name: "Kumari Bank", domain: "kumaribank.com" },
+    { name: "NMB Bank", domain: "nmb.com" },
+    { name: "Sanima Bank", domain: "sanimabank.com" },
+    { name: "Siddhartha Bank", domain: "siddharthabank.com" },
+    { name: "Everest Bank", domain: "everestbankltd.com" },
+    { name: "Nepal Bank", domain: "nepalbank.com" },
     { name: "Rastriya Banijya Bank", domain: "rbb.com.np" },
-    { name: "Agriculture Development Bank", domain: "adbl.com.np" },
-    { name: "Laxmi Bank", domain: "laxmibank.com.np" },
-    { name: "Citizens Bank", domain: "ctznbank.com.np" },
+    { name: "Agriculture Development Bank", domain: "adbl.gov.np" },
+    { name: "Laxmi Bank", domain: "laxmisunrise.com" },
+    { name: "Citizens Bank", domain: "ctznbank.com" },
   ];
 
   const checkSSL = async (d) => {
