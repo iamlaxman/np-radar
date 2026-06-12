@@ -1641,25 +1641,130 @@ app.get("/api/domain-generate", async (req, res) => {
 });
 
 app.get("/api/compare", async (req, res) => {
-  const d1 = validateDomain(req.query.domain1),
-    d2 = validateDomain(req.query.domain2);
-  if (!d1 || !d2) return res.status(400).json({ error: "Need two domains" });
-  async function qi(d) {
-    const i = { domain: d, dns: {}, ssl: null, dnssec: false };
-    try {
-      i.dns.a = (await dns.resolve4(d))[0] || null;
-    } catch (e) {}
-    try {
-      i.dns.ns = await dns.resolveNs(d);
-    } catch (e) {}
-    try {
-      await dns.resolve(d, "DS");
-      i.dnssec = true;
-    } catch (e) {}
-    return i;
+  const d1 = validateDomain(req.query.domain1);
+  const d2 = validateDomain(req.query.domain2);
+
+  if (!d1 || !d2) {
+    return res.status(400).json({
+      error: "Need two domains",
+    });
   }
-  const [i1, i2] = await Promise.all([qi(d1), qi(d2)]);
-  res.json({ domain1: i1, domain2: i2, checkedAt: new Date().toISOString() });
+
+  async function getSSLInfo(domain) {
+    return new Promise((resolve) => {
+      const socket = tls.connect(
+        {
+          host: domain,
+          port: 443,
+          servername: domain,
+          rejectUnauthorized: false,
+          timeout: 10000,
+        },
+        () => {
+          try {
+            const cert = socket.getPeerCertificate();
+
+            if (!cert || !cert.valid_to) {
+              socket.end();
+              return resolve(null);
+            }
+
+            const expiry = new Date(cert.valid_to);
+            const daysLeft = Math.ceil(
+              (expiry.getTime() - Date.now()) /
+                (1000 * 60 * 60 * 24)
+            );
+
+            resolve({
+              valid: daysLeft > 0,
+              daysLeft,
+              expiresAt: expiry.toISOString(),
+              issuer:
+                cert.issuer?.O ||
+                cert.issuer?.CN ||
+                "Unknown",
+              subject:
+                cert.subject?.CN ||
+                domain,
+            });
+
+            socket.end();
+          } catch {
+            resolve(null);
+          }
+        }
+      );
+
+      socket.on("error", () => resolve(null));
+
+      socket.on("timeout", () => {
+        socket.destroy();
+        resolve(null);
+      });
+    });
+  }
+
+  async function qi(domain) {
+    const info = {
+      domain,
+      dns: {
+        a: [],
+        aaaa: [],
+        ns: [],
+        mx: [],
+      },
+      ssl: null,
+      dnssec: false,
+    };
+
+    try {
+      info.dns.a = await dns.resolve4(domain);
+    } catch {}
+
+    try {
+      info.dns.aaaa = await dns.resolve6(domain);
+    } catch {}
+
+    try {
+      info.dns.ns = await dns.resolveNs(domain);
+    } catch {}
+
+    try {
+      info.dns.mx = await dns.resolveMx(domain);
+    } catch {}
+
+    try {
+      const dnskeys = await dns.resolve(domain, "DNSKEY");
+      info.dnssec = dnskeys.length > 0;
+    } catch {}
+
+    try {
+      info.ssl = await getSSLInfo(domain);
+    } catch {}
+
+    return info;
+  }
+
+  try {
+    const [i1, i2] = await Promise.all([
+      qi(d1),
+      qi(d2),
+    ]);
+
+    res.json({
+      success: true,
+      domain1: i1,
+      domain2: i2,
+      checkedAt: new Date().toISOString(),
+    });
+  } catch (err) {
+    console.error("Compare API Error:", err);
+
+    res.status(500).json({
+      success: false,
+      error: "Failed to compare domains",
+    });
+  }
 });
 
 app.get("/api/availability", async (req, res) => {

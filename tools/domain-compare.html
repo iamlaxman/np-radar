@@ -130,17 +130,106 @@
         document.getElementById('loading').classList.add('hidden');
         document.getElementById('results').classList.remove('hidden');
         const renderDomain = (info, label, color) => `
-          <div class="result-card flex-1">
-            <div class="text-sm font-bold mb-3" style="color:${color}">${label}</div>
-            <div class="font-mono text-sm text-slate-300 mb-4 truncate">${info.domain}</div>
-            <div class="space-y-2 text-sm">
-              <div class="flex justify-between py-1.5 border-b border-white/5"><span class="text-slate-500">IP Address</span><span class="font-mono text-slate-300">${info.dns?.a||'N/A'}</span></div>
-              <div class="flex justify-between py-1.5 border-b border-white/5"><span class="text-slate-500">Nameservers</span><span class="font-mono text-slate-300">${(info.dns?.ns||[]).length||0} NS</span></div>
-              <div class="flex justify-between py-1.5 border-b border-white/5"><span class="text-slate-500">SSL</span><span class="font-semibold ${info.ssl?.valid?'text-success':'text-danger'}">${info.ssl?.valid?'✅ Valid':'❌ Invalid'}</span></div>
-              <div class="flex justify-between py-1.5 border-b border-white/5"><span class="text-slate-500">SSL Expires</span><span class="font-mono text-slate-300">${info.ssl?.daysLeft||'N/A'} days</span></div>
-              <div class="flex justify-between py-1.5"><span class="text-slate-500">DNSSEC</span><span class="font-semibold ${info.dnssec?'text-success':'text-danger'}">${info.dnssec?'✅ Enabled':'❌ Disabled'}</span></div>
-            </div>
-          </div>`;
+  <div class="result-card flex-1">
+    
+    <div class="text-sm font-bold mb-3" style="color:${color}">
+      ${label}
+    </div>
+
+    <div class="font-mono text-sm text-slate-300 mb-4 truncate">
+      ${info.domain}
+    </div>
+
+    <div class="space-y-2 text-sm">
+
+      <!-- IP Address -->
+      <div class="flex justify-between py-1.5 border-b border-white/5">
+        <span class="text-slate-500">IP Address</span>
+        <span class="font-mono text-slate-300 text-right">
+          ${Array.isArray(info.dns?.a)
+            ? info.dns.a.join(", ")
+            : info.dns?.a || "N/A"}
+        </span>
+      </div>
+
+      <!-- IPv6 -->
+      <div class="flex justify-between py-1.5 border-b border-white/5">
+        <span class="text-slate-500">IPv6</span>
+        <span class="font-mono text-slate-300 text-right">
+          ${Array.isArray(info.dns?.aaaa)
+            ? info.dns.aaaa.join(", ")
+            : info.dns?.aaaa || "N/A"}
+        </span>
+      </div>
+
+      <!-- Nameservers -->
+      <div class="flex justify-between py-1.5 border-b border-white/5">
+        <span class="text-slate-500">Nameservers</span>
+        <span class="font-mono text-slate-300 text-right text-xs">
+          ${Array.isArray(info.dns?.ns)
+            ? info.dns.ns.join(", ")
+            : "N/A"}
+        </span>
+      </div>
+
+      <!-- MX Records -->
+      <div class="flex justify-between py-1.5 border-b border-white/5">
+        <span class="text-slate-500">MX Records</span>
+        <span class="font-mono text-slate-300 text-right text-xs">
+          ${(info.dns?.mx || [])
+            .map(m => m.exchange)
+            .join(", ") || "N/A"}
+        </span>
+      </div>
+
+      <!-- DNSSEC -->
+      <div class="flex justify-between py-1.5 border-b border-white/5">
+        <span class="text-slate-500">DNSSEC</span>
+        <span class="font-semibold ${
+          info.dnssec ? "text-success" : "text-danger"
+        }">
+          ${info.dnssec ? "✅ Enabled" : "❌ Disabled"}
+        </span>
+      </div>
+
+      <!-- SSL -->
+      <div class="flex justify-between py-1.5 border-b border-white/5">
+        <span class="text-slate-500">SSL</span>
+        <span class="font-semibold ${
+          info.ssl
+            ? info.ssl.valid
+              ? "text-success"
+              : "text-danger"
+            : "text-slate-400"
+        }">
+          ${
+            !info.ssl
+              ? "⚪ Unknown"
+              : info.ssl.valid
+              ? "✅ Valid"
+              : "❌ Invalid"
+          }
+        </span>
+      </div>
+
+      <!-- SSL Expiry -->
+      <div class="flex justify-between py-1.5 border-b border-white/5">
+        <span class="text-slate-500">SSL Expires</span>
+        <span class="font-mono text-slate-300">
+          ${info.ssl?.daysLeft ?? "N/A"} days
+        </span>
+      </div>
+
+      <!-- SSL Issuer -->
+      <div class="flex justify-between py-1.5">
+        <span class="text-slate-500">Issuer</span>
+        <span class="font-mono text-slate-300 text-right text-xs">
+          ${info.ssl?.issuer || "N/A"}
+        </span>
+      </div>
+
+    </div>
+  </div>`;
         document.getElementById('results').innerHTML = `<div class="flex flex-col md:flex-row gap-4">${renderDomain(d.domain1,'Domain 1','#8B5CF6')}${renderDomain(d.domain2,'Domain 2','#06B6D4')}</div>`;
       } catch(e) {
         document.getElementById('loading').classList.add('hidden');
