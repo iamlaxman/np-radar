@@ -1461,7 +1461,7 @@ async function refreshBanksInBackground() {
     { name: "Sanima Bank", domain: "sanimabank.com" },
     { name: "Siddhartha Bank", domain: "siddharthabank.com" },
     { name: "Everest Bank", domain: "everestbankltd.com" },
-    { name: "Nepal Bank", domain: "nepalbank.com" },
+    { name: "Nepal Bank", domain: "nepalbank.com.np" },
     { name: "Rastriya Banijya Bank", domain: "rbb.com.np" },
     { name: "Agriculture Development Bank", domain: "adbl.gov.np" },
     { name: "Laxmi Bank", domain: "laxmisunrise.com" },
