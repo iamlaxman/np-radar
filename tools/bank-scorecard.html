@@ -1,208 +1,635 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
-  <title>Nepali Bank Security Scorecard — Compare Bank Domain Security | NP Radar</title>
-  <meta name="description" content="Compare SSL, DNSSEC, SPF, and DMARC security across all 15+ Nepali bank domains. Data auto-updates daily. Free security scorecard." />
-  <meta name="keywords" content="Nepali bank security, bank domain security, Nepal bank SSL, Himalayan Bank, Nabil Bank, NIC Asia, bank scorecard Nepal, NP Radar" />
-  <meta name="author" content="NP Radar" />
-  <meta name="robots" content="index, follow" />
-  <meta name="theme-color" content="#F59E0B" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://npradar.laxman-poudel.com.np/tools/bank-scorecard.html" />
-  <meta property="og:title" content="Nepali Bank Security Scorecard | NP Radar" />
-  <meta property="og:description" content="Compare SSL, DNSSEC, SPF, and DMARC security across 15+ Nepali banks. Auto-updating daily." />
-  <meta property="og:image" content="https://npradar.laxman-poudel.com.np/favicon/og.png" />
-  <meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
-  <meta property="og:site_name" content="NP Radar" /><meta property="og:locale" content="en_US" />
-  <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:url" content="https://npradar.laxman-poudel.com.np/tools/bank-scorecard.html" />
-  <meta property="twitter:title" content="Bank Security Scorecard | NP Radar" />
-  <meta property="twitter:description" content="Compare SSL, DNSSEC, SPF, DMARC across 15+ Nepali banks." />
-  <meta property="twitter:image" content="https://npradar.laxman-poudel.com.np/favicon/og.png" />
-  <link rel="canonical" href="https://npradar.laxman-poudel.com.np/tools/bank-scorecard.html" />
-  <link rel="manifest" href="../favicon/site.webmanifest" />
-  <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="NP Radar" />
-  <link rel="icon" type="image/x-icon" href="../favicon/favicon.ico" />
-  <link rel="icon" type="image/png" sizes="32x32" href="../favicon/favicon-32x32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="../favicon/favicon-16x16.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png" />
-  <link rel="icon" type="image/png" sizes="192x192" href="../favicon/android-chrome-192x192.png" />
-  <link rel="icon" type="image/png" sizes="512x512" href="../favicon/android-chrome-512x512.png" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>tailwind.config={theme:{extend:{colors:{bg:'#0A0A0F',surface:'#111118',elevated:'#1A1A24',border:'rgba(255,255,255,0.08)',primary:'#6366F1',accent:'#EC4899',success:'#10B981',warning:'#F59E0B',danger:'#EF4444'},fontFamily:{display:['Syne','sans-serif'],body:['Space Grotesk','sans-serif'],mono:['JetBrains Mono','monospace']}}}}</script>
-  
-  <style>
-    body { background: #0A0A0F; font-family: 'Space Grotesk', sans-serif; color: #F1F5F9; }
-    .result-card { background: #111118; border: 1px solid rgba(255,255,255,0.06); border-radius: 1rem; padding: 1.25rem; }
-    .stat-card { background: #111118; border: 1px solid rgba(255,255,255,0.06); border-radius: 1rem; padding: 1.25rem; text-align: center; }
-    .skeleton { background: linear-gradient(90deg, #1A1A24 25%, #252535 50%, #1A1A24 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 6px; }
-    @keyframes shimmer { 0%{background-position:200% 0}100%{background-position:-200% 0} }
-    .bank-row { transition: background 0.15s ease; }
-    .bank-row:hover { background: rgba(99,102,241,0.04); }
-    .grade-badge { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 8px; font-weight: 700; font-size: 0.875rem; font-family: 'JetBrains Mono', monospace; }
-    .refresh-btn { transition: transform 0.3s ease; cursor: pointer; }
-    .refresh-btn:active { transform: rotate(180deg); }
-    .cache-badge { display: inline-flex; align-items: center; gap: 0.375rem; padding: 0.25rem 0.625rem; border-radius: 999px; font-size: 0.6875rem; font-weight: 500; }
-    ::-webkit-scrollbar { width: 4px; height: 4px; }
-    ::-webkit-scrollbar-track { background: #0A0A0F; }
-    ::-webkit-scrollbar-thumb { background: #1A1A24; border-radius: 2px; }
-  </style>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <nav class="sticky top-0 z-50 flex items-center justify-between px-4 md:px-6 py-3 border-b border-white/5" style="background:rgba(10,10,15,0.95);backdrop-filter:blur(12px)">
-    <a href="../index.html" class="flex items-center gap-2 text-slate-400 hover:text-white text-sm"><i class="fas fa-arrow-left text-xs"></i> <span class="hidden sm:inline">Home</span></a>
-    <div class="flex items-center gap-2"><img src="../favicon/favicon-32x32.png" alt="NP Radar" class="w-6 h-6 rounded" width="28" height="28" /><span class="font-display font-bold text-sm">NP <span class="text-primary">Radar</span></span></div>
-    <a href="tools.html" class="flex items-center gap-1 text-slate-400 hover:text-white text-sm"><i class="fas fa-th-large text-xs"></i> <span class="hidden sm:inline">Tools</span></a>
-  </nav>
+    <title>
+      Nepali Bank Security Scorecard — Compare Bank Domain Security | NP Radar
+    </title>
+    <meta
+      name="description"
+      content="Compare SSL, DNSSEC, SPF, and DMARC security across all 15+ Nepali bank domains. Data auto-updates daily. Free security scorecard."
+    />
+    <meta
+      name="keywords"
+      content="Nepali bank security, bank domain security, Nepal bank SSL, Himalayan Bank, Nabil Bank, NIC Asia, bank scorecard Nepal, NP Radar"
+    />
+    <meta name="author" content="NP Radar" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#F59E0B" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://npradar.laxman-poudel.com.np/tools/bank-scorecard.html"
+    />
+    <meta
+      property="og:title"
+      content="Nepali Bank Security Scorecard | NP Radar"
+    />
+    <meta
+      property="og:description"
+      content="Compare SSL, DNSSEC, SPF, and DMARC security across 15+ Nepali banks. Auto-updating daily."
+    />
+    <meta
+      property="og:image"
+      content="https://npradar.laxman-poudel.com.np/favicon/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="NP Radar" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta
+      property="twitter:url"
+      content="https://npradar.laxman-poudel.com.np/tools/bank-scorecard.html"
+    />
+    <meta
+      property="twitter:title"
+      content="Bank Security Scorecard | NP Radar"
+    />
+    <meta
+      property="twitter:description"
+      content="Compare SSL, DNSSEC, SPF, DMARC across 15+ Nepali banks."
+    />
+    <meta
+      property="twitter:image"
+      content="https://npradar.laxman-poudel.com.np/favicon/og.png"
+    />
+    <link
+      rel="canonical"
+      href="https://npradar.laxman-poudel.com.np/tools/bank-scorecard.html"
+    />
+    <link rel="manifest" href="../favicon/site.webmanifest" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="NP Radar" />
+    <link rel="icon" type="image/x-icon" href="../favicon/favicon.ico" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../favicon/favicon-16x16.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="../favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="../favicon/android-chrome-192x192.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="512x512"
+      href="../favicon/android-chrome-512x512.png"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@700;800&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              bg: "#0A0A0F",
+              surface: "#111118",
+              elevated: "#1A1A24",
+              border: "rgba(255,255,255,0.08)",
+              primary: "#6366F1",
+              accent: "#EC4899",
+              success: "#10B981",
+              warning: "#F59E0B",
+              danger: "#EF4444",
+            },
+            fontFamily: {
+              display: ["Syne", "sans-serif"],
+              body: ["Space Grotesk", "sans-serif"],
+              mono: ["JetBrains Mono", "monospace"],
+            },
+          },
+        },
+      };
+    </script>
 
-  <div style="max-width:1100px;margin:0 auto;padding:30px 20px">
-
-    <div class="mb-6">
-      <div class="flex items-center gap-3 mb-2">
-        <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2)"><i class="fas fa-building-columns text-amber-400 text-lg"></i></div>
-        <div class="min-w-0"><h1 class="font-display text-2xl md:text-3xl font-bold">Bank Security Scorecard</h1><p class="text-slate-400 text-sm">Compare security across 15+ Nepali bank domains.</p></div>
+    <style>
+      body {
+        background: #0a0a0f;
+        font-family: "Space Grotesk", sans-serif;
+        color: #f1f5f9;
+      }
+      .result-card {
+        background: #111118;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 1rem;
+        padding: 1.25rem;
+      }
+      .stat-card {
+        background: #111118;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 1rem;
+        padding: 1.25rem;
+        text-align: center;
+      }
+      .skeleton {
+        background: linear-gradient(
+          90deg,
+          #1a1a24 25%,
+          #252535 50%,
+          #1a1a24 75%
+        );
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+        border-radius: 6px;
+      }
+      @keyframes shimmer {
+        0% {
+          background-position: 200% 0;
+        }
+        100% {
+          background-position: -200% 0;
+        }
+      }
+      .bank-row {
+        transition: background 0.15s ease;
+      }
+      .bank-row:hover {
+        background: rgba(99, 102, 241, 0.04);
+      }
+      .grade-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 0.875rem;
+        font-family: "JetBrains Mono", monospace;
+      }
+      .refresh-btn {
+        transition: transform 0.3s ease;
+        cursor: pointer;
+      }
+      .refresh-btn:active {
+        transform: rotate(180deg);
+      }
+      .cache-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        padding: 0.25rem 0.625rem;
+        border-radius: 999px;
+        font-size: 0.6875rem;
+        font-weight: 500;
+      }
+      ::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0a0a0f;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #1a1a24;
+        border-radius: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav
+      class="sticky top-0 z-50 flex items-center justify-between px-4 md:px-6 py-3 border-b border-white/5"
+      style="background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(12px)"
+    >
+      <a
+        href="../index.html"
+        class="flex items-center gap-2 text-slate-400 hover:text-white text-sm"
+        ><i class="fas fa-arrow-left text-xs"></i>
+        <span class="hidden sm:inline">Home</span></a
+      >
+      <div class="flex items-center gap-2">
+        <img
+          src="../favicon/favicon-32x32.png"
+          alt="NP Radar"
+          class="w-6 h-6 rounded"
+          width="28"
+          height="28"
+        /><span class="font-display font-bold text-sm"
+          >NP <span class="text-primary">Radar</span></span
+        >
       </div>
-      <div class="flex flex-wrap items-center gap-3 mt-3">
-        <span class="cache-badge" id="cacheBadge" style="background:rgba(16,185,129,0.1);color:#10B981;border:1px solid rgba(16,185,129,0.2)"><i class="fas fa-database text-[10px]"></i> <span id="cacheStatus">Loading...</span></span>
-        <span class="text-xs text-slate-500"><i class="fas fa-clock text-xs mr-1"></i> Auto-refreshes daily</span>
-        <button onclick="fetchFreshData()" class="refresh-btn text-xs text-primary hover:text-primary/80 flex items-center gap-1"><i class="fas fa-sync-alt text-xs"></i> Refresh Now</button>
-      </div>
-    </div>
+      <a
+        href="tools.html"
+        class="flex items-center gap-1 text-slate-400 hover:text-white text-sm"
+        ><i class="fas fa-th-large text-xs"></i>
+        <span class="hidden sm:inline">Tools</span></a
+      >
+    </nav>
 
-    <div id="loadingState" class="hidden">
-      <div class="mb-4 p-4 rounded-xl" style="background:rgba(99,102,241,0.05);border:1px solid rgba(99,102,241,0.1)">
-        <div class="flex items-center gap-3"><div class="w-5 h-5 border-2 border-primary/30 border-t-primary rounded-full animate-spin"></div><div><div class="text-sm font-medium">Fetching bank data...</div><div class="text-xs text-slate-500 mt-0.5">First-time load — please wait</div></div></div>
-      </div>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4"><div class="skeleton h-24 rounded-xl"></div><div class="skeleton h-24 rounded-xl"></div><div class="skeleton h-24 rounded-xl"></div><div class="skeleton h-24 rounded-xl"></div></div>
-      <div class="skeleton h-96 rounded-xl"></div>
-    </div>
-
-    <div id="errorState" class="hidden text-center py-12">
-      <div class="text-5xl mb-5 text-slate-600"><i class="fas fa-circle-exclamation"></i></div>
-      <h3 class="text-xl font-semibold mb-2">Unable to load</h3>
-      <p class="text-slate-400 mb-4 text-sm" id="errorMsg">Please try again.</p>
-      <button onclick="fetchFreshData()" class="px-5 py-2.5 rounded-xl text-white font-semibold hover:scale-105 transition-all" style="background:#F59E0B"><i class="fas fa-redo mr-2"></i> Retry</button>
-    </div>
-
-    <div id="resultsState" class="hidden">
-      <!-- About this Scorecard — FULL description -->
-      <div class="result-card mb-4" style="background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.15)">
-        <div class="flex items-start gap-3">
-          <i class="fas fa-info-circle text-amber-400 mt-0.5"></i>
-          <div>
-            <div class="text-sm font-medium text-amber-400 mb-1">About this Scorecard</div>
-            <p class="text-slate-400 text-xs leading-relaxed">
-              This scorecard checks <strong style="color:#E2E8F0">SSL certificate validity</strong>, <strong style="color:#E2E8F0">DNSSEC configuration</strong>, 
-              <strong style="color:#E2E8F0">SPF records</strong> (email spoofing protection), and <strong style="color:#E2E8F0">DMARC policies</strong> for each bank domain. 
-              Scores are calculated automatically. Higher scores indicate better security posture.
+    <div style="max-width: 1100px; margin: 0 auto; padding: 30px 20px">
+      <div class="mb-6">
+        <div class="flex items-center gap-3 mb-2">
+          <div
+            class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+            style="
+              background: rgba(245, 158, 11, 0.1);
+              border: 1px solid rgba(245, 158, 11, 0.2);
+            "
+          >
+            <i class="fas fa-building-columns text-amber-400 text-lg"></i>
+          </div>
+          <div class="min-w-0">
+            <h1 class="font-display text-2xl md:text-3xl font-bold">
+              Bank Security Scorecard
+            </h1>
+            <p class="text-slate-400 text-sm">
+              Compare security across 15+ Nepali bank domains.
             </p>
           </div>
         </div>
+        <div class="flex flex-wrap items-center gap-3 mt-3">
+          <span
+            class="cache-badge"
+            id="cacheBadge"
+            style="
+              background: rgba(16, 185, 129, 0.1);
+              color: #10b981;
+              border: 1px solid rgba(16, 185, 129, 0.2);
+            "
+            ><i class="fas fa-database text-[10px]"></i>
+            <span id="cacheStatus">Loading...</span></span
+          >
+          <span class="text-xs text-slate-500"
+            ><i class="fas fa-clock text-xs mr-1"></i> Auto-refreshes
+            daily</span
+          >
+          <button
+            onclick="fetchFreshData()"
+            class="refresh-btn text-xs text-primary hover:text-primary/80 flex items-center gap-1"
+          >
+            <i class="fas fa-sync-alt text-xs"></i> Refresh Now
+          </button>
+        </div>
       </div>
-      
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4" id="statsRow"></div>
-      <div class="overflow-x-auto rounded-xl border border-white/5">
-        <table class="w-full border-collapse">
-          <thead><tr class="bg-surface/50 border-b border-white/5"><th class="text-left py-3 px-4 text-xs text-slate-500 uppercase">#</th><th class="text-left py-3 px-4 text-xs text-slate-500 uppercase">Bank</th><th class="text-center py-3 px-3 text-xs text-slate-500 uppercase">SSL</th><th class="text-center py-3 px-3 text-xs text-slate-500 uppercase">DNSSEC</th><th class="text-center py-3 px-3 text-xs text-slate-500 uppercase">SPF</th><th class="text-center py-3 px-3 text-xs text-slate-500 uppercase">DMARC</th><th class="text-right py-3 px-4 text-xs text-slate-500 uppercase">Score</th><th class="text-center py-3 px-4 text-xs text-slate-500 uppercase">Grade</th></tr></thead>
-          <tbody id="bankTableBody" class="divide-y divide-white/3"></tbody>
-        </table>
+
+      <div id="loadingState" class="hidden">
+        <div
+          class="mb-4 p-4 rounded-xl"
+          style="
+            background: rgba(99, 102, 241, 0.05);
+            border: 1px solid rgba(99, 102, 241, 0.1);
+          "
+        >
+          <div class="flex items-center gap-3">
+            <div
+              class="w-5 h-5 border-2 border-primary/30 border-t-primary rounded-full animate-spin"
+            ></div>
+            <div>
+              <div class="text-sm font-medium">Fetching bank data...</div>
+              <div class="text-xs text-slate-500 mt-0.5">
+                First-time load — please wait
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+          <div class="skeleton h-24 rounded-xl"></div>
+          <div class="skeleton h-24 rounded-xl"></div>
+          <div class="skeleton h-24 rounded-xl"></div>
+          <div class="skeleton h-24 rounded-xl"></div>
+        </div>
+        <div class="skeleton h-96 rounded-xl"></div>
       </div>
-      <div class="flex flex-wrap items-center gap-4 mt-4 text-xs text-slate-500">
-        <span><span class="text-success">✅</span> = Good</span>
-        <span><span class="text-danger">❌</span> = Missing</span>
-        <span>·</span>
-        <span>Score: SSL (30pts) + DNSSEC (25pts) + SPF (25pts) + DMARC (20pts)</span>
+
+      <div id="errorState" class="hidden text-center py-12">
+        <div class="text-5xl mb-5 text-slate-600">
+          <i class="fas fa-circle-exclamation"></i>
+        </div>
+        <h3 class="text-xl font-semibold mb-2">Unable to load</h3>
+        <p class="text-slate-400 mb-4 text-sm" id="errorMsg">
+          Please try again.
+        </p>
+        <button
+          onclick="fetchFreshData()"
+          class="px-5 py-2.5 rounded-xl text-white font-semibold hover:scale-105 transition-all"
+          style="background: #f59e0b"
+        >
+          <i class="fas fa-redo mr-2"></i> Retry
+        </button>
       </div>
-      <div class="text-center text-xs text-slate-600 mt-4" id="lastUpdated"></div>
+
+      <div id="resultsState" class="hidden">
+        <!-- About this Scorecard — FULL description -->
+        <div
+          class="result-card mb-4"
+          style="
+            background: rgba(245, 158, 11, 0.05);
+            border: 1px solid rgba(245, 158, 11, 0.15);
+          "
+        >
+          <div class="flex items-start gap-3">
+            <i class="fas fa-info-circle text-amber-400 mt-0.5"></i>
+            <div>
+              <div class="text-sm font-medium text-amber-400 mb-1">
+                About this Scorecard
+              </div>
+              <p class="text-slate-400 text-xs leading-relaxed">
+                This scorecard checks
+                <strong style="color: #e2e8f0">SSL certificate validity</strong
+                >, <strong style="color: #e2e8f0">DNSSEC configuration</strong>,
+                <strong style="color: #e2e8f0">SPF records</strong> (email
+                spoofing protection), and
+                <strong style="color: #e2e8f0">DMARC policies</strong> for each
+                bank domain. Scores are calculated automatically. Higher scores
+                indicate better security posture.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4"
+          id="statsRow"
+        ></div>
+        <div class="overflow-x-auto rounded-xl border border-white/5">
+          <table class="w-full border-collapse">
+            <thead>
+              <tr class="bg-surface/50 border-b border-white/5">
+                <th
+                  class="text-left py-3 px-4 text-xs text-slate-500 uppercase"
+                >
+                  #
+                </th>
+                <th
+                  class="text-left py-3 px-4 text-xs text-slate-500 uppercase"
+                >
+                  Bank
+                </th>
+                <th
+                  class="text-center py-3 px-3 text-xs text-slate-500 uppercase"
+                >
+                  SSL
+                </th>
+                <th
+                  class="text-center py-3 px-3 text-xs text-slate-500 uppercase"
+                >
+                  DNSSEC
+                </th>
+                <th
+                  class="text-center py-3 px-3 text-xs text-slate-500 uppercase"
+                >
+                  SPF
+                </th>
+                <th
+                  class="text-center py-3 px-3 text-xs text-slate-500 uppercase"
+                >
+                  DMARC
+                </th>
+                <th
+                  class="text-right py-3 px-4 text-xs text-slate-500 uppercase"
+                >
+                  Score
+                </th>
+                <th
+                  class="text-center py-3 px-4 text-xs text-slate-500 uppercase"
+                >
+                  Grade
+                </th>
+              </tr>
+            </thead>
+            <tbody id="bankTableBody" class="divide-y divide-white/3"></tbody>
+          </table>
+        </div>
+        <div
+          class="flex flex-wrap items-center gap-4 mt-4 text-xs text-slate-500"
+        >
+          <span><span class="text-success">✅</span> = Good</span>
+          <span><span class="text-danger">❌</span> = Missing</span>
+          <span>·</span>
+          <span
+            >Score: SSL (30pts) + DNSSEC (25pts) + SPF (25pts) + DMARC
+            (20pts)</span
+          >
+        </div>
+        <div
+          class="text-center text-xs text-slate-600 mt-4"
+          id="lastUpdated"
+        ></div>
+      </div>
+
+      <div
+        id="bgRefreshNotice"
+        class="hidden mt-4 p-2 rounded-lg text-center"
+        style="
+          background: rgba(99, 102, 241, 0.05);
+          border: 1px solid rgba(99, 102, 241, 0.1);
+        "
+      >
+        <span class="text-xs text-slate-400"
+          ><span
+            class="w-3 h-3 border-2 border-primary/30 border-t-primary rounded-full animate-spin inline-block mr-1 align-middle"
+          ></span>
+          Refreshing data in background...</span
+        >
+      </div>
     </div>
 
-    <div id="bgRefreshNotice" class="hidden mt-4 p-2 rounded-lg text-center" style="background:rgba(99,102,241,0.05);border:1px solid rgba(99,102,241,0.1)">
-      <span class="text-xs text-slate-400"><span class="w-3 h-3 border-2 border-primary/30 border-t-primary rounded-full animate-spin inline-block mr-1 align-middle"></span> Refreshing data in background...</span>
-    </div>
-  </div>
+    <script>
+      const API = window.location.origin;
+      const CACHE_KEY = "npradar_bank_scorecard_v4";
+      const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours (daily)
 
-  <script>
-    const API = window.location.origin;
-    const CACHE_KEY = 'npradar_bank_scorecard_v4';
-    const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours (daily)
-    
-    function getCachedData() {
-      try { const d = localStorage.getItem(CACHE_KEY); if(!d) return null; const p = JSON.parse(d); return (Date.now()-p.timestamp)>CACHE_DURATION ? null : p; }
-      catch(e) { return null; }
-    }
-    
-    function saveToCache(data) {
-      try { localStorage.setItem(CACHE_KEY, JSON.stringify({...data, timestamp: Date.now()})); }
-      catch(e) {}
-    }
-    
-    function updateBadge(data) {
-      const b = document.getElementById('cacheBadge'), s = document.getElementById('cacheStatus');
-      if(!b||!s) return;
-      if(!data) { b.style.cssText='background:rgba(245,158,11,0.1);color:#F59E0B;border-color:rgba(245,158,11,0.2)'; s.textContent='No cache'; return; }
-      const age = Math.floor((Date.now()-data.timestamp)/60000);
-      if(age<1) { b.style.cssText='background:rgba(16,185,129,0.1);color:#10B981;border-color:rgba(16,185,129,0.2)'; s.textContent='Live data'; }
-      else if(age<60) { b.style.cssText='background:rgba(16,185,129,0.08);color:#10B981;border-color:rgba(16,185,129,0.15)'; s.textContent=`Cached · ${age}m ago`; }
-      else if(age<1440) { b.style.cssText='background:rgba(99,102,241,0.08);color:#818CF8;border-color:rgba(99,102,241,0.15)'; s.textContent=`Cached · ${Math.floor(age/60)}h ago`; }
-      else { b.style.cssText='background:rgba(99,102,241,0.08);color:#818CF8;border-color:rgba(99,102,241,0.15)'; s.textContent=`Cached · ${Math.floor(age/1440)}d ago`; }
-    }
-    
-    function renderData(data) {
-      document.getElementById('loadingState').classList.add('hidden');
-      document.getElementById('errorState').classList.add('hidden');
-      document.getElementById('resultsState').classList.remove('hidden');
-      document.getElementById('bgRefreshNotice').classList.add('hidden');
-      
-      const sb = data.banks.filter(b=>b.score>=60).length, nw = data.banks.filter(b=>b.score<40).length;
-      document.getElementById('statsRow').innerHTML = `<div class="stat-card"><div class="text-2xl font-bold text-primary">${data.totalBanks}</div><div class="text-xs text-slate-500 mt-1">Total Banks</div></div><div class="stat-card"><div class="text-2xl font-bold text-success">${data.avgScore}</div><div class="text-xs text-slate-500 mt-1">Avg Score /100</div></div><div class="stat-card"><div class="text-2xl font-bold text-success">${sb}</div><div class="text-xs text-slate-500 mt-1">Secure (60+)</div></div><div class="stat-card"><div class="text-2xl font-bold text-warning">${nw}</div><div class="text-xs text-slate-500 mt-1">Needs Work</div></div>`;
-      document.getElementById('bankTableBody').innerHTML = data.banks.map((b,i)=>{
-        const sc=b.score>=80?'#10B981':b.score>=60?'#F59E0B':b.score>=40?'#F97316':'#EF4444';
-        const g={A:{bg:'rgba(16,185,129,0.1)',c:'#10B981',bd:'rgba(16,185,129,0.2)'},B:{bg:'rgba(99,102,241,0.1)',c:'#6366F1',bd:'rgba(99,102,241,0.2)'},C:{bg:'rgba(245,158,11,0.1)',c:'#F59E0B',bd:'rgba(245,158,11,0.2)'},D:{bg:'rgba(249,115,22,0.1)',c:'#F97316',bd:'rgba(249,115,22,0.2)'},F:{bg:'rgba(239,68,68,0.1)',c:'#EF4444',bd:'rgba(239,68,68,0.2)'}}[b.grade]||{bg:'rgba(245,158,11,0.1)',c:'#F59E0B',bd:'rgba(245,158,11,0.2)'};
-        return `<tr class="bank-row border-b border-white/5"><td class="py-3 px-4 text-sm text-slate-500">${i+1}</td><td class="py-3 px-4"><div class="text-sm font-medium text-slate-200">${b.name}</div><div class="text-xs text-slate-500 font-mono">${b.domain}</div></td><td class="text-center py-3 px-3 text-sm">${b.ssl}</td><td class="text-center py-3 px-3 text-sm">${b.dnssec}</td><td class="text-center py-3 px-3 text-sm">${b.spf}</td><td class="text-center py-3 px-3 text-sm">${b.dmarc}</td><td class="text-right py-3 px-4"><span class="font-mono text-sm font-semibold" style="color:${sc}">${b.score}</span></td><td class="text-center py-3 px-4"><span class="grade-badge" style="background:${g.bg};color:${g.c};border:1px solid ${g.bd}">${b.grade}</span></td></tr>`;
-      }).join('');
-      document.getElementById('lastUpdated').textContent = 'Last updated: ' + new Date(data.timestamp||data.lastChecked||Date.now()).toLocaleString();
-      updateBadge(getCachedData());
-    }
-    
-    async function fetchFreshData() {
-      const cached = getCachedData();
-      if (cached) { renderData(cached); document.getElementById('bgRefreshNotice').classList.remove('hidden'); }
-      else { document.getElementById('loadingState').classList.remove('hidden'); document.getElementById('resultsState').classList.add('hidden'); document.getElementById('errorState').classList.add('hidden'); document.getElementById('bgRefreshNotice').classList.add('hidden'); }
-      
-      try {
-        await new Promise(r => setTimeout(r, 500));
-        const response = await fetch(`${API}/api/bank-scorecard`);
-        if (response.status === 429) { if (cached) { updateBadge(cached); document.getElementById('bgRefreshNotice').classList.add('hidden'); return; } throw new Error('Server is busy. Please wait a moment and try again.'); }
-        if (!response.ok) throw new Error('HTTP ' + response.status);
-        const data = await response.json();
-        saveToCache(data);
-        renderData({ ...data, timestamp: Date.now() });
-      } catch (error) {
-        document.getElementById('bgRefreshNotice').classList.add('hidden');
-        if (cached) { updateBadge(cached); return; }
-        document.getElementById('loadingState').classList.add('hidden');
-        document.getElementById('resultsState').classList.add('hidden');
-        document.getElementById('errorMsg').textContent = error.message || 'Failed to load. Please try again.';
-        document.getElementById('errorState').classList.remove('hidden');
+      function getCachedData() {
+        try {
+          const d = localStorage.getItem(CACHE_KEY);
+          if (!d) return null;
+          const p = JSON.parse(d);
+          return Date.now() - p.timestamp > CACHE_DURATION ? null : p;
+        } catch (e) {
+          return null;
+        }
       }
-    }
-    
-    (function(){
-      const cached = getCachedData();
-      if (cached) { renderData(cached); if ((Date.now() - cached.timestamp) > CACHE_DURATION) fetchFreshData(); }
-      else { document.getElementById('loadingState').classList.remove('hidden'); fetchFreshData(); }
-    })();
-  </script>
-</body>
+
+      function saveToCache(data) {
+        try {
+          localStorage.setItem(
+            CACHE_KEY,
+            JSON.stringify({ ...data, timestamp: Date.now() }),
+          );
+        } catch (e) {}
+      }
+
+      function updateBadge(data) {
+        const b = document.getElementById("cacheBadge"),
+          s = document.getElementById("cacheStatus");
+        if (!b || !s) return;
+        if (!data) {
+          b.style.cssText =
+            "background:rgba(245,158,11,0.1);color:#F59E0B;border-color:rgba(245,158,11,0.2)";
+          s.textContent = "No cache";
+          return;
+        }
+        const age = Math.floor((Date.now() - data.timestamp) / 60000);
+        if (age < 1) {
+          b.style.cssText =
+            "background:rgba(16,185,129,0.1);color:#10B981;border-color:rgba(16,185,129,0.2)";
+          s.textContent = "Live data";
+        } else if (age < 60) {
+          b.style.cssText =
+            "background:rgba(16,185,129,0.08);color:#10B981;border-color:rgba(16,185,129,0.15)";
+          s.textContent = `Cached · ${age}m ago`;
+        } else if (age < 1440) {
+          b.style.cssText =
+            "background:rgba(99,102,241,0.08);color:#818CF8;border-color:rgba(99,102,241,0.15)";
+          s.textContent = `Cached · ${Math.floor(age / 60)}h ago`;
+        } else {
+          b.style.cssText =
+            "background:rgba(99,102,241,0.08);color:#818CF8;border-color:rgba(99,102,241,0.15)";
+          s.textContent = `Cached · ${Math.floor(age / 1440)}d ago`;
+        }
+      }
+
+      function renderData(data) {
+        document.getElementById("loadingState").classList.add("hidden");
+        document.getElementById("errorState").classList.add("hidden");
+        document.getElementById("resultsState").classList.remove("hidden");
+        document.getElementById("bgRefreshNotice").classList.add("hidden");
+
+        const sb = data.banks.filter((b) => b.score >= 60).length,
+          nw = data.banks.filter((b) => b.score < 40).length;
+        document.getElementById("statsRow").innerHTML =
+          `<div class="stat-card"><div class="text-2xl font-bold text-primary">${data.totalBanks}</div><div class="text-xs text-slate-500 mt-1">Total Banks</div></div><div class="stat-card"><div class="text-2xl font-bold text-success">${data.avgScore}</div><div class="text-xs text-slate-500 mt-1">Avg Score /100</div></div><div class="stat-card"><div class="text-2xl font-bold text-success">${sb}</div><div class="text-xs text-slate-500 mt-1">Secure (60+)</div></div><div class="stat-card"><div class="text-2xl font-bold text-warning">${nw}</div><div class="text-xs text-slate-500 mt-1">Needs Work</div></div>`;
+        document.getElementById("bankTableBody").innerHTML = data.banks
+          .map((b, i) => {
+            const sc =
+              b.score >= 80
+                ? "#10B981"
+                : b.score >= 60
+                  ? "#F59E0B"
+                  : b.score >= 40
+                    ? "#F97316"
+                    : "#EF4444";
+            const g = {
+              A: {
+                bg: "rgba(16,185,129,0.1)",
+                c: "#10B981",
+                bd: "rgba(16,185,129,0.2)",
+              },
+              B: {
+                bg: "rgba(99,102,241,0.1)",
+                c: "#6366F1",
+                bd: "rgba(99,102,241,0.2)",
+              },
+              C: {
+                bg: "rgba(245,158,11,0.1)",
+                c: "#F59E0B",
+                bd: "rgba(245,158,11,0.2)",
+              },
+              D: {
+                bg: "rgba(249,115,22,0.1)",
+                c: "#F97316",
+                bd: "rgba(249,115,22,0.2)",
+              },
+              F: {
+                bg: "rgba(239,68,68,0.1)",
+                c: "#EF4444",
+                bd: "rgba(239,68,68,0.2)",
+              },
+            }[b.grade] || {
+              bg: "rgba(245,158,11,0.1)",
+              c: "#F59E0B",
+              bd: "rgba(245,158,11,0.2)",
+            };
+            return `<tr class="bank-row border-b border-white/5"><td class="py-3 px-4 text-sm text-slate-500">${i + 1}</td><td class="py-3 px-4"><div class="text-sm font-medium text-slate-200">${b.name}</div><div class="text-xs text-slate-500 font-mono">${b.domain}</div></td><td class="text-center py-3 px-3 text-sm">${b.ssl}</td><td class="text-center py-3 px-3 text-sm">${b.dnssec}</td><td class="text-center py-3 px-3 text-sm">${b.spf}</td><td class="text-center py-3 px-3 text-sm">${b.dmarc}</td><td class="text-right py-3 px-4"><span class="font-mono text-sm font-semibold" style="color:${sc}">${b.score}</span></td><td class="text-center py-3 px-4"><span class="grade-badge" style="background:${g.bg};color:${g.c};border:1px solid ${g.bd}">${b.grade}</span></td></tr>`;
+          })
+          .join("");
+        document.getElementById("lastUpdated").textContent =
+          "Last updated: " +
+          new Date(
+            data.timestamp || data.lastChecked || Date.now(),
+          ).toLocaleString();
+        updateBadge(getCachedData());
+      }
+
+      async function fetchFreshData() {
+        const cached = getCachedData();
+        if (cached) {
+          renderData(cached);
+          document.getElementById("bgRefreshNotice").classList.remove("hidden");
+        } else {
+          document.getElementById("loadingState").classList.remove("hidden");
+          document.getElementById("resultsState").classList.add("hidden");
+          document.getElementById("errorState").classList.add("hidden");
+          document.getElementById("bgRefreshNotice").classList.add("hidden");
+        }
+
+        try {
+          await new Promise((r) => setTimeout(r, 500));
+          const response = await fetch(`${API}/api/bank-scorecard`);
+          if (response.status === 429) {
+            if (cached) {
+              updateBadge(cached);
+              document
+                .getElementById("bgRefreshNotice")
+                .classList.add("hidden");
+              return;
+            }
+            throw new Error(
+              "Server is busy. Please wait a moment and try again.",
+            );
+          }
+          if (!response.ok) throw new Error("HTTP " + response.status);
+          const data = await response.json();
+          saveToCache(data);
+          renderData({ ...data, timestamp: Date.now() });
+        } catch (error) {
+          document.getElementById("bgRefreshNotice").classList.add("hidden");
+          if (cached) {
+            updateBadge(cached);
+            return;
+          }
+          document.getElementById("loadingState").classList.add("hidden");
+          document.getElementById("resultsState").classList.add("hidden");
+          document.getElementById("errorMsg").textContent =
+            error.message || "Failed to load. Please try again.";
+          document.getElementById("errorState").classList.remove("hidden");
+        }
+      }
+
+      (function () {
+        const cached = getCachedData();
+        if (cached) {
+          renderData(cached);
+          if (Date.now() - cached.timestamp > CACHE_DURATION) fetchFreshData();
+        } else {
+          document.getElementById("loadingState").classList.remove("hidden");
+          fetchFreshData();
+        }
+      })();
+    </script>
+  </body>
 </html>
