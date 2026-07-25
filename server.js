@@ -38,13 +38,19 @@ app.use(compression({ level: 6, threshold: 1024 }));
 app.use(
   cors({
     origin: isProduction
-      ? ["https://npradar.laxman-poudel.com.np", /\.laxman-poudel\.com\.np$/]
+      ? [
+          "https://npradar.laxman-poudel.com.np",
+          /\.laxman-poudel\.com\.np$/,
+          "https://domainsathi.vercel.app",
+          /\.vercel\.app$/,              // ← This allows ALL vercel.app subdomains
+          "http://localhost:5500",
+          "http://127.0.0.1:5500",
+        ]
       : "*",
-    methods: ["GET", "HEAD"],
+    methods: ["GET", "HEAD", "OPTIONS"],
     maxAge: 86400,
   }),
 );
-app.use(express.json({ limit: "10kb" }));
 
 // Rate limiter — skip for health, stats, bank-scorecard
 const rateLimitMap = new Map();
